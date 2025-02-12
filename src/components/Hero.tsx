@@ -1,6 +1,6 @@
 import React from "react";
-import { ArrowIcon, GithubIcon } from "./SvgIcons";
-import { Button } from "./Button";
+import { ArrowIcon, GithubIcon } from "./icons";
+import { Button } from "./button";
 
 const Hero = () => {
   return (

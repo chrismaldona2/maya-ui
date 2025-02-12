@@ -1,5 +1,5 @@
 import { ThemeProvider } from "next-themes";
-import SmoothScroll from "@/components/SmoothScroll";
+import SmoothScroll from "@/components/smooth-scroll";
 import { PropsWithChildren } from "react";
 
 export function Providers({ children }: PropsWithChildren) {
