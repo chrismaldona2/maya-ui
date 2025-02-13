@@ -2,28 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar {
-  width: 9px;
-  @apply bg-neutral-700 dark:bg-neutral-900;
-}
+@layer base {
+  ::-webkit-scrollbar {
+    width: 9px;
+    @apply bg-neutral-700 dark:bg-neutral-900;
+  }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-neutral-900 dark:bg-neutral-600;
-}
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-900 dark:bg-neutral-600;
+  }
 
-html.lenis,
-html.lenis body {
-  height: auto;
-}
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
 
-.lenis.lenis-stopped {
-  overflow: clip;
-}
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
 
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
 }

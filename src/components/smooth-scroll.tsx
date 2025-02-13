@@ -3,7 +3,6 @@ import { ReactLenis } from "lenis/react";
 import type { LenisRef } from "lenis/react";
 import { cancelFrame, frame } from "motion/react";
 import { ReactNode, useEffect, useRef } from "react";
-
 const SmoothScroll = ({
   children,
   root,
@@ -12,7 +11,6 @@ const SmoothScroll = ({
   root?: boolean;
 }) => {
   const lenisRef = useRef<LenisRef>(null);
-  // integration with motion library
   useEffect(() => {
     function update(data: { timestamp: number }) {
       const time = data.timestamp;
@@ -21,10 +19,9 @@ const SmoothScroll = ({
     frame.update(update, true);
     return () => cancelFrame(update);
   }, []);
-
   return (
     <ReactLenis
-      options={{ autoRaf: false, duration: 1.5 }}
+      options={{ autoRaf: true, duration: 1.1 }}
       ref={lenisRef}
       root={root}
     >
@@ -32,5 +29,4 @@ const SmoothScroll = ({
     </ReactLenis>
   );
 };
-
 export default SmoothScroll;

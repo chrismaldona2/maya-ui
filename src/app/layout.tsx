@@ -29,7 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={geist.className} suppressHydrationWarning>
-      <body className="bg-white dark:bg-neutral-900">
+      <body className="bg-white dark:bg-neutral-950">
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <Header />
