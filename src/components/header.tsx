@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
-import { BearSvg, MenuIcon } from "./icons";
+import { MenuIcon } from "./icons";
 import { useCallback, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import ThemeToggle from "./theme-toggle";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 import MobileMenu from "./mobile-menu";
+import Logo from "./logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -24,7 +25,7 @@ const Header = () => {
 
       <header className="bg-white/80 dark:bg-neutral-950/20 backdrop-blur-md flex flex-col mx-auto items-center sticky top-0 shadow-sm dark:border-b border-neutral-900">
         <div className="max-w-screen-xl px-4 py-4 w-full flex items-center gap-6">
-          <Logo />
+          <Logo redirectToMainPage />
 
           <nav>
             <ul className="hidden sm:flex gap-5 text-sm">
@@ -56,13 +57,3 @@ const Header = () => {
 };
 
 export default Header;
-
-const Logo = () => {
-  return (
-    <Link href="/" aria-label="Go to main page">
-      <div className="bg-gradient-to-br from-[#2C2B2B] to-[#050505] dark:from-neutral-900 dark:to-neutral-950 p-1.5 rounded-md shadow-inner shadow-gray-50/5">
-        <BearSvg className="size-5" />
-      </div>
-    </Link>
-  );
-};
