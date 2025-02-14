@@ -4,12 +4,12 @@
 
 @layer base {
   ::-webkit-scrollbar {
-    width: 9px;
-    @apply bg-neutral-700 dark:bg-neutral-900;
+    width: 10px;
+    @apply bg-neutral-200 dark:bg-neutral-900;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-neutral-900 dark:bg-neutral-600;
+    @apply bg-neutral-400 dark:bg-neutral-600;
   }
 
   html.lenis,

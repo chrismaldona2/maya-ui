@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { CloseIcon } from "./icons";
+import { CloseIcon } from "@/components/ui/icons";
 import { useEffect, useRef } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
@@ -18,7 +18,7 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
   }, [onClose]);
 
   return (
-    <motion.div className="fixed flex items-start inset-0 z-50">
+    <motion.div className="fixed flex items-start inset-0 z-[9999]">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -32,7 +32,7 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
         animate={{ x: 0 }}
         exit={{ x: "-100%" }}
         transition={{ type: "tween", duration: 0.4 }}
-        className="bg-white dark:bg-neutral-800 relative py-10 px-8 shadow-lg inset-0 h-full w-3/4 sm:max-w-sm"
+        className="bg-white dark:bg-neutral-900 relative py-10 px-8 shadow-lg inset-0 h-full w-3/4 sm:max-w-sm"
         ref={menuRef}
       >
         <div className="absolute top-4 right-3.5">

@@ -21,7 +21,7 @@ const SmoothScroll = ({
   }, []);
   return (
     <ReactLenis
-      options={{ autoRaf: true, duration: 1.1 }}
+      options={{ autoRaf: false, duration: 1.1 }}
       ref={lenisRef}
       root={root}
     >

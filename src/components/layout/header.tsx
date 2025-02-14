@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-import { MenuIcon } from "./icons";
+import { MenuIcon } from "@/components/ui/icons";
 import { useCallback, useState } from "react";
 import { AnimatePresence } from "motion/react";
-import ThemeToggle from "./theme-toggle";
+import ThemeToggle from "@/components/toggles/basic-theme-toggle";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
-import MobileMenu from "./mobile-menu";
-import Logo from "./logo";
+import MobileMenu from "@/components/layout/mobile-menu";
+import Logo from "@/components/ui/logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -23,8 +23,8 @@ const Header = () => {
         ✨ Bring your UI to life with Maya UI
       </div>
 
-      <header className="bg-white/80 dark:bg-neutral-950/20 backdrop-blur-md flex flex-col mx-auto items-center sticky top-0 shadow-sm dark:border-b border-neutral-900">
-        <div className="max-w-screen-xl px-4 py-4 w-full flex items-center gap-6">
+      <header className="z-50 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md  flex flex-col mx-auto items-center sticky top-0 shadow-sm dark:border-b border-neutral-900">
+        <div className="max-w-screen-xl p-4 w-full flex items-center gap-6">
           <Logo redirectToMainPage />
 
           <nav>

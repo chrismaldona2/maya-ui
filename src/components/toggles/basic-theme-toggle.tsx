@@ -1,5 +1,5 @@
 import useThemeSwitch from "@/hooks/useThemeSwitch";
-import { MoonIcon, SunIcon } from "./icons";
+import { MoonIcon, SunIcon } from "@/components/ui/icons";
 
 const ThemeToggle = () => {
   const { mounted, theme, oppositeTheme, handleSwitch } = useThemeSwitch();

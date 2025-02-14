@@ -4,7 +4,8 @@ import { Geist } from "next/font/google";
 import { Providers } from "./providers";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
-import Header from "@/components/header";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default async function RootLayout({
           <Providers>
             <Header />
             {children}
+            <Footer />
           </Providers>
         </NextIntlClientProvider>
       </body>
