@@ -2,20 +2,14 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { CloseIcon } from "@/components/ui/icons";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useEscapeKeyPress } from "@/hooks/useEscapeKeyPress";
 
 const MobileMenu = ({ onClose }: { onClose: () => void }) => {
   const menuRef = useRef<HTMLDivElement>(null);
   useClickOutside(menuRef, onClose);
-
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [onClose]);
+  useEscapeKeyPress(onClose);
 
   return (
     <motion.div className="fixed flex items-start inset-0 z-[9999]">
@@ -44,7 +38,7 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
           <ul className="flex flex-col gap-4">
             <li>
               <Link
-                href="/"
+                href="/components"
                 onClick={onClose}
                 className="font-semibold text-neutral-600 dark:text-neutral-300"
               >

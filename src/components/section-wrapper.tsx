@@ -10,7 +10,7 @@ const SectionWrapper = ({ className, children }: SectionWrapperProps) => {
   return (
     <div
       className={cn(
-        "max-w-screen-xl p-4 w-full mx-auto overflow-hidden",
+        "max-w-screen-xl py-4 px-6 w-full mx-auto overflow-hidden",
         className
       )}
     >

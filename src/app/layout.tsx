@@ -2,10 +2,9 @@ import "@/styles/global.css";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Providers } from "./providers";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import PageLayout from "@/components/layout/page-layout";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -25,19 +24,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const locale = await getLocale();
-  const messages = await getMessages();
-
   return (
-    <html lang={locale} className={geist.className} suppressHydrationWarning>
-      <body className="bg-white dark:bg-neutral-950">
-        <NextIntlClientProvider messages={messages}>
-          <Providers>
+    <html lang="en" className={geist.className} suppressHydrationWarning>
+      <body className="bg-white dark:bg-neutral-950 ">
+        <Providers>
+          <PageLayout>
             <Header />
             {children}
             <Footer />
-          </Providers>
-        </NextIntlClientProvider>
+          </PageLayout>
+        </Providers>
       </body>
     </html>
   );

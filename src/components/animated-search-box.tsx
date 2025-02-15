@@ -1,8 +1,19 @@
 "use client";
 import { useRef, useState } from "react";
 import { motion, useAnimate } from "motion/react";
+import { useEscapeKeyPress } from "@/hooks/useEscapeKeyPress";
 
-const AnimatedSearchBox = () => {
+interface AnimatedSearchBoxProps {
+  onSearch?: (query: string) => void;
+  placeholder?: string;
+  clearOnSubmit?: boolean;
+}
+
+const AnimatedSearchBox = ({
+  onSearch,
+  placeholder,
+  clearOnSubmit,
+}: AnimatedSearchBoxProps) => {
   const [isSearching, setIsSearching] = useState(false);
   const [scope, animate] = useAnimate();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -13,7 +24,7 @@ const AnimatedSearchBox = () => {
       [
         [
           scope.current.querySelector("#search-input"),
-          { width: "100%" },
+          { width: "100%", visibility: "visible" },
           { at: 0 },
         ],
         [
@@ -30,8 +41,41 @@ const AnimatedSearchBox = () => {
     inputRef.current?.focus();
   };
 
+  const closeSearchBox = async () => {
+    setIsSearching(false);
+    await animate(
+      [
+        [
+          scope.current.querySelector("#search-input"),
+          { width: 0, visibility: "hidden" },
+          { at: 0 },
+        ],
+        [
+          scope.current.querySelector("#search-button"),
+          {
+            borderTopLeftRadius: "0.5rem",
+            borderBottomLeftRadius: "0.5rem",
+          },
+          { at: 0 },
+        ],
+      ],
+      { duration: 0.5, ease: "easeInOut" }
+    );
+
+    clearInput();
+  };
+  useEscapeKeyPress(closeSearchBox, inputRef);
+
   const handleSearch = () => {
-    console.log("searched: ", inputRef.current?.value);
+    if (inputRef.current) {
+      onSearch?.(inputRef.current.value);
+      if (clearOnSubmit) clearInput();
+    }
+  };
+  const clearInput = () => {
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
   };
 
   return (
@@ -40,18 +84,23 @@ const AnimatedSearchBox = () => {
       ref={scope}
       layout
     >
-      <div id="search-input" className="overflow-hidden" style={{ width: 0 }}>
+      <div
+        id="search-input"
+        className="overflow-hidden"
+        style={{ width: 0, visibility: "hidden" }}
+      >
         <input
           ref={inputRef}
           type="text"
+          placeholder={placeholder}
           className="min-h-full w-full outline-none py-2 px-4 rounded-l-lg bg-[#ffffff] dark:bg-[#2a2a2a]"
           aria-hidden={!isSearching}
         />
       </div>
 
       <motion.button
-        id="search-button"
         layout
+        id="search-button"
         className="relative py-3 px-5 text-base/none sm:text-lg/none bg-blue-500 dark:bg-blue-600 hover:bg-blue-400 dark:hover:bg-blue-500 transition-colors duration-[.35s] font-medium text-center overflow-clip whitespace-nowrap text-slate-50 "
         style={{ borderRadius: "0.5rem" }}
         onClick={isSearching ? handleSearch : openSearchBox}

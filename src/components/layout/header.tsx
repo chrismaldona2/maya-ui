@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MenuIcon } from "@/components/ui/icons";
 import { useCallback, useState } from "react";
 import { AnimatePresence } from "motion/react";
-import ThemeToggle from "@/components/toggles/basic-theme-toggle";
+import ThemeToggle from "@/components/basic-theme-toggle";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 import MobileMenu from "@/components/layout/mobile-menu";
 import Logo from "@/components/ui/logo";
@@ -23,7 +23,7 @@ const Header = () => {
         ✨ Bring your UI to life with Maya UI
       </div>
 
-      <header className="z-50 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md  flex flex-col mx-auto items-center sticky top-0 shadow-sm dark:border-b border-neutral-900">
+      <header className="w-full z-50 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md  flex flex-col mx-auto items-center sticky top-0 shadow-sm dark:border-b border-neutral-900">
         <div className="max-w-screen-xl p-4 w-full flex items-center gap-6">
           <Logo redirectToMainPage />
 
@@ -31,7 +31,7 @@ const Header = () => {
             <ul className="hidden sm:flex gap-5 text-sm">
               <li>
                 <Link
-                  href="/"
+                  href="/components"
                   className="p-1 text-neutral-400 hover:text-neutral-800 dark:text-gray-400 dark:hover:text-neutral-200 transition-colors duration-300"
                 >
                   Components

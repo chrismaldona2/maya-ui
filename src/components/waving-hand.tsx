@@ -1,8 +1,9 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { motion, useAnimate } from "motion/react";
 import { memo, useRef } from "react";
 
-const WavingHand = ({ size = "24" }: { size?: string }) => {
+const WavingHand = ({ className }: { className?: string }) => {
   const [scope, animate] = useAnimate();
   const isAnimating = useRef<boolean>(false);
 
@@ -25,9 +26,10 @@ const WavingHand = ({ size = "24" }: { size?: string }) => {
       viewBox="0 0 128 128"
       role="img"
       preserveAspectRatio="xMidYMid meet"
-      className={`outline-none cursor-pointer origin-[80%_80%] ${
-        size ? `size-[${size}]` : "size-6"
-      }`}
+      className={cn(
+        "outline-none cursor-pointer origin-[80%_80%] size-6",
+        className
+      )}
       onClick={animateWave}
       onHoverStart={animateWave}
       whileTap={{ scale: 0.95 }}
