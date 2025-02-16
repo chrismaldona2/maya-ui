@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Providers } from "./providers";
 import Header from "@/components/layout/header";
-import Footer from "@/components/layout/footer";
 import PageLayout from "@/components/layout/page-layout";
+import Footer from "@/components/layout/footer";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -31,8 +31,8 @@ export default async function RootLayout({
           <PageLayout>
             <Header />
             {children}
-            <Footer />
           </PageLayout>
+          <Footer />
         </Providers>
       </body>
     </html>

@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowIcon, GithubIcon } from "./ui/icons";
 import { Button } from "./ui/button";
-import SectionWrapper from "./section-wrapper";
+import SectionWrapper from "./layout/section-wrapper";
 import Link from "next/link";
 
 const Hero = () => {

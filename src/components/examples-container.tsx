@@ -1,5 +1,5 @@
 import RotatingThemeToggle from "./rotating-theme-toggle";
-import SectionWrapper from "./section-wrapper";
+import SectionWrapper from "./layout/section-wrapper";
 import WavingHand from "./waving-hand";
 import AnimatedSearchBox from "./animated-search-box";
 import { BentoGrid } from "./bento-grid";

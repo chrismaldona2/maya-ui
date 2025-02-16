@@ -1,7 +1,7 @@
 const Components = () => {
   return (
-    <main className="h-full py-10 px-4">
-      <h1 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+    <main className="flex-grow flex flex-col gap-16 h-full py-8 px-4 md:px-10 min-h-[300vh]">
+      <h1 className="text-xl font-semibold text-neutral-600 dark:text-neutral-200">
         Coming soon..
       </h1>
     </main>
