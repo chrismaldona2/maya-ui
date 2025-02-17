@@ -1,13 +1,13 @@
 import React from "react";
 import { ArrowIcon, GithubIcon } from "./ui/icons";
 import { Button } from "./ui/button";
-import SectionWrapper from "./layout/section-wrapper";
 import Link from "next/link";
+import CenteredWrapper from "./layout/centered-wrapper";
 
 const Hero = () => {
   return (
-    <SectionWrapper>
-      <div className=" flex flex-col items-center gap-5 text-center">
+    <CenteredWrapper>
+      <div className="py-4 flex flex-col items-center gap-5 text-center">
         <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-neutral-800 to-neutral-950 dark:from-neutral-50 dark:to-neutral-300 text-transparent bg-clip-text">
           Maya UI
         </h1>
@@ -34,7 +34,7 @@ const Hero = () => {
           </a>
         </div>
       </div>
-    </SectionWrapper>
+    </CenteredWrapper>
   );
 };
 

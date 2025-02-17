@@ -25,7 +25,7 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
         initial={{ x: "-100%" }}
         animate={{ x: 0 }}
         exit={{ x: "-100%" }}
-        transition={{ type: "tween", duration: 0.4 }}
+        transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
         className="bg-white dark:bg-neutral-900 relative py-10 px-8 shadow-lg inset-0 h-full w-3/4 sm:max-w-sm"
         ref={menuRef}
       >

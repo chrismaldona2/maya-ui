@@ -1,5 +1,5 @@
 import RotatingThemeToggle from "./rotating-theme-toggle";
-import SectionWrapper from "./layout/section-wrapper";
+import CenteredWrapper from "./layout/centered-wrapper";
 import WavingHand from "./waving-hand";
 import AnimatedSearchBox from "./animated-search-box";
 import { BentoGrid } from "./bento-grid";
@@ -9,7 +9,7 @@ import { CodeIcon } from "./ui/icons";
 
 const ExamplesContainer = () => {
   return (
-    <SectionWrapper>
+    <CenteredWrapper>
       <div className="flex flex-col items-start drop-shadow-sm">
         <div className="overflow-clip rounded-t-xl">
           <button
@@ -25,7 +25,7 @@ const ExamplesContainer = () => {
               <BentoGrid.Item key={id} className={className}>
                 <div className="relative h-full flex items-center justify-center">
                   <Link
-                    href="/"
+                    href="/components"
                     className="absolute top-0 right-0 py-1 px-2 text-xs font-semibold rounded-md bg-neutral-300 dark:bg-[#2a2929]"
                   >
                     <CodeIcon className="size-4 [&_path]:fill-[#909090] dark:[&_path]:fill-neutral-600 pointer-events-none" />
@@ -40,7 +40,7 @@ const ExamplesContainer = () => {
           </BentoGrid>
         </div>
       </div>
-    </SectionWrapper>
+    </CenteredWrapper>
   );
 };
 
