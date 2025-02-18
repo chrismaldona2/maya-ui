@@ -1,10 +1,11 @@
 "use client";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { CloseIcon } from "@/components/ui/icons";
+import { CloseIcon } from "@/components/icons";
 import { useRef } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { useEscapeKeyPress } from "@/hooks/useEscapeKeyPress";
+import { sidebarLinks } from "@/config/docs";
 
 const MobileMenu = ({ onClose }: { onClose: () => void }) => {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -34,18 +35,27 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
             <CloseIcon className="[&_path]:fill-neutral-500 size-3" />
           </button>
         </div>
-        <nav>
-          <ul className="flex flex-col gap-4">
-            <li>
-              <Link
-                href="/components"
-                onClick={onClose}
-                className="font-semibold text-neutral-600 dark:text-neutral-300"
-              >
-                Components
-              </Link>
-            </li>
-          </ul>
+        <nav className="py-6">
+          {sidebarLinks.map((section) => (
+            <div key={section.title} className="mb-7">
+              <h3 className="font-semibold text-neutral-600 dark:text-neutral-300">
+                {section.title}
+              </h3>
+              <ul className="flex flex-col">
+                {section.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={onClose}
+                      className=" block font-medium text-sm text-neutral-500 py-2"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </nav>
       </motion.div>
     </motion.div>

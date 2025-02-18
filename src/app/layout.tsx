@@ -2,9 +2,10 @@ import "@/styles/global.css";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Providers } from "./providers";
-import Header from "@/components/layout/header";
-import PageLayout from "@/components/layout/page-layout";
-import Footer from "@/components/layout/footer";
+import Header from "@/components/header";
+import PageLayout from "@/components/page-layout";
+import Footer from "@/components/footer";
+import { cn } from "@/lib/utils";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -25,8 +26,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={geist.className} suppressHydrationWarning>
-      <body className="bg-white dark:bg-neutral-950 ">
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn("bg-background antialiased", geist.className)}>
         <Providers>
           <PageLayout>
             <Header />

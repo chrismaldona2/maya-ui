@@ -24,7 +24,7 @@ const AnimatedSearchBox = ({
       [
         [
           scope.current.querySelector("#search-input"),
-          { width: "100%", visibility: "visible" },
+          { width: "100%", visibility: "visible", x: [25, 0] },
           { at: 0 },
         ],
         [

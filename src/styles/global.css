@@ -3,13 +3,17 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply bg-gradient-to-br from-white to-slate-50 dark:from-neutral-950 dark:to-[#0e0e0e];
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
     @apply bg-neutral-200 dark:bg-neutral-900;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-neutral-400 dark:bg-neutral-600;
+    @apply bg-zinc-400 dark:bg-neutral-800;
   }
 
   html.lenis,

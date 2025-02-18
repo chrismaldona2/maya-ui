@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BearSvg } from "@/components/ui/icons";
+import { BearSvg } from "@/components/icons";
 
 const Logo = ({
   redirectToMainPage = false,

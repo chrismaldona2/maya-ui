@@ -1,8 +1,8 @@
 import React from "react";
-import { ArrowIcon, GithubIcon } from "./ui/icons";
-import { Button } from "./ui/button";
+import { ArrowIcon, GithubIcon } from "./icons";
+import { Button } from "./button";
 import Link from "next/link";
-import CenteredWrapper from "./layout/centered-wrapper";
+import CenteredWrapper from "./centered-wrapper";
 
 const Hero = () => {
   return (
@@ -12,7 +12,7 @@ const Hero = () => {
           Maya UI
         </h1>
         <div className="text-neutral-500 mb-4 text-base md:text-lg">
-          <p>A free, open-source collection of animated React components.</p>
+          <p>A free open-source collection of animated React components.</p>
           <p>Built with Tailwind CSS and Motion.</p>
         </div>
         <div className="flex flex-wrap gap-3 [&_>*]:flex-grow max-w-[75%] min-w-[200px]">
