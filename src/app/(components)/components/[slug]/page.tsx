@@ -2,8 +2,13 @@ import path from "path";
 import { promises as fs } from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 
-const ComponentInfo = async ({ params }: { params: { slug: string } }) => {
-  const component = (await params).slug;
+const ComponentInfo = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug: component } = await params;
+
   const content = await fs.readFile(
     path.join(process.cwd(), "src/docs/components", `${component}.mdx`),
     "utf-8"
