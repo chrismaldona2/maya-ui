@@ -15,12 +15,11 @@ const Hero = () => {
           <p>A free open-source collection of animated React components.</p>
           <p>Built with Tailwind CSS and Motion.</p>
         </div>
-        <div className="flex flex-wrap gap-3 [&_>*]:flex-grow justify-center">
+        <div className="flex flex-wrap gap-3 [&_>*]:flex-grow max-w-[80%] items-center">
           <Link
             href="/components"
             className={buttonVariants({
               variant: "filled",
-              className: "max-w-[245px]",
             })}
           >
             <span>Browse components</span>
@@ -31,7 +30,6 @@ const Hero = () => {
             target="_blank"
             className={buttonVariants({
               variant: "outlined",
-              className: "max-w-[245px]",
             })}
           >
             <GithubIcon className="size-4 [&_path]:fill-neutral-950 dark:[&_path]:fill-neutral-200 flex-shrink-0" />

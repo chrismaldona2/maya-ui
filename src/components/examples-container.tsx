@@ -27,7 +27,7 @@ const examples: Example[] = [
         <WavingHand className="flex-shrink-0" />
       </div>
     ),
-    className: "md:col-span-2 lg:col-span-1",
+    className: "col-span-full lg:col-span-2 ",
     href: "/components/waving-hand",
   },
   {
