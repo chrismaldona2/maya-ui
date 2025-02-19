@@ -101,7 +101,7 @@ const AnimatedSearchBox = ({
       <motion.button
         layout
         id="search-button"
-        className="relative py-3 px-5 text-base/none sm:text-lg/none bg-blue-500 dark:bg-blue-600 hover:bg-blue-400 dark:hover:bg-blue-500 transition-colors duration-[.35s] font-medium text-center overflow-clip whitespace-nowrap text-slate-50 "
+        className="relative py-3 px-5 text-base/none sm:text-lg/none bg-blue-600 hover:bg-blue-500 transition-colors duration-[.35s] font-medium text-center overflow-clip whitespace-nowrap text-slate-50 "
         style={{ borderRadius: "0.5rem" }}
         onClick={isSearching ? handleSearch : openSearchBox}
       >

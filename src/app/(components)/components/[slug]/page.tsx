@@ -2,6 +2,12 @@ import path from "path";
 import { promises as fs } from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 
+interface Frontmatter {
+  title: string;
+  location: string;
+  description: string;
+}
+
 const ComponentInfo = async ({
   params,
 }: {
@@ -13,12 +19,6 @@ const ComponentInfo = async ({
     path.join(process.cwd(), "src/docs/components", `${component}.mdx`),
     "utf-8"
   );
-
-  interface Frontmatter {
-    title: string;
-    location: string;
-    description: string;
-  }
 
   const data = await compileMDX<Frontmatter>({
     source: content,

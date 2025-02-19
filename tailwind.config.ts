@@ -8,7 +8,10 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        "neutral-450": "#808080",
+        "neutral-550": "#5c5c5c",
+      },
     },
   },
   plugins: [],
