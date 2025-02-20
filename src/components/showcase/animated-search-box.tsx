@@ -42,6 +42,8 @@ const AnimatedSearchBox = ({
   };
 
   const closeSearchBox = async () => {
+    if (!isSearching) return;
+
     setIsSearching(false);
     await animate(
       [
@@ -80,15 +82,11 @@ const AnimatedSearchBox = ({
 
   return (
     <motion.div
-      className="relative flex justify-center shadow-sm"
+      className="relative flex justify-center drop-shadow-sm "
       ref={scope}
       layout
     >
-      <div
-        id="search-input"
-        className="overflow-hidden"
-        style={{ width: 0, visibility: "hidden" }}
-      >
+      <div id="search-input" style={{ width: 0, visibility: "hidden" }}>
         <input
           ref={inputRef}
           type="text"

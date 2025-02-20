@@ -1,63 +1,10 @@
 import CenteredWrapper from "./centered-wrapper";
-import WavingHand from "./waving-hand";
-import AnimatedSearchBox from "./animated-search-box";
-import { BentoGrid } from "./bento-grid";
-import { ReactNode } from "react";
-import Link from "next/link";
-import { CodeIcon } from "./icons";
+import BentoGrid from "./bento-grid";
 import ComponentContainer from "./component-container";
+import ExampleCard, { Example } from "./example-card";
 
-interface Example {
-  id: number;
-  title: string;
-  component: ReactNode;
-  className?: string;
-  href: string;
-}
-
-const examples: Example[] = [
-  {
-    id: 1,
-    title: "Greeting",
-    component: (
-      <div className="flex items-center gap-2">
-        <span className="pointer-events-none text-lg font-semibold text-neutral-550 dark:text-neutral-200">
-          Hello world!
-        </span>
-        <WavingHand className="flex-shrink-0" />
-      </div>
-    ),
-    className: "col-span-full lg:col-span-2 ",
-    href: "/components/waving-hand",
-  },
-  {
-    id: 2,
-    title: "Search box",
-    component: <AnimatedSearchBox placeholder="something..." clearOnSubmit />,
-    className: "col-span-full lg:col-span-2",
-    href: "/components/animated-search-box",
-  },
-];
-
-const ExampleCard = ({ example }: { example: Example }) => {
-  const { title, component, href } = example;
-
-  return (
-    <div className="relative flex h-full items-center justify-center">
-      <Link
-        href={href}
-        className="absolute right-0 top-0 rounded-md bg-neutral-300 px-2 py-1 text-xs font-semibold dark:bg-[#2a2929]"
-        aria-label={`See '${title}' code`}
-      >
-        <CodeIcon className="size-4 pointer-events-none [&_path]:fill-[#909090] dark:[&_path]:fill-neutral-600" />
-      </Link>
-      {component}
-      <span className="absolute bottom-0 w-full select-none text-center text-sm text-neutral-550 dark:text-neutral-450">
-        {title}
-      </span>
-    </div>
-  );
-};
+import AnimatedSearchBox from "@/components/showcase/animated-search-box";
+import WavingHand from "@/components/showcase/waving-hand";
 
 const ExamplesContainer = () => {
   return (
@@ -86,3 +33,27 @@ const ExamplesContainer = () => {
 };
 
 export default ExamplesContainer;
+
+export const examples: Example[] = [
+  {
+    id: 1,
+    title: "Greeting",
+    component: (
+      <div className="flex items-center gap-2">
+        <span className="pointer-events-none text-lg font-semibold text-neutral-550 dark:text-neutral-200">
+          Hello world!
+        </span>
+        <WavingHand className="flex-shrink-0" />
+      </div>
+    ),
+    className: "col-span-full lg:col-span-2 ",
+    href: "/components/waving-hand",
+  },
+  {
+    id: 2,
+    title: "Search box",
+    component: <AnimatedSearchBox placeholder="something..." clearOnSubmit />,
+    className: "col-span-full lg:col-span-2",
+    href: "/components/animated-search-box",
+  },
+];

@@ -1,5 +1,5 @@
 import CenteredWrapper from "@/components/centered-wrapper";
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/layout/sidebar";
 import { ReactNode } from "react";
 import { sidebarLinks } from "@/config/docs"; // Adjust the path as needed
 

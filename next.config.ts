@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
+import { withContentlayer } from "next-contentlayer2";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["next-mdx-remote"],
+  experimental: {
+    turbo: {},
+  },
 };
 
-export default nextConfig;
+export default withContentlayer(nextConfig);

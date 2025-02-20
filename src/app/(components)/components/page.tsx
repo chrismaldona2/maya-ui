@@ -1,35 +1,24 @@
-import path from "path";
-import { promises as fs } from "fs";
-import { compileMDX } from "next-mdx-remote/rsc";
+import { allDocs } from "contentlayer/generated";
+import { getMDXComponent } from "next-contentlayer2/hooks";
+import { notFound } from "next/navigation";
 
-const Components = async () => {
-  const content = await fs.readFile(
-    path.join(process.cwd(), "src/docs", `introduction.mdx`),
-    "utf-8"
-  );
+const Components = () => {
+  const doc = allDocs.find((doc) => doc._raw.flattenedPath === "introduction");
 
-  interface Frontmatter {
-    title: string;
-    location: string;
-  }
+  if (!doc) notFound();
 
-  const data = await compileMDX<Frontmatter>({
-    source: content,
-    options: {
-      parseFrontmatter: true,
-    },
-  });
+  const Content = getMDXComponent(doc.body.code);
 
   return (
     <>
       <h1 className="font-bold text-3xl text-neutral-700 dark:text-neutral-300 mb-6">
-        {data.frontmatter.title}
+        {doc.title}
       </h1>
       <div
         className="text-lg [&_p]:mb-4 [&_p]:text-neutral-500 dark:[&_p]:text-neutral-400 [&_a]:font-semibold 
       [&_a]:bg-gradient-to-br [&_a]:from-[#8689f3] [&_a]:to-[#945abe] [&_a]:to-70% [&_a]:bg-clip-text [&_a]:text-transparent"
       >
-        {data.content}
+        <Content />
       </div>
     </>
   );

@@ -2,9 +2,9 @@ import "@/styles/global.css";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Providers } from "./providers";
-import Header from "@/components/header";
-import PageLayout from "@/components/page-layout";
-import Footer from "@/components/footer";
+import Header from "@/components/layout/header";
+import PageLayout from "@/components/layout/page-layout";
+import Footer from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({

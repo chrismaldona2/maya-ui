@@ -5,9 +5,9 @@ import { useCallback, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import ThemeToggle from "@/components/basic-theme-toggle";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
-import MobileMenu from "@/components/mobile-menu";
+import MobileMenu from "@/components/layout/mobile-menu";
 import Logo from "@/components/logo";
-import CenteredWrapper from "./centered-wrapper";
+import CenteredWrapper from "@/components/centered-wrapper";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);

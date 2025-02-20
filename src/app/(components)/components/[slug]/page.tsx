@@ -1,41 +1,40 @@
-import path from "path";
-import { promises as fs } from "fs";
-import { compileMDX } from "next-mdx-remote/rsc";
+import { allDocs } from "contentlayer/generated";
+import { getMDXComponent } from "next-contentlayer2/hooks";
+import { mdxComponents } from "@/components/showcase/mdx-components";
+import ComponentContainer from "@/components/component-container";
 
-interface Frontmatter {
-  title: string;
-  location: string;
-  description: string;
-}
+export const generateStaticParams = async () =>
+  allDocs.map((doc) => ({ slug: doc._raw.flattenedPath }));
 
 const ComponentInfo = async ({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) => {
-  const { slug: component } = await params;
+  const { slug } = await params;
 
-  const content = await fs.readFile(
-    path.join(process.cwd(), "src/docs/components", `${component}.mdx`),
-    "utf-8"
-  );
+  const doc = allDocs.find((doc) => doc._raw.flattenedPath === slug);
 
-  const data = await compileMDX<Frontmatter>({
-    source: content,
-    options: {
-      parseFrontmatter: true,
-    },
-  });
+  if (!doc) return <></>;
+
+  const Content = getMDXComponent(doc.body.code);
 
   return (
     <>
-      <div>
-        <h1 className="font-bold text-3xl text-neutral-700 dark:text-neutral-300 mb-2">
-          {data.frontmatter.title}
-        </h1>
-        <p className="text-lg text-neutral-500 dark:text-neutral-400">
-          {data.frontmatter.description}
-        </p>
+      <h1 className="font-bold text-3xl text-neutral-700 dark:text-neutral-300 mb-3">
+        {doc.title}
+      </h1>
+      <p className="text-lg text-neutral-600 dark:text-neutral-400">
+        {doc.description}
+      </p>
+
+      <div className="mt-12">
+        <h2 className="mb-2 font-medium text-neutral-500 dark:text-neutral-300">
+          Preview
+        </h2>
+        <div className="overflow-clip min-h-[150px] py-10 px-4 flex justify-center items-center bg-neutral-200 dark:bg-[#131313] rounded-xl shadow-[inset_3px_2px_2px_rgba(200,200,200,.1)] dark:shadow-[inset_2px_2px_8px_rgba(40,44,44,0.1)]">
+          <Content components={{ ComponentContainer, ...mdxComponents }} />
+        </div>
       </div>
     </>
   );
