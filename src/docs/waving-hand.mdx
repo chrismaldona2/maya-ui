@@ -3,4 +3,26 @@ title: Waving hand
 description: Animated hand that waves when hovered or clicked.
 ---
 
-<WavingHand />
+<ContainerWithTabs
+  tabs={[
+    {
+      label: "Preview",
+      content: (
+        <ComponentCard
+          component={
+            <div className="flex gap-2">
+              <span className="text-lg font-semibold text-primary/70 dark:text-primary cursor-default text-end">
+                Hello world!
+              </span>
+              <WavingHand />
+            </div>
+          }
+        />
+      ),
+    },
+    {
+      label: "Code",
+      content: <span>coming soon...</span>,
+    },
+  ]}
+/>

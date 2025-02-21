@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence, motion, Variants } from "motion/react";
-import useThemeSwitch from "@/hooks/useThemeSwitch";
+import useThemeSwitch from "@/hooks/use-theme-switch";
 import { cn } from "@/lib/utils";
 
 const toggleVariants: Variants = {
@@ -30,7 +30,8 @@ const toggleVariants: Variants = {
 };
 
 const RotatingThemeToggle = () => {
-  const { mounted, theme, handleSwitch } = useThemeSwitch();
+  const { mounted, resolvedTheme: theme, handleSwitch } = useThemeSwitch();
+
   if (!mounted) return null;
 
   const dropShadow =

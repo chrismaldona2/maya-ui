@@ -27,7 +27,7 @@ const WavingHand = ({ className }: { className?: string }) => {
       role="img"
       preserveAspectRatio="xMidYMid meet"
       className={cn(
-        "outline-none cursor-pointer origin-[80%_80%] size-6",
+        "flex-shrink-0 outline-none cursor-pointer origin-[80%_80%] size-6",
         className
       )}
       onClick={animateWave}

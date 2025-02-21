@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const useThemeSwitch = () => {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
   const oppositeTheme = theme === "light" ? "dark" : "light";
 
@@ -15,7 +15,7 @@ const useThemeSwitch = () => {
     setTheme(oppositeTheme);
   };
 
-  return { mounted, theme, oppositeTheme, handleSwitch };
+  return { mounted, theme, resolvedTheme, oppositeTheme, handleSwitch };
 };
 
 export default useThemeSwitch;

@@ -3,8 +3,32 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --primary: 0 0 12%;
+    --secondary: 0 0 80%;
+    --primary-foreground: 0 0 85%;
+    --secondary-foreground: 0 0 12%;
+  }
+
+  .dark {
+    --primary: 0 0 80%;
+    --secondary: 0 0 12%;
+    --primary-foreground: 0 0 12%;
+    --secondary-foreground: 0 0 80%;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-gradient-to-br from-white to-slate-50 dark:from-neutral-950 dark:to-[#0e0e0e];
+  }
+
+  ::selection {
+    @apply bg-primary dark:bg-white text-primary-foreground;
   }
 
   ::-webkit-scrollbar {

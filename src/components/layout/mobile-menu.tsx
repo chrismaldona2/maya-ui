@@ -3,8 +3,8 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { CloseIcon } from "@/components/icons";
 import { useRef } from "react";
-import { useClickOutside } from "@/hooks/useClickOutside";
-import { useEscapeKeyPress } from "@/hooks/useEscapeKeyPress";
+import { useClickOutside } from "@/hooks/use-click-outside";
+import { useEscapeKeyPress } from "@/hooks/use-escape-key-press";
 import { sidebarLinks } from "@/config/docs";
 
 const MobileMenu = ({ onClose }: { onClose: () => void }) => {

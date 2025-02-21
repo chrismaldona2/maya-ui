@@ -1,16 +1,9 @@
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ReactNode } from "react";
 
 interface SidebarProps {
   children: ReactNode;
-}
-
-interface SidebarSectionProps extends SidebarProps {
-  title: string;
-}
-
-interface SidebarLinkProps extends SidebarProps {
-  href: string;
 }
 
 const Sidebar = ({ children }: SidebarProps) => {
@@ -24,10 +17,15 @@ const Sidebar = ({ children }: SidebarProps) => {
   );
 };
 
+interface SidebarSectionProps {
+  children: ReactNode;
+  title: string;
+}
+
 const SidebarSection = ({ title, children }: SidebarSectionProps) => {
   return (
     <section>
-      <h2 className="mx-2 text-base font-semibold text-neutral-600 dark:text-gray-300 mb-0.5">
+      <h2 className="mx-1 text-base font-semibold text-neutral-600 dark:text-gray-300 mb-0.5">
         {title}
       </h2>
       <div className="flex flex-col">{children}</div>
@@ -35,11 +33,21 @@ const SidebarSection = ({ title, children }: SidebarSectionProps) => {
   );
 };
 
-const SidebarLink = ({ href, children }: SidebarLinkProps) => {
+interface SidebarLinkProps {
+  children: ReactNode;
+  href: string;
+  isActive?: boolean;
+}
+
+const SidebarLink = ({ isActive, href, children }: SidebarLinkProps) => {
   return (
     <Link
       href={href}
-      className="cursor-pointer rounded-md px-2 py-2 text-sm text-neutral-500 transition-colors duration-300 hover:bg-neutral-100 hover:dark:bg-neutral-900"
+      className={cn(
+        "cursor-pointer rounded-md px-2 py-2 text-sm text-neutral-500 hover:transition-colors hover:duration-300 hover:bg-neutral-100 hover:dark:bg-neutral-900",
+        isActive &&
+          "font-medium text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900"
+      )}
     >
       {children}
     </Link>

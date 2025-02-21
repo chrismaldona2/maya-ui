@@ -9,8 +9,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        "neutral-450": "#808080",
-        "neutral-550": "#5c5c5c",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+
+        neutral: {
+          150: "#ededed",
+          250: "#dbdbdb",
+          450: "#808080",
+          550: "#5c5c5c",
+          850: "#1f1f1f",
+          925: "#131313",
+        },
       },
     },
   },

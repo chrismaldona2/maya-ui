@@ -1,14 +1,7 @@
-// sidebarLinks.ts
 export const sidebarLinks = [
   {
     title: "Getting started",
     links: [{ href: "/components", label: "Introduction" }],
-  },
-  {
-    title: "Inputs",
-    links: [
-      { href: "/components/animated-search-box", label: "Animated search box" },
-    ],
   },
   {
     title: "Toggles",

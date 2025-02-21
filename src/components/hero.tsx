@@ -20,6 +20,8 @@ const Hero = () => {
             href="/components"
             className={buttonVariants({
               variant: "filled",
+              className:
+                "bg-gradient-to-br from-neutral-700 to-neutral-900 dark:from-white dark:to-zinc-200",
             })}
           >
             <span>Browse components</span>

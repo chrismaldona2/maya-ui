@@ -7,11 +7,8 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        filled:
-          "bg-gradient-to-br from-neutral-700 to-neutral-900 text-neutral-50 dark:from-white dark:to-neutral-300 dark:text-zinc-900",
-
-        outlined:
-          "bg-transparent text-zinc-900 border border-zinc-900 dark:border-neutral-400 dark:text-neutral-300 ",
+        filled: "bg-primary text-primary-foreground",
+        outlined: "bg-transparent text-primary border border-primary",
       },
     },
     defaultVariants: {

@@ -3,4 +3,17 @@ title: Rotating theme toggle
 description: A theme switcher that toggles with a smooth animation.
 ---
 
-<RotatingThemeToggle />
+<ContainerWithTabs
+  tabs={[
+    {
+      label: "Preview",
+      content: <ComponentCard component={<RotatingThemeToggle />} />,
+    },
+    {
+      label: "Code",
+      content: <span>coming soon...</span>,
+
+    },
+
+]}
+/>

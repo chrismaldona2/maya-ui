@@ -5,7 +5,4 @@ export const mdxComponents = {
   RotatingThemeToggle: dynamic(
     () => import("@/components/showcase/rotating-theme-toggle")
   ),
-  AnimatedSearchBox: dynamic(
-    () => import("@/components/showcase/animated-search-box")
-  ),
 };
