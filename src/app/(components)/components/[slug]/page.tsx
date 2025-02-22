@@ -42,12 +42,16 @@ const ComponentInfo = async ({
       <h1 className="font-bold text-3xl md:text-4xl text-neutral-700 dark:text-neutral-300 mb-4">
         {doc.title}
       </h1>
-      <p className="text-lg text-neutral-600 dark:text-neutral-400">
-        {doc.description}
-      </p>
+
+      {doc.description && (
+        <p className="text-lg text-neutral-600 dark:text-neutral-400">
+          {doc.description}
+        </p>
+      )}
+
       <div className="mt-10">
         <Content
-          components={{ ComponentCard, ...components, ...mdxComponents }}
+          components={{ ...mdxComponents, ...components, ComponentCard }}
         />
       </div>
     </>

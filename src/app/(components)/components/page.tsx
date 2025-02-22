@@ -9,13 +9,14 @@ const components = {
       className="font-semibold bg-gradient-to-br from-[#8689f3] to-[#945abe] to-70% bg-clip-text text-transparent"
       href="https://uiverse.io/"
       target="_blank"
+      rel="noopener noreferrer"
     >
       UIVerse
     </a>
   ),
-};
+} as const;
 
-const Components = () => {
+const ComponentsPage = () => {
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === "introduction");
 
   if (!doc) return <></>;
@@ -31,10 +32,10 @@ const Components = () => {
         {doc.title}
       </h1>
       <div className="text-lg text-neutral-500 dark:text-neutral-400 flex flex-col gap-4">
-        <Content components={components} />
+        <Content components={{ ...components }} />
       </div>
     </>
   );
 };
 
-export default Components;
+export default ComponentsPage;
