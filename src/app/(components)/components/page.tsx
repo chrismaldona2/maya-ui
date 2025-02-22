@@ -1,8 +1,8 @@
 import DocBreadcrumb from "@/components/doc-breadcrumb";
 import ScrollToTop from "@/components/layout/scroll-to-top";
-import UIVerseLink from "@/components/showcase/uiverse-link";
 import { allDocs } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer2/hooks";
+import { mdxComponents } from "@/components/showcase/mdx-components";
 
 const ComponentsPage = () => {
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === "introduction");
@@ -20,7 +20,7 @@ const ComponentsPage = () => {
         {doc.title}
       </h1>
       <div className="text-lg text-neutral-500 dark:text-neutral-400 flex flex-col gap-4">
-        <Content components={{ UIVerseLink }} />
+        <Content components={{ ...mdxComponents }} />
       </div>
     </>
   );
