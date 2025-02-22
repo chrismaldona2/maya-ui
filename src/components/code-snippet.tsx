@@ -1,6 +1,7 @@
 "use client";
 import useThemeSwitch from "@/hooks/use-theme-switch";
 import SyntaxHighlighter from "react-syntax-highlighter";
+
 import {
   atomOneDark,
   atomOneLight,
@@ -16,8 +17,9 @@ export interface CodeSnippetProps {
 }
 
 const CodeSnippet = ({ language, code, className }: CodeSnippetProps) => {
-  const { theme } = useThemeSwitch();
-  const style = theme === "dark" ? atomOneDark : atomOneLight;
+  const { resolvedTheme } = useThemeSwitch();
+
+  const style = resolvedTheme === "dark" ? atomOneDark : atomOneLight;
 
   const component = (
     <>
@@ -31,7 +33,7 @@ const CodeSnippet = ({ language, code, className }: CodeSnippetProps) => {
           customStyle={{
             padding: "1rem",
             borderRadius: 0,
-            background: theme === "dark" ? "transparent" : "#fff",
+            background: resolvedTheme === "dark" ? "transparent" : "#fff",
             width: "100%",
             height: "100%",
           }}
