@@ -37,7 +37,7 @@ const wavingAnimation = {
     repeat: 0,
 };
 
-const WavingHand = (props: SvgIcon) => {
+const WavingHand = ({className, ...props}: SvgIcon) => {
     const [scope, animate] = useAnimate();
     const isAnimating = useRef<boolean>(false);
 
@@ -56,15 +56,15 @@ const WavingHand = (props: SvgIcon) => {
           viewBox="0 0 128 128"
           role="img"
           preserveAspectRatio="xMidYMid meet"
-          {...props}
-          className={cn(
-            "flex-shrink-0 outline-none cursor-pointer origin-[80%_80%] size-6",
-            props.className
-          )}
           onClick={animateWave}
           onHoverStart={animateWave}
           whileTap={{ scale: 0.95 }}
           initial={{ scale: 1 }}
+          className={cn(
+            "flex-shrink-0 outline-none cursor-pointer origin-[80%_80%] size-6",
+            className
+          )}
+          {...props}
         >
           <radialGradient
             id="IconifyId17ecdb2904d178eab21437"
