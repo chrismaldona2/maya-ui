@@ -3,7 +3,7 @@ import ScrollToTop from "@/components/layout/scroll-to-top";
 import { allDocs } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer2/hooks";
 
-const UIVerseLink = () => {
+const UiVerseLink = () => {
   return (
     <a
       className="font-semibold bg-gradient-to-br from-[#8689f3] to-[#945abe] to-70% bg-clip-text text-transparent"
@@ -17,7 +17,7 @@ const UIVerseLink = () => {
 };
 
 const components = {
-  UIVerseLink,
+  UiVerseLink,
 };
 
 const ComponentsPage = () => {
