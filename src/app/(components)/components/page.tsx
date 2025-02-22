@@ -4,10 +4,6 @@ import UIVerseLink from "@/components/showcase/uiverse-link";
 import { allDocs } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer2/hooks";
 
-const components = {
-  UIVerseLink,
-};
-
 const ComponentsPage = () => {
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === "introduction");
 
@@ -24,7 +20,7 @@ const ComponentsPage = () => {
         {doc.title}
       </h1>
       <div className="text-lg text-neutral-500 dark:text-neutral-400 flex flex-col gap-4">
-        <Content components={{ ...components }} />
+        <Content components={{ UIVerseLink }} />
       </div>
     </>
   );
