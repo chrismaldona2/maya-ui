@@ -11,6 +11,7 @@ const SmoothScroll = ({
   root?: boolean;
 }) => {
   const lenisRef = useRef<LenisRef>(null);
+
   useEffect(() => {
     function update(data: { timestamp: number }) {
       const time = data.timestamp;
@@ -19,9 +20,13 @@ const SmoothScroll = ({
     frame.update(update, true);
     return () => cancelFrame(update);
   }, []);
+
   return (
     <ReactLenis
-      options={{ autoRaf: false, duration: 1.1 }}
+      options={{
+        duration: 1.1,
+        autoRaf: false,
+      }}
       ref={lenisRef}
       root={root}
     >

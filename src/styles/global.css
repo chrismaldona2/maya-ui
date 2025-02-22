@@ -27,12 +27,13 @@
     @apply bg-gradient-to-br from-white to-slate-50 dark:from-neutral-950 dark:to-[#0e0e0e];
   }
 
-  ::selection {
-    @apply bg-primary dark:bg-white text-primary-foreground;
-  }
-
   ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
+    @apply bg-neutral-200 dark:bg-neutral-900;
+  }
+
+  ::-webkit-scrollbar-corner {
     @apply bg-neutral-200 dark:bg-neutral-900;
   }
 

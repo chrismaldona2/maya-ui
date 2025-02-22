@@ -2,6 +2,7 @@
 import { AnimatePresence, motion, Variants } from "motion/react";
 import useThemeSwitch from "@/hooks/use-theme-switch";
 import { cn } from "@/lib/utils";
+import { SvgIcon } from "../icons";
 
 const toggleVariants: Variants = {
   hidden: {
@@ -29,125 +30,119 @@ const toggleVariants: Variants = {
   },
 };
 
-const RotatingThemeToggle = () => {
-  const { mounted, resolvedTheme: theme, handleSwitch } = useThemeSwitch();
+const RotatingThemeToggle = ({ className }: { className?: string }) => {
+  const { mounted, resolvedTheme, handleSwitch } = useThemeSwitch();
 
-  if (!mounted) return null;
+  if (!mounted) return;
 
-  const dropShadow =
-    theme === "dark"
-      ? "drop-shadow-[0px_0px_2rem_#8f9fc9]"
-      : "drop-shadow-[0px_0px_1rem_#ffc800]";
+  const shadow =
+    resolvedTheme === "dark"
+      ? "drop-shadow-[0px_0px_1.35rem_rgba(143,_159,_201,_1)]"
+      : "drop-shadow-[0px_0px_.8rem_rgba(255,_200,_0,_1)]";
 
   const ariaLabel =
-    theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+    resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode";
 
   return (
-    <div className="relative size-7">
-      <AnimatePresence mode="wait">
-        <motion.button
-          key={theme}
-          style={{ willChange: "transform, opacity" }}
-          className={cn(
-            "absolute appearance-none cursor-pointer focus:outline-none focus-visible:ring-2",
-            dropShadow
-          )}
-          onClick={handleSwitch}
-          variants={toggleVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          aria-label={ariaLabel}
-          title={ariaLabel}
-        >
-          {theme === "dark" ? (
-            <MoonIcon className="size-full rounded-sm" />
-          ) : (
-            <SunIcon className="size-full rounded-sm" />
-          )}
-        </motion.button>
-      </AnimatePresence>
-    </div>
+    <AnimatePresence mode="wait">
+      <motion.button
+        key={resolvedTheme}
+        style={{ willChange: "transform, opacity" }}
+        className={cn(
+          "size-7 appearance-none cursor-pointer rounded-sm overflow-clip",
+          shadow,
+          className
+        )}
+        onClick={handleSwitch}
+        variants={toggleVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        aria-label={ariaLabel}
+        title={ariaLabel}
+      >
+        {resolvedTheme === "dark" ? (
+          <MoonIcon className="size-full" />
+        ) : (
+          <SunIcon className="size-full" />
+        )}
+      </motion.button>
+    </AnimatePresence>
   );
 };
 
 export default RotatingThemeToggle;
 
-const SunIcon = ({ className }: { className?: string }) => {
+const SunIcon = (props: SvgIcon) => {
   return (
     <svg
-      width="120"
-      height="120"
-      viewBox="0 0 120 120"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("pointer-events-none", className)}
+      {...props}
+      className={cn("pointer-events-none", props.className)}
     >
-      <rect width="120" height="120" fill="#FFFFAD" />
-      <rect x="15" y="15" width="90" height="90" fill="white" />
+      <rect width="24" height="24" fill="#ffff8d" />
+      <path d="M3 3H21V21H3V3Z" fill="white" />
     </svg>
   );
 };
 
-const MoonIcon = ({ className }: { className?: string }) => {
+const MoonIcon = (props: SvgIcon) => {
   return (
     <svg
-      width="120"
-      height="120"
-      viewBox="0 0 120 120"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("pointer-events-none", className)}
+      {...props}
+      className={cn("pointer-events-none", props.className)}
     >
-      <g clipPath="url(#clip0_45_2)">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M15 15H30V30H15V15ZM15 60H30V75H15V60Z"
-          fill="#59667A"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M45 0H60V15H45V0ZM105 60H120V75H105V60ZM105 15H90V45H105V15ZM60 45H75V75H60V45Z"
-          fill="#949AAF"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M90 15L75 15V45V60H105V45H90V15ZM45 60V30H60V60V75H105V90H45V75H30V60H45Z"
-          fill="#B8C0E2"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M30 0H45V15H60V0H105H120V60H105V15H75V30V45H60V30H45V60H30V0ZM105 75V60H75V75H105ZM105 75V90H120V75H105ZM30 75H45V90H30V75Z"
-          fill="#EDF4FF"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M15 30H30V45H15V30ZM15 75H30V90H15V75ZM30 90H45V105H30V90ZM105 90H120V105H105V90Z"
-          fill="#747C9E"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M15 0H0V45H15V0ZM15 60H0V120H15H60V105H75V120H120V105H90V90H45V105H15V60Z"
-          fill="#59637D"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M30 0H15V15H30V0ZM30 90H15V105H30V90ZM90 90H105V105H90V90ZM75 105H60V120H75V105ZM0 45H30V60H0V45Z"
-          fill="#454B62"
-        />
-      </g>
-      <defs>
-        <clipPath id="clip0_45_2">
-          <rect width="120" height="120" fill="white" />
-        </clipPath>
-      </defs>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3 3H6V6H3V3ZM3 12H6V15H3V12Z"
+        fill="#59667a"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M9 0H12V3H9V0ZM21 12H24V15H21V12ZM21 3H18V9H21V3ZM12 9H15V15H12V9Z"
+        fill="#949aaf"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M18 3H15V9V12H21V9H18V3ZM9 12V6H12V12V15H21V18H9V15H6V12H9Z"
+        fill="#b8c0e2"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6 0H9V3H12V0H21H24V12H21V3H15V6V9H12V6H9V12H6V0ZM21 15V12H15V15H21ZM21 15V18H24V15H21ZM6 15H9V18H6V15Z"
+        fill="#edf4ff"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3 6H6V9H3V6ZM3 15H6V18H3V15ZM6 18H9V21H6V18ZM21 18H24V21H21V18Z"
+        fill="#747c9e"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3 0H0V9H3V0ZM3 12H0V24H3H12V21H15V24H24V21H18V18H9V21H3V12Z"
+        fill="#59637d"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6 0H3V3H6V0ZM6 18H3V21H6V18ZM18 18H21V21H18V18ZM15 21H12V24H15V21ZM0 9H6V12H0V9Z"
+        fill="#454b62"
+      />
     </svg>
   );
 };

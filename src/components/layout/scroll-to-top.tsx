@@ -1,9 +1,14 @@
 "use client";
+import { useLenis } from "lenis/react";
 import { useEffect } from "react";
 
 export default function ScrollToTop() {
+  const lenis = useLenis();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    lenis?.scrollTo(0, {
+      duration: 0.8,
+    });
+  }, [lenis]);
+
   return null;
 }

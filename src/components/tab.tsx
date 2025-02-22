@@ -27,9 +27,20 @@ const Tab = ({ className, isActive, onClick, children }: TabProps) => {
   );
 };
 
-const TabsContainer = ({ children }: { children: ReactNode }) => {
+const TabsContainer = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) => {
   return (
-    <div className=" rounded-t-xl flex justify-start w-fit [&>*:first-child]:rounded-tl-xl [&>*:last-child]:rounded-tr-xl">
+    <div
+      className={cn(
+        "rounded-t-xl flex justify-start w-fit [&>*:first-child]:rounded-tl-xl [&>*:last-child]:rounded-tr-xl",
+        className
+      )}
+    >
       {children}
     </div>
   );
