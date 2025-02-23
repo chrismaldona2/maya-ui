@@ -8,6 +8,7 @@ import AnimateOnHeightChange from "./animate-on-height-change";
 export interface ContainerWithTabsProps {
   tabs: { label: string; content: ReactNode }[];
   defaultTab?: string;
+  className?: string;
   innerContainerClassname?: string;
   tabsContainerClassName?: string;
   tabsClassname?: string;
@@ -16,13 +17,14 @@ export interface ContainerWithTabsProps {
 const ContainerWithTabs = ({
   tabs,
   defaultTab = tabs[0].label,
+  className,
   innerContainerClassname,
   tabsContainerClassName,
   tabsClassname,
 }: ContainerWithTabsProps) => {
   const [activeTab, setActiveTab] = useState<string>(defaultTab);
 
-  // This function prevents hover effects if there is only one tab
+  // this function prevents hover effects if there is only one tab
   const getTabs = () => {
     if (tabs.length > 1) {
       return tabs.map((tab) => (
@@ -31,13 +33,14 @@ const ContainerWithTabs = ({
           isActive={activeTab === tab.label}
           onClick={() => setActiveTab(tab.label)}
           className={tabsClassname}
+          ariaLabel={tab.label}
         >
           {tab.label}
         </Tab>
       ));
     } else {
       return (
-        <Tab className={tabsClassname} isActive>
+        <Tab className={tabsClassname} ariaLabel={tabs[0].label} isActive>
           {tabs[0].label}
         </Tab>
       );
@@ -45,7 +48,7 @@ const ContainerWithTabs = ({
   };
 
   return (
-    <div className="drop-shadow-sm max-w-full">
+    <div className={cn("drop-shadow-sm max-w-full", className)}>
       <Tab.Container className={tabsContainerClassName}>
         {getTabs()}
       </Tab.Container>

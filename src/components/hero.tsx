@@ -13,7 +13,7 @@ const Hero = () => {
         </h1>
         <div className="text-neutral-500 mb-4 text-base md:text-lg">
           <p>A free open-source collection of animated React components.</p>
-          <p>Built with Tailwind CSS and Motion.</p>
+          <p>Built with TypeScript, Tailwind CSS and Motion.</p>
         </div>
         <div className="flex flex-wrap gap-3 [&_>*]:flex-grow max-w-[80%] items-center">
           <Link

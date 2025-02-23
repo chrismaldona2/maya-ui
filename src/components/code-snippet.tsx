@@ -1,5 +1,5 @@
 "use client";
-import useThemeSwitch from "@/hooks/use-theme-switch";
+import useTheme from "@/hooks/use-theme";
 import SyntaxHighlighter from "react-syntax-highlighter";
 
 import {
@@ -9,24 +9,37 @@ import {
 import ComponentCard from "./component-card";
 import CopyButton from "./copy-button";
 import { cn } from "@/lib/utils";
+import { SupportedCodeLanguage } from "@/types/shared";
+import { NestedSmoothScroll } from "./layout/smooth-scroll";
 
 export interface CodeSnippetProps {
-  language: "typescript" | "javascript";
+  language: SupportedCodeLanguage;
   code: string;
   className?: string;
 }
 
-const CodeSnippet = ({ language, code, className }: CodeSnippetProps) => {
-  const { resolvedTheme } = useThemeSwitch();
+export interface CodeSnippetProps {
+  language: SupportedCodeLanguage;
+  code: string;
+  className?: string;
+  disableCopy?: boolean;
+}
+
+const CodeSnippet = ({
+  language,
+  code,
+  className,
+  disableCopy,
+}: CodeSnippetProps) => {
+  const { resolvedTheme, mounted } = useTheme();
+
+  if (!mounted) return null;
 
   const style = resolvedTheme === "dark" ? atomOneDark : atomOneLight;
 
   const component = (
-    <>
-      <div
-        className="h-full overflow-auto overscroll-contain text-xs md:text-base w-full"
-        data-lenis-prevent
-      >
+    <NestedSmoothScroll maxHeight="43.75rem">
+      <div className="size-full text-sm md:text-base">
         <SyntaxHighlighter
           language={language}
           style={style}
@@ -42,19 +55,20 @@ const CodeSnippet = ({ language, code, className }: CodeSnippetProps) => {
           {code}
         </SyntaxHighlighter>
       </div>
-
-      <CopyButton
-        text={code}
-        className="size-[2.65rem] absolute top-3 right-5 z-10"
-      />
-    </>
+      {!disableCopy && (
+        <CopyButton
+          text={code}
+          className="size-10 absolute top-3 right-5 z-10"
+        />
+      )}
+    </NestedSmoothScroll>
   );
 
   return (
     <ComponentCard
       className={cn("relative p-0", className)}
       component={component}
-    ></ComponentCard>
+    />
   );
 };
 
