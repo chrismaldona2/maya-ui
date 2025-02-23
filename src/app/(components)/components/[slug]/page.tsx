@@ -1,25 +1,15 @@
 import { allDocs } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer2/hooks";
-import { mdxComponents } from "@/components/showcase/mdx-components";
-import ContainerWithTabs, {
-  ContainerWithTabsProps,
-} from "@/components/container-with-tabs";
+import {
+  mdxComponents,
+  dynamicImports,
+} from "@/components/showcase/mdx-components";
 import ComponentCard from "@/components/component-card";
 import ScrollToTop from "@/components/layout/scroll-to-top";
 import DocBreadcrumb from "@/components/doc-breadcrumb";
-import CodeSnippet, { CodeSnippetProps } from "@/components/code-snippet";
 
 export const generateStaticParams = async () =>
   allDocs.map((doc) => ({ slug: doc._raw.flattenedPath }));
-
-const components = {
-  ContainerWithTabs: (props: ContainerWithTabsProps) => (
-    <ContainerWithTabs {...props} innerContainerClassname="py-5 px-[1.15rem]" />
-  ),
-  CodeSnippet: (props: CodeSnippetProps) => (
-    <CodeSnippet {...props} className="h-[700px] " />
-  ),
-};
 
 const ComponentInfo = async ({
   params,
@@ -49,11 +39,11 @@ const ComponentInfo = async ({
         </p>
       )}
 
-      <div className="mt-10">
+      <article className="mt-7 flex flex-col gap-14">
         <Content
-          components={{ ...mdxComponents, ...components, ComponentCard }}
+          components={{ ...dynamicImports, ...mdxComponents, ComponentCard }}
         />
-      </div>
+      </article>
     </>
   );
 };

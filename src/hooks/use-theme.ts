@@ -1,10 +1,10 @@
 "use client";
-import { useTheme } from "next-themes";
+import { useTheme as useThemeNext } from "next-themes";
 import { useEffect, useState } from "react";
 
-const useThemeSwitch = () => {
+const useTheme = () => {
   const [mounted, setMounted] = useState(false);
-  const { theme, resolvedTheme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useThemeNext();
 
   const oppositeTheme = theme === "light" ? "dark" : "light";
 
@@ -19,4 +19,4 @@ const useThemeSwitch = () => {
   return { mounted, theme, resolvedTheme, oppositeTheme, handleSwitch };
 };
 
-export default useThemeSwitch;
+export default useTheme;

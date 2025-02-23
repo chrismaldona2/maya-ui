@@ -9,9 +9,8 @@ interface SidebarProps {
 const Sidebar = ({ children }: SidebarProps) => {
   return (
     <aside
-      className="flex h-full flex-col gap-9 overflow-auto overscroll-contain px-4 py-6 lg:py-8"
+      className="flex h-full flex-col gap-9 px-4 py-6 lg:py-8"
       aria-label="Sidebar Navigation"
-      data-lenis-prevent
     >
       {children}
     </aside>

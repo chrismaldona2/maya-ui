@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence, motion, Variants } from "motion/react";
-import useThemeSwitch from "@/hooks/use-theme-switch";
+import useTheme from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
 import { SvgIcon } from "../icons";
 
@@ -31,7 +31,7 @@ const toggleVariants: Variants = {
 };
 
 const RotatingThemeToggle = ({ className }: { className?: string }) => {
-  const { mounted, resolvedTheme, handleSwitch } = useThemeSwitch();
+  const { mounted, resolvedTheme, handleSwitch } = useTheme();
 
   if (!mounted) return;
 

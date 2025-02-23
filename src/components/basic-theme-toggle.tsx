@@ -1,8 +1,8 @@
-import useThemeSwitch from "@/hooks/use-theme-switch";
 import { MoonIcon, SunIcon } from "@/components/icons";
+import useTheme from "@/hooks/use-theme";
 
 const ThemeToggle = () => {
-  const { mounted, theme, oppositeTheme, handleSwitch } = useThemeSwitch();
+  const { mounted, resolvedTheme, oppositeTheme, handleSwitch } = useTheme();
 
   if (!mounted) return null;
 
@@ -13,7 +13,7 @@ const ThemeToggle = () => {
       aria-label={`Switch to ${oppositeTheme} mode`}
       title={`Switch to ${oppositeTheme} mode`}
     >
-      {theme === "dark" ? (
+      {resolvedTheme === "dark" ? (
         <MoonIcon className="[&_path]:fill-neutral-300 size-full" />
       ) : (
         <SunIcon className="[&_path]:fill-neutral-700 size-full" />

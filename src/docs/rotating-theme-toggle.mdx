@@ -13,7 +13,7 @@ description: A theme switcher that toggles with a smooth animation.
       label: "Code",
       content: <CodeSnippet code={`"use client";
 import { AnimatePresence, motion, Variants } from "motion/react";
-import useThemeSwitch from "@/hooks/use-theme-switch";
+import useTheme from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
 
 const toggleVariants: Variants = {
@@ -43,7 +43,7 @@ const toggleVariants: Variants = {
 };
 
 const RotatingThemeToggle = ({ className }: { className?: string }) => {
-    const { mounted, resolvedTheme, handleSwitch } = useThemeSwitch();
+    const { mounted, resolvedTheme, handleSwitch } = useTheme();
 
     if (!mounted) return;
 

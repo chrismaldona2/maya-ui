@@ -3,13 +3,8 @@ import { ReactLenis } from "lenis/react";
 import type { LenisRef } from "lenis/react";
 import { cancelFrame, frame } from "motion/react";
 import { ReactNode, useEffect, useRef } from "react";
-const SmoothScroll = ({
-  children,
-  root,
-}: {
-  children: ReactNode;
-  root?: boolean;
-}) => {
+
+const SmoothScroll = ({ children }: { children: ReactNode }) => {
   const lenisRef = useRef<LenisRef>(null);
 
   useEffect(() => {
@@ -28,10 +23,43 @@ const SmoothScroll = ({
         autoRaf: false,
       }}
       ref={lenisRef}
-      root={root}
+      root
     >
       {children}
     </ReactLenis>
   );
 };
-export default SmoothScroll;
+
+const NestedSmoothScroll = ({
+  children,
+  maxHeight,
+}: {
+  children: ReactNode;
+  maxHeight: string;
+}) => {
+  const lenisRef = useRef<LenisRef>(null);
+
+  useEffect(() => {
+    function update(data: { timestamp: number }) {
+      lenisRef.current?.lenis?.raf(data.timestamp);
+    }
+    frame.update(update, true);
+    return () => cancelFrame(update);
+  }, []);
+
+  return (
+    <ReactLenis
+      options={{
+        duration: 1.1,
+        autoRaf: false,
+      }}
+      ref={lenisRef}
+      className={`overflow-hidden w-full`}
+      style={{ maxHeight }}
+    >
+      {children}
+    </ReactLenis>
+  );
+};
+
+export { SmoothScroll, NestedSmoothScroll };

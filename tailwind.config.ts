@@ -27,6 +27,18 @@ export default {
           925: "#131313",
         },
       },
+      animation: {
+        "hand-wave": "hand-wave 1000ms ease-in-out",
+      },
+      keyframes: {
+        "hand-wave": {
+          "0%": { transform: "rotate(0deg)" },
+          "15%": { transform: "rotate(-16deg)" },
+          "40%": { transform: "rotate(0deg)" },
+          "65%": { transform: "rotate(-16deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
+      },
     },
   },
   plugins: [],

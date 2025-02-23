@@ -1,7 +1,10 @@
 export const sidebarLinks = [
   {
     title: "Getting started",
-    links: [{ href: "/components", label: "Introduction" }],
+    links: [
+      { href: "/components", label: "Introduction" },
+      { href: "/components/dependencies", label: "Dependencies" },
+    ],
   },
   {
     title: "Toggles",
