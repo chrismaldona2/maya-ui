@@ -17,11 +17,6 @@ export interface CodeSnippetProps {
   className?: string;
 }
 
-<<<<<<< Updated upstream
-const CodeSnippet = ({ language, code, className }: CodeSnippetProps) => {
-  const { theme } = useThemeSwitch();
-  const style = theme === "dark" ? atomOneDark : atomOneLight;
-=======
 export interface CodeSnippetProps {
   language: SupportedCodeLanguage;
   code: string;
@@ -40,7 +35,6 @@ const CodeSnippet = ({
   if (!mounted) return null;
 
   const style = resolvedTheme === "dark" ? atomOneDark : atomOneLight;
->>>>>>> Stashed changes
 
   const component = (
     <NestedSmoothScroll maxHeight="43.75rem">
@@ -51,7 +45,7 @@ const CodeSnippet = ({
           customStyle={{
             padding: "1rem",
             borderRadius: 0,
-            background: theme === "dark" ? "transparent" : "#fff",
+            background: resolvedTheme === "dark" ? "transparent" : "#fff",
             width: "100%",
             height: "100%",
           }}
