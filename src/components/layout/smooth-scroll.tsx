@@ -52,6 +52,8 @@ const NestedSmoothScroll = ({
       options={{
         duration: 1.1,
         autoRaf: false,
+        syncTouch: true,
+        touchMultiplier: 1.15,
       }}
       ref={lenisRef}
       className={`overflow-hidden w-full`}
