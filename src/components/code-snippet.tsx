@@ -39,30 +39,28 @@ const CodeSnippet = ({
 
   const component = (
     <NestedSmoothScroll maxHeight="43.75rem">
-      <div className="h-full overflow-auto">
-        <div className="text-sm md:text-base">
-          <SyntaxHighlighter
-            language={language}
-            style={style}
-            customStyle={{
-              padding: "1rem",
-              borderRadius: 0,
-              background: resolvedTheme === "dark" ? "transparent" : "#fff",
-              width: "100%",
-              height: "100%",
-            }}
-            wrapLongLines
-          >
-            {code}
-          </SyntaxHighlighter>
-        </div>
-        {!disableCopy && (
-          <CopyButton
-            text={code}
-            className="size-10 absolute top-3 right-5 z-10"
-          />
-        )}
+      <div className="text-sm md:text-base">
+        <SyntaxHighlighter
+          language={language}
+          style={style}
+          customStyle={{
+            padding: "1rem",
+            borderRadius: 0,
+            background: resolvedTheme === "dark" ? "transparent" : "#fff",
+            width: "100%",
+            height: "100%",
+          }}
+          wrapLongLines
+        >
+          {code}
+        </SyntaxHighlighter>
       </div>
+      {!disableCopy && (
+        <CopyButton
+          text={code}
+          className="size-10 absolute top-3 right-5 z-10"
+        />
+      )}
     </NestedSmoothScroll>
   );
 
