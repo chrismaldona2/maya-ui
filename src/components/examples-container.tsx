@@ -2,7 +2,7 @@ import BentoGrid from "./bento-grid";
 import CenteredWrapper from "./centered-wrapper";
 import ComponentCard from "./component-card";
 import ContainerWithTabs from "./container-with-tabs";
-import RotatingThemeToggle from "./showcase/rotating-theme-toggle";
+import RotatingThemeToggle from "./showcase/rotating-theme-toggle-tailwind";
 import WavingHand from "./showcase/waving-hand";
 
 const Examples = () => {
@@ -11,7 +11,7 @@ const Examples = () => {
       <ComponentCard
         className="lg:col-span-2"
         component={<RotatingThemeToggle />}
-        title="Rotating theme toggle"
+        title="Rotating theme toggle tailwind"
         codeLink="/components/rotating-theme-toggle"
       />
       <ComponentCard

@@ -1,12 +1,13 @@
-import WavingHand from "./showcase/waving-hand";
+import { ReactNode } from "react";
+import ThemeToggle from "./showcase/rotating-theme-toggle-tailwind";
 
-const App = () => {
+const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
-      <span>Hello world!</span>
-      <WavingHand />
+      <ThemeToggle className="absolute top-0 left-0 m-5 size-8" />
+      {children}
     </div>
   );
 };
 
-export default App;
+export default Layout;

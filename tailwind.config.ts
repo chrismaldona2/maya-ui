@@ -28,7 +28,9 @@ export default {
         },
       },
       animation: {
-        "hand-wave": "hand-wave 1000ms ease-in-out",
+        "hand-wave": "hand-wave 1000ms ease-in-out ",
+        "rotate-in": "rotate-in 300ms ease-in-out backwards",
+        "rotate-out": "rotate-out 350ms ease-in-out forwards",
       },
       keyframes: {
         "hand-wave": {
@@ -37,6 +39,16 @@ export default {
           "40%": { transform: "rotate(0deg)" },
           "65%": { transform: "rotate(-16deg)" },
           "100%": { transform: "rotate(0deg)" },
+        },
+        "rotate-in": {
+          "0%": { transform: "rotate(90deg) scale(0)" },
+          "60%": { transform: "rotate(10deg) scale(1.15)" },
+          "100%": { transform: "rotate(0deg) scale(1)" },
+        },
+        "rotate-out": {
+          "0%": { transform: "rotate(0deg) scale(1)" },
+          "25%": { transform: "rotate(-30deg) scale(1.15)" },
+          "100%": { transform: "rotate(-90deg) scale(0)" },
         },
       },
     },

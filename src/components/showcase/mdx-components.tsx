@@ -7,8 +7,11 @@ import CodeSnippet, { CodeSnippetProps } from "../code-snippet";
 
 export const dynamicImports = {
   WavingHand: dynamic(() => import("@/components/showcase/waving-hand")),
-  RotatingThemeToggle: dynamic(
-    () => import("@/components/showcase/rotating-theme-toggle")
+  RotatingThemeToggleMotion: dynamic(
+    () => import("@/components/showcase/rotating-theme-toggle-motion")
+  ),
+  RotatingThemeToggleTailwind: dynamic(
+    () => import("@/components/showcase/rotating-theme-toggle-tailwind")
   ),
 };
 
@@ -20,7 +23,9 @@ export const mdxComponents = {
       innerContainerClassname="py-5 px-[1.15rem]"
     />
   ),
-  CodeSnippet: (props: CodeSnippetProps) => <CodeSnippet {...props} />,
+  CodeSnippet: (props: CodeSnippetProps) => (
+    <CodeSnippet {...props} className="mb-2" />
+  ),
   UIVerseLink: () => (
     <a
       className="font-semibold bg-gradient-to-br from-[#8689f3] to-[#945abe] to-70% bg-clip-text text-transparent"
@@ -30,8 +35,9 @@ export const mdxComponents = {
       UIVerse
     </a>
   ),
+
   Note: ({ children }: PropsWithChildren) => (
-    <aside className="my-5 py-3 px-4 rounded-md bg-neutral-200 text-neutral-700 dark:bg-neutral-850 dark:text-neutral-400">
+    <aside className="my-5 p-4 rounded-md bg-neutral-200 text-neutral-700 dark:bg-neutral-850 dark:text-neutral-400">
       {children}
     </aside>
   ),
@@ -65,7 +71,7 @@ export const mdxComponents = {
     </h2>
   ),
   p: ({ children }: PropsWithChildren) => (
-    <p className="text-base text-neutral-600 dark:text-[#adadad] mb-3.5">
+    <p className="text-base text-neutral-600 dark:text-[#adadad] my-3.5">
       {children}
     </p>
   ),

@@ -1,6 +1,6 @@
 ---
 title: Waving hand
-description: Animated hand that waves when hovered or clicked.
+description: An animated hand emoji that waves when hovered, clicked, or focused. Ideal for greeting users in an interactive way.
 ---
 
 
@@ -25,31 +25,55 @@ description: Animated hand that waves when hovered or clicked.
     {
       label: "Code",
       content: <CodeSnippet code={`"use client";
-import { useTimeoutAnimation } from "@/hooks/use-timeout-animation";
 import { cn } from "@/lib/utils";
+import { HTMLAttributes, useState } from "react";
 
-const WAVE_DURATION_MS = 1000; // must match waving animation duration set in tailwind config
+type SvgIcon = HTMLAttributes<SVGElement>;
 
+const WavingHand = ({ className, ...props }: SvgIcon) => {
+    const [isWaving, setIsWaving] = useState<boolean>(false);
 
-const WavingHand = ({ className }: { className?: string }) => {
-    const { isActive, startAnimation } = useTimeoutAnimation(WAVE_DURATION_MS);
+    const triggerAnimation = () => {
+        if (!isWaving) setIsWaving(true);
+    };
 
     return (
       <WavingHandEmoji
-        className={cn(
-          "flex-shrink-0 outline-none cursor-pointer origin-[80%_80%] size-6",
-          isActive && "animate-hand-wave",
-          className
-        )}
-        onClick={startAnimation}
-        onMouseEnter={startAnimation}
+          {...props}
+          className={cn(
+            "flex-shrink-0 cursor-pointer origin-[80%_80%] size-6",
+            isWaving && "animate-hand-wave",
+            className
+          )}
+          tabIndex={0}
+          // ↓ you can see I'm repeating myself here, you can abstract this logic if you want!
+          // ↓ left it like this because it felt more readable
+          // ↓ also didn't think it was that necessary (they are not a looot)
+          onClick={(e) => {
+              triggerAnimation();
+              props.onClick?.(e);
+            }}
+          onMouseEnter={(e) => {
+            triggerAnimation();
+            props.onMouseEnter?.(e);
+          }}
+          onFocus={(e) => {
+            triggerAnimation();
+            props.onFocus?.(e);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              triggerAnimation();
+              props.onKeyDown?.(e);
+            }
+          }}
+          onAnimationEnd={() => setIsWaving(false)}
       />
     );
 };
 
 export default WavingHand;
 
-type SvgIcon = React.HTMLAttributes<SVGElement>;
 const WavingHandEmoji = (props: SvgIcon) => {
     return (
       <svg
@@ -106,33 +130,39 @@ const WavingHandEmoji = (props: SvgIcon) => {
         </defs>
       </svg>
     );
-};
-`} language="typescript" />,
+};  
+`} language="tsx" />,
     },
     {
       label: "Usage",
-      content:  <CodeSnippet code={`import WavingHand from ".waving-hand";
+      content:  <CodeSnippet code={`"use client"
+import WavingHand from ".waving-hand";
 
-const App = () => {
+const Gretting = () => {
+    const handleClick = () => console.log("how are you?");
+
     return (
       <div>
         <span>Hello world!</span>
-        <WavingHand />
+        <WavingHand onClick={handleClick}/>
       </div>
     );
 };
 
-export default App;`} language="typescript"/>
+export default Gretting;`} language="tsx"/>
     }
   ]}
 />
+
+
 </section>
+
 
 
 <section>
 <header>
   ## Prerequisites
-  Before using this component, configure the following in your project:
+  Before using this component, add the following animation configurations to your Tailwind config file:
 </header>
 
 <ContainerWithTabs
@@ -161,37 +191,7 @@ export default {
     },
 } satisfies Config;
 `} language="typescript"/>
-        },
-        {
-            label: "use-timeout-animation.ts",
-            content: <CodeSnippet code={`import { useState, useEffect, useRef, useCallback } from "react";
-
-export const useTimeoutAnimation = (duration: number) => {
-    const [isActive, setIsActive] = useState(false);
-    const timeoutRef = useRef<number | null>(null);
-
-    const startAnimation = useCallback(() => {
-      if (isActive) return; // prevents restarting if already active
-
-      setIsActive(true);
-      timeoutRef.current = window.setTimeout(() => {
-        setIsActive(false);
-      }, duration);
-    }, [isActive, duration]);
-
-    useEffect(() => {
-      return () => {
-        if (timeoutRef.current !== null) {
-          clearTimeout(timeoutRef.current);
         }
-      };
-    }, []);
-
-    return { isActive, startAnimation };
-};
-`} language="typescript"/>
-        }
-
 ]}/>
 
 
@@ -206,7 +206,7 @@ export const useTimeoutAnimation = (duration: number) => {
     This component relies on the following libraries:
   </header>
 
-  - **Tailwind CSS**: For styling and simple animations.
-  - **clsx**: For conditional class handling.
-  - **tailwind-merge**: For merging Tailwind classes safely.
+  - **<a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a>**: For styling and simple animations.
+  - **<a href="https://github.com/dcastil/tailwind-merge" target="_blank">clsx</a>**: For conditional class handling.
+  - **<a href="https://github.com/lukeed/clsx" target="_blank">tailwind-merge</a>**: For merging Tailwind classes safely.
 </section>
