@@ -14,7 +14,7 @@ const WavingHand = ({ className, ...props }: SvgIcon) => {
     <WavingHandEmoji
       {...props}
       className={cn(
-        "flex-shrink-0 cursor-pointer origin-[80%_80%] size-6",
+        "flex-shrink-0 cursor-pointer origin-[80%_80%] size-6 outline-none",
         isWaving && "animate-hand-wave",
         className
       )}
