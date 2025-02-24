@@ -3,6 +3,12 @@ import { ReactLenis } from "lenis/react";
 import type { LenisRef } from "lenis/react";
 import { cancelFrame, frame } from "motion/react";
 import { ReactNode, useEffect, useRef } from "react";
+import { LenisOptions } from "lenis";
+
+const SCROLL_GLOBAL_CONFIG: LenisOptions = {
+  lerp: 0.09,
+  autoRaf: false,
+};
 
 const SmoothScroll = ({ children }: { children: ReactNode }) => {
   const lenisRef = useRef<LenisRef>(null);
@@ -17,14 +23,7 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <ReactLenis
-      options={{
-        duration: 1.1,
-        autoRaf: false,
-      }}
-      ref={lenisRef}
-      root
-    >
+    <ReactLenis options={SCROLL_GLOBAL_CONFIG} ref={lenisRef} root>
       {children}
     </ReactLenis>
   );
@@ -49,12 +48,9 @@ const NestedSmoothScroll = ({
 
   return (
     <ReactLenis
-      options={{
-        duration: 1.1,
-        autoRaf: false,
-      }}
+      options={SCROLL_GLOBAL_CONFIG}
       ref={lenisRef}
-      className={`overflow-auto w-full`}
+      className={`overflow-auto w-full `}
       style={{ maxHeight }}
     >
       {children}

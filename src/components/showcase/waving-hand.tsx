@@ -1,28 +1,49 @@
 "use client";
-import { useTimeoutAnimation } from "@/hooks/use-timeout-animation";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { SvgIcon } from "../icons";
 
-const WAVE_DURATION_MS = 1000; // must match waving animation duration set in tailwind config
+const WavingHand = ({ className, ...props }: SvgIcon) => {
+  const [isWaving, setIsWaving] = useState<boolean>(false);
 
-const WavingHand = ({ className }: { className?: string }) => {
-  const { isActive, startAnimation } = useTimeoutAnimation(WAVE_DURATION_MS);
+  const triggerAnimation = () => {
+    if (!isWaving) setIsWaving(true);
+  };
 
   return (
     <WavingHandEmoji
+      {...props}
       className={cn(
-        "flex-shrink-0 outline-none cursor-pointer origin-[80%_80%] size-6",
-        isActive && "animate-hand-wave",
+        "flex-shrink-0 cursor-pointer origin-[80%_80%] size-6",
+        isWaving && "animate-hand-wave",
         className
       )}
-      onClick={startAnimation}
-      onMouseEnter={startAnimation}
+      tabIndex={0}
+      onClick={(e) => {
+        triggerAnimation();
+        props.onClick?.(e);
+      }}
+      onMouseEnter={(e) => {
+        triggerAnimation();
+        props.onMouseEnter?.(e);
+      }}
+      onFocus={(e) => {
+        triggerAnimation();
+        props.onFocus?.(e);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          triggerAnimation();
+          props.onKeyDown?.(e);
+        }
+      }}
+      onAnimationEnd={() => setIsWaving(false)}
     />
   );
 };
 
 export default WavingHand;
 
-type SvgIcon = React.HTMLAttributes<SVGElement>;
 const WavingHandEmoji = (props: SvgIcon) => {
   return (
     <svg

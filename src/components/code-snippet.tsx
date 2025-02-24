@@ -1,11 +1,10 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
-import SyntaxHighlighter from "react-syntax-highlighter";
-
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
-  atomOneDark,
-  atomOneLight,
-} from "react-syntax-highlighter/dist/esm/styles/hljs";
+  oneDark,
+  oneLight,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 import ComponentCard from "./component-card";
 import CopyButton from "./copy-button";
 import { cn } from "@/lib/utils";
@@ -35,16 +34,18 @@ const CodeSnippet = ({
 
   if (!mounted) return null;
 
-  const style = resolvedTheme === "dark" ? atomOneDark : atomOneLight;
+  const style = resolvedTheme === "dark" ? oneDark : oneLight;
 
   const component = (
     <NestedSmoothScroll maxHeight="43.75rem">
-      <div className="text-sm md:text-base">
+      <div className="h-full text-sm md:text-base">
         <SyntaxHighlighter
           language={language}
           style={style}
+          codeTagProps={{ style: { background: "transparent" } }}
           customStyle={{
-            padding: "1rem",
+            padding: "1.2rem",
+            margin: 0,
             borderRadius: 0,
             background: resolvedTheme === "dark" ? "transparent" : "#fff",
             width: "100%",
@@ -66,7 +67,7 @@ const CodeSnippet = ({
 
   return (
     <ComponentCard
-      className={cn("relative p-0", className)}
+      className={cn("relative p-0 min-h-full", className)}
       component={component}
     />
   );
