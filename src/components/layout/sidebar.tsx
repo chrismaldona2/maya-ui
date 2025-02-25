@@ -45,8 +45,10 @@ const SidebarLink = ({ isActive, href, children }: SidebarLinkProps) => {
       href={href}
       className={cn(
         "cursor-pointer rounded-md px-2 py-2 text-sm text-neutral-500 hover:transition-colors hover:duration-300 hover:bg-neutral-100 hover:dark:bg-neutral-900",
-        isActive &&
-          "font-medium text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900"
+        {
+          "font-medium text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900":
+            isActive,
+        }
       )}
     >
       {children}

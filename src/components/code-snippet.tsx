@@ -9,7 +9,6 @@ import ComponentCard from "./component-card";
 import CopyButton from "./copy-button";
 import { cn } from "@/lib/utils";
 import { SupportedCodeLanguage } from "@/types/shared";
-import { NestedSmoothScroll } from "./layout/smooth-scroll";
 
 export interface CodeSnippetProps {
   language: SupportedCodeLanguage;
@@ -31,13 +30,11 @@ const CodeSnippet = ({
   disableCopy,
 }: CodeSnippetProps) => {
   const { resolvedTheme, mounted } = useTheme();
-
   if (!mounted) return null;
-
   const style = resolvedTheme === "dark" ? oneDark : oneLight;
 
   const component = (
-    <NestedSmoothScroll maxHeight="43.75rem">
+    <div className="overflow-auto max-h-[700px] w-full">
       <div className="h-full text-sm md:text-base">
         <SyntaxHighlighter
           language={language}
@@ -62,7 +59,7 @@ const CodeSnippet = ({
           className="size-10 absolute top-3 right-5 z-10"
         />
       )}
-    </NestedSmoothScroll>
+    </div>
   );
 
   return (

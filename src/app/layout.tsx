@@ -6,6 +6,7 @@ import Header from "@/components/layout/header";
 import PageLayout from "@/components/layout/page-layout";
 import Footer from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/react";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default async function RootLayout({
             {children}
           </PageLayout>
           <Footer />
+          <Analytics />
         </Providers>
       </body>
     </html>
