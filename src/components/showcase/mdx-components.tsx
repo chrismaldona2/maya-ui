@@ -1,31 +1,14 @@
-import dynamic from "next/dynamic";
-import ContainerWithTabs, {
-  ContainerWithTabsProps,
-} from "../container-with-tabs";
 import { AnchorHTMLAttributes, PropsWithChildren } from "react";
-import CodeSnippet, { CodeSnippetProps } from "../code-snippet";
-
-export const dynamicImports = {
-  WavingHand: dynamic(() => import("@/components/showcase/waving-hand")),
-  RotatingThemeToggleMotion: dynamic(
-    () => import("@/components/showcase/rotating-theme-toggle-motion")
-  ),
-  RotatingThemeToggleTailwind: dynamic(
-    () => import("@/components/showcase/rotating-theme-toggle-tailwind")
-  ),
-};
+import { Tabs, TabPanel } from "../container-with-tabs";
+import CodeSnippet from "../code-snippet";
+import ComponentCard from "../component-card";
+import dynamic from "next/dynamic";
 
 export const mdxComponents = {
-  ContainerWithTabs: (props: ContainerWithTabsProps) => (
-    <ContainerWithTabs
-      {...props}
-      className="mt-5"
-      innerContainerClassname="py-5 px-[1.15rem]"
-    />
-  ),
-  CodeSnippet: (props: CodeSnippetProps) => (
-    <CodeSnippet {...props} className="mb-2" />
-  ),
+  Tabs,
+  TabPanel,
+  CodeSnippet,
+  ComponentCard,
   UIVerseLink: () => (
     <a
       className="font-semibold bg-gradient-to-br from-[#8689f3] to-[#945abe] to-70% bg-clip-text text-transparent"
@@ -35,7 +18,6 @@ export const mdxComponents = {
       UIVerse
     </a>
   ),
-
   Note: ({ children }: PropsWithChildren) => (
     <aside className="my-5 p-4 rounded-md bg-neutral-200 text-neutral-700 dark:bg-neutral-850 dark:text-neutral-400">
       {children}
@@ -74,5 +56,23 @@ export const mdxComponents = {
     <p className="text-base text-neutral-600 dark:text-[#adadad] my-3.5">
       {children}
     </p>
+  ),
+};
+
+export const dynamicImports = {
+  WavingHand: dynamic(
+    () => import("@/components/showcase/waving-hand/waving-hand")
+  ),
+  RotatingThemeToggleTailwind: dynamic(
+    () =>
+      import(
+        "@/components/showcase/rotating-theme-toggle/rotating-theme-toggle-tailwind"
+      )
+  ),
+  RotatingThemeToggleMotion: dynamic(
+    () =>
+      import(
+        "@/components/showcase/rotating-theme-toggle/rotating-theme-toggle-motion"
+      )
   ),
 };

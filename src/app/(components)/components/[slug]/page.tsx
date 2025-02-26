@@ -4,9 +4,9 @@ import {
   mdxComponents,
   dynamicImports,
 } from "@/components/showcase/mdx-components";
-import ComponentCard from "@/components/component-card";
 import ScrollToTop from "@/components/layout/scroll-to-top";
 import DocBreadcrumb from "@/components/doc-breadcrumb";
+import DocNavigation from "@/components/layout/doc-navigation";
 
 export const generateStaticParams = async () =>
   allDocs.map((doc) => ({ slug: doc._raw.flattenedPath }));
@@ -17,13 +17,11 @@ const ComponentInfo = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-
+  const currentPath = `/components/${slug}`;
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === slug);
-
   if (!doc) return <></>;
 
   const Content = getMDXComponent(doc.body.code);
-
   return (
     <>
       <ScrollToTop />
@@ -40,10 +38,12 @@ const ComponentInfo = async ({
       )}
 
       <article className="mt-7 flex flex-col gap-14">
-        <Content
-          components={{ ...dynamicImports, ...mdxComponents, ComponentCard }}
-        />
+        <Content components={{ ...dynamicImports, ...mdxComponents }} />
       </article>
+
+      <div className="mt-20">
+        <DocNavigation currentPath={currentPath} />
+      </div>
     </>
   );
 };

@@ -5,7 +5,7 @@ import { CloseIcon } from "@/components/icons";
 import { useRef } from "react";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { useEscapeKeyPress } from "@/hooks/use-escape-key-press";
-import { sidebarLinks } from "@/config/docs";
+import { sidebarLinks } from "@/config/navigation";
 
 const MobileMenu = ({ onClose }: { onClose: () => void }) => {
   const menuRef = useRef<HTMLDivElement>(null);
