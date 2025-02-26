@@ -12,7 +12,6 @@ const Components = async ({ children }: { children: ReactNode }) => {
         <main className="h-full py-12 md:py-8 px-2 md:px-14 md:border-l border-neutral-200 dark:border-neutral-900">
           {children}
         </main>
-
         <div className="hidden h-full border-l border-neutral-200 dark:border-neutral-900 lg:block"></div>
       </div>
     </CenteredWrapper>

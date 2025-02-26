@@ -1,70 +1,95 @@
 "use client";
-import { ReactNode, useState } from "react";
-import Tab from "./tab";
-import Container from "./container";
 import { cn } from "@/lib/utils";
+import { cloneElement, ReactElement, ReactNode, useState } from "react";
 import AnimateOnHeightChange from "./animate-on-height-change";
 
-export interface ContainerWithTabsProps {
-  tabs: { label: string; content: ReactNode }[];
-  defaultTab?: string;
-  className?: string;
-  innerContainerClassname?: string;
-  tabsContainerClassName?: string;
-  tabsClassname?: string;
+interface TabContainerProps {
+  children: ReactElement<PanelProps> | ReactElement<PanelProps>[];
+  defaultActive?: number;
+  innerContainerClassName?: string;
+  remountOnChange?: boolean;
 }
 
-const ContainerWithTabs = ({
-  tabs,
-  defaultTab = tabs[0].label,
-  className,
-  innerContainerClassname,
-  tabsContainerClassName,
-  tabsClassname,
-}: ContainerWithTabsProps) => {
-  const [activeTab, setActiveTab] = useState<string>(defaultTab);
-
-  // this function prevents hover effects if there is only one tab
-  const getTabs = () => {
-    if (tabs.length > 1) {
-      return tabs.map((tab) => (
-        <Tab
-          key={tab.label}
-          isActive={activeTab === tab.label}
-          onClick={() => setActiveTab(tab.label)}
-          className={tabsClassname}
-          ariaLabel={tab.label}
-        >
-          {tab.label}
-        </Tab>
-      ));
-    } else {
-      return (
-        <Tab className={tabsClassname} ariaLabel={tabs[0].label} isActive>
-          {tabs[0].label}
-        </Tab>
-      );
-    }
-  };
+const Tabs = ({
+  children,
+  innerContainerClassName,
+  defaultActive = 0,
+  remountOnChange = false,
+}: TabContainerProps) => {
+  const [activeTab, setActiveTab] = useState(defaultActive);
+  const tabsArray = Array.isArray(children) ? children : [children];
 
   return (
-    <div className={cn("drop-shadow-sm max-w-full", className)}>
-      <Tab.Container className={tabsContainerClassName}>
-        {getTabs()}
-      </Tab.Container>
+    <section className="drop-shadow-sm">
+      <div
+        role="tablist"
+        className="flex justify-start max-w-[95%] [&>*:first-child]:rounded-tl-xl [&>*:last-child]:rounded-tr-xl"
+      >
+        {tabsArray.map((tab, index) => (
+          <button
+            key={index}
+            onClick={() => setActiveTab(index)}
+            className={cn(
+              "text-neutral-550 dark:text-neutral-450 bg-neutral-300 dark:bg-neutral-925  px-6 py-2.5 text-sm  cursor-pointer select-none truncate",
+              {
+                "font-medium text-neutral-800  dark:text-zinc-400 bg-neutral-200 dark:bg-neutral-900":
+                  activeTab === index,
+              },
+              {
+                "hover:bg-neutral-150 dark:hover:bg-neutral-850":
+                  activeTab !== index,
+              }
+            )}
+          >
+            {tab.props.label}
+          </button>
+        ))}
+      </div>
 
-      <Container
+      <div
         className={cn(
-          "bg-gradient-to-b from-neutral-100 to-zinc-100 dark:from-[#111111] dark:to-[#0d0d0d] rounded-tl-none",
-          innerContainerClassname
+          "py-5 px-[1.15rem] bg-gradient-to-b from-neutral-100 to-zinc-100 dark:from-[#111111] dark:to-[#0d0d0d] rounded-xl",
+          "shadow-[inset_-2px_-4px_8px_rgba(200,200,200,0.1)] dark:shadow-[inset_-2px_-4px_8px_rgba(44,44,44,0.1)]",
+          "rounded-tl-none",
+          innerContainerClassName
         )}
       >
         <AnimateOnHeightChange>
-          {tabs.find((tab) => tab.label === activeTab)?.content}
+          {remountOnChange
+            ? tabsArray.map((content, index) =>
+                index === activeTab
+                  ? cloneElement(content, { active: true, key: index })
+                  : null
+              )
+            : tabsArray.map((content, index) =>
+                cloneElement(content, {
+                  active: index === activeTab,
+                  key: index,
+                })
+              )}
         </AnimateOnHeightChange>
-      </Container>
+      </div>
+    </section>
+  );
+};
+
+interface PanelProps {
+  children: ReactNode;
+  label: string;
+  active?: boolean;
+  className?: string;
+}
+
+const TabPanel = ({ children, className, active = false }: PanelProps) => {
+  return (
+    <div
+      role="tabpanel"
+      aria-hidden={!active}
+      className={cn(className, "hidden", { block: active })}
+    >
+      {children}
     </div>
   );
 };
 
-export default ContainerWithTabs;
+export { Tabs, TabPanel };

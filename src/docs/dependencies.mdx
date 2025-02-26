@@ -1,68 +1,49 @@
 ---
 title: Dependencies
-description: Some of the components rely on external dependencies to provide enhanced functionality, animations, or styling. 
+description: Some of the components rely on external dependencies to provide enhanced functionality, animations, or styling.
 ---
 
+import { installationSnippets } from "@/components/showcase/dependencies/snippets"
 
 <section>
-<header>
-
+    <header>
     ## Styling dependencies
     These libraries are essential and used in almost every component here.
-</header>
+    </header>
 
-- [**Tailwind CSS**](https://tailwindcss.com/) - A utility-first CSS framework for styling components with ease.
-- [**tailwind-merge**](https://github.com/dcastil/tailwind-merge) - A utility to intelligently merge Tailwind class names, preventing conflicts.
-- [**clsx**](https://github.com/lukeed/clsx) - A small utility to conditionally join class names dynamically.
+    - [**Tailwind CSS**](https://tailwindcss.com/) - A utility-first CSS framework for styling components with ease.
+    - [**tailwind-merge**](https://github.com/dcastil/tailwind-merge) - A utility to intelligently merge Tailwind class names, preventing conflicts.
+    - [**clsx**](https://github.com/lukeed/clsx) - A small utility to conditionally join class names dynamically.
+</section>
+
+<section>
+    <header>
+        ## Animation dependencies
+        Some components require animation libraries to achieve complex interactions and motion effects.
+    </header>
+
+    - [**Motion**](https://motion.dev/) - A powerful animation library for React.
+    - [**React Three Fiber**](https://r3f.docs.pmnd.rs/) - React renderer for Three.js, enabling 3D scenes with JSX and seamless React integration for interactive experiences.
 </section>
 
 
 <section>
-<header>
-    ## Animation dependencies
-    Some components require animation libraries to achieve complex interactions and motion effects.
-</header>
-
-- [**Motion**](https://motion.dev/) - A powerful animation library for React.
-- [**React Three Fiber**](https://r3f.docs.pmnd.rs/) - React renderer for Three.js, enabling 3D scenes with JSX and seamless React integration for interactive experiences.
-</section>
-
-
-<section>
-<header>
+    <header>
     ## Basic installation
     To use these dependencies in your project, install them using npm or yarn:
-</header>
+    </header>
 
-<ContainerWithTabs
-    tabs={[
-        {
-            label: "npm",
-            content: <CodeSnippet code={`//core
-npm install tailwind-merge clsx
+    <Tabs>
+        <TabPanel label="npm">
+            <CodeSnippet code={installationSnippets.npm} language="bash"/>
+        </TabPanel>
+        <TabPanel label="yarn">
+            <CodeSnippet code={installationSnippets.yarn} language="bash"/>
+        </TabPanel>
+    </Tabs>
 
-//animation
-npm install motion
 
-//3d
-npm install three @types/three @react-three/fiber`} language="javascript" disableCopy/>,
-        },
+    <Note>Tailwind CSS installation may require multiple steps. For detailed instructions, visit their [installation guide](https://tailwindcss.com/docs/installation/). </Note>
 
-        {
-            label: "yarn",
-            content: <CodeSnippet code={`//core
-yarn add tailwind-merge clsx
-
-//animation
-yarn add motion
-
-//3d
-yarn add three @types/three @react-three/fiber`} language="javascript" disableCopy/>
-        }
-
-]}/>
-
-<Note>Tailwind CSS installation may require multiple steps. For detailed instructions, visit their [installation guide](https://tailwindcss.com/docs/installation/).</Note>
-
-Each component will specify which libraries are required.
+    Each component will specify which libraries are required.
 </section>

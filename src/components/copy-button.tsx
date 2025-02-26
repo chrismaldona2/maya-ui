@@ -30,13 +30,13 @@ const CopyButton = ({ text, className, ...props }: CopyButtonProps) => {
       aria-label="Copy to clipboard"
       title="Copy to clipboard"
       className={cn(
-        "p-2.5 cursor-pointer rounded-lg bg-neutral-200/90 hover:bg-neutral-100/90 dark:bg-neutral-900/90 dark:hover:bg-neutral-850/90 [&_path]:fill-neutral-400  dark:[&_path]:fill-neutral-700 active:scale-[85%] transition-[transform] duration-300 hover:[transition-property:transform,background-color]",
+        "p-2.5 cursor-pointer rounded-lg bg-neutral-200/90 hover:bg-neutral-100/90 dark:bg-neutral-900/90 dark:hover:bg-neutral-850/90 active:scale-[85%] transition-[transform] duration-300 hover:[transition-property:transform,background-color]",
         className
       )}
       {...props}
     >
       <div className="relative">
-        <CopyIcon className="size-full" />
+        <CopyIcon className="size-full [&_path]:fill-neutral-400  dark:[&_path]:fill-neutral-700" />
         <AnimatePresence mode="wait">
           {isCopied && (
             <MotionCheckIcon
@@ -45,7 +45,7 @@ const CopyButton = ({ text, className, ...props }: CopyButtonProps) => {
               animate="visible"
               exit="hidden"
               transition={{ duration: 0.2 }}
-              className="size-[42%] absolute right-[17%] bottom-[20%]"
+              className="size-[42%] absolute right-[17%] bottom-[20%] [&_path]:fill-green-500"
             />
           )}
 
@@ -56,7 +56,7 @@ const CopyButton = ({ text, className, ...props }: CopyButtonProps) => {
               animate="visible"
               exit="hidden"
               transition={{ duration: 0.2 }}
-              className="size-[42%] absolute right-[17%] bottom-[20%]"
+              className="size-[42%] absolute right-[17%] bottom-[20%] [&_path]:fill-red-700"
             />
           )}
         </AnimatePresence>

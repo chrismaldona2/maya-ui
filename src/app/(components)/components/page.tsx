@@ -2,11 +2,11 @@ import DocBreadcrumb from "@/components/doc-breadcrumb";
 import ScrollToTop from "@/components/layout/scroll-to-top";
 import { allDocs } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer2/hooks";
-
 import {
-  dynamicImports,
   mdxComponents,
+  dynamicImports,
 } from "@/components/showcase/mdx-components";
+import DocNavigation from "@/components/layout/doc-navigation";
 
 const ComponentsPage = () => {
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === "introduction");
@@ -33,6 +33,10 @@ const ComponentsPage = () => {
       <article className="mt-8 flex flex-col gap-8">
         <Content components={{ ...dynamicImports, ...mdxComponents }} />
       </article>
+
+      <div className="mt-20">
+        <DocNavigation currentPath="/components" />
+      </div>
     </>
   );
 };

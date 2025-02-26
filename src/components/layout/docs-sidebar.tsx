@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Sidebar from "./sidebar";
-import { sidebarLinks } from "@/config/docs";
+import { sidebarLinks } from "@/config/navigation";
 
 const DocsSidebar = () => {
   const pathname = usePathname();

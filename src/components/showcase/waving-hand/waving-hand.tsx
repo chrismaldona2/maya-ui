@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { SvgIcon } from "../icons";
+import { SvgIcon } from "../../icons";
 
 const WavingHand = ({ className, ...props }: SvgIcon) => {
   const [isWaving, setIsWaving] = useState<boolean>(false);
@@ -15,6 +15,7 @@ const WavingHand = ({ className, ...props }: SvgIcon) => {
       {...props}
       className={cn(
         "flex-shrink-0 cursor-pointer origin-[80%_80%] size-6 outline-none",
+        "focus-visible:ring-2 ring-neutral-600 dark:ring-neutral-100",
         isWaving && "animate-hand-wave",
         className
       )}

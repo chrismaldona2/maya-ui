@@ -4,7 +4,7 @@ import { CodeIcon } from "./icons";
 import { cn } from "@/lib/utils";
 
 interface ComponentCardProps {
-  component: ReactNode;
+  children: ReactNode;
   title?: string;
   codeLink?: string;
   className?: string;
@@ -12,7 +12,7 @@ interface ComponentCardProps {
 
 const ComponentCard = ({
   title,
-  component,
+  children,
   codeLink,
   className,
 }: ComponentCardProps) => {
@@ -32,7 +32,7 @@ const ComponentCard = ({
           <CodeIcon className="size-4 pointer-events-none [&_path]:fill-[#909090] dark:[&_path]:fill-neutral-600" />
         </Link>
       )}
-      {component}
+      {children}
       {title && (
         <span className="absolute bottom-2 w-full select-none text-center text-sm text-neutral-550 dark:text-neutral-450">
           {title}
