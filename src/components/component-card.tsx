@@ -19,7 +19,7 @@ const ComponentCard = ({
   return (
     <div
       className={cn(
-        "relative size-full flex items-center justify-center py-4 px-2 bg-neutral-200 dark:bg-[#131313] rounded-xl shadow-[inset_3px_2px_2px_rgba(200,200,200,.1)] dark:shadow-[inset_2px_2px_8px_rgba(40,44,44,0.1)] min-h-[175px] overflow-clip",
+        "relative size-full flex items-center gap-2 justify-center py-4 px-2 bg-neutral-200 dark:bg-[#131313] rounded-xl shadow-[inset_3px_2px_2px_rgba(200,200,200,.1)] dark:shadow-[inset_2px_2px_8px_rgba(40,44,44,0.1)] min-h-[175px] overflow-clip",
         className
       )}
     >

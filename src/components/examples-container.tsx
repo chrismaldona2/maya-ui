@@ -2,6 +2,7 @@ import BentoGrid from "./bento-grid";
 import CenteredWrapper from "./centered-wrapper";
 import ComponentCard from "./component-card";
 import { TabPanel, Tabs } from "./container-with-tabs";
+import ModalDemo from "./showcase/modal/modal-demo";
 import RotatingThemeToggle from "./showcase/rotating-theme-toggle/rotating-theme-toggle-tailwind";
 import WavingHand from "./showcase/waving-hand/waving-hand";
 
@@ -12,8 +13,7 @@ const ExamplesContainer = () => {
         <TabPanel label="Examples">
           <BentoGrid>
             <ComponentCard
-              className="lg:col-span-2"
-              title="Rotating theme toggle tailwind"
+              title="Rotating theme toggle"
               codeLink="/components/rotating-theme-toggle"
             >
               <RotatingThemeToggle />
@@ -29,6 +29,13 @@ const ExamplesContainer = () => {
                 </span>
                 <WavingHand />
               </div>
+            </ComponentCard>
+            <ComponentCard
+              title="Modal"
+              className="col-span-full lg:col-span-1"
+              codeLink="/components/modal"
+            >
+              <ModalDemo />
             </ComponentCard>
           </BentoGrid>
         </TabPanel>

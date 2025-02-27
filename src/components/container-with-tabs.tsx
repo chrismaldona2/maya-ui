@@ -29,6 +29,7 @@ const Tabs = ({
           <button
             key={index}
             onClick={() => setActiveTab(index)}
+            title={tab.props.label}
             className={cn(
               "text-neutral-550 dark:text-neutral-450 bg-neutral-300 dark:bg-neutral-925  px-6 py-2.5 text-sm  cursor-pointer select-none truncate",
               {

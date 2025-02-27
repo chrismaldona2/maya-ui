@@ -1,6 +1,12 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import {
+  PrismLight,
+  PrismLight as SyntaxHighlighter,
+} from "react-syntax-highlighter";
+import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
+import typescript from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
+import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
 import {
   oneDark,
   oneLight,
@@ -10,6 +16,10 @@ import CopyButton from "./copy-button";
 import { cn } from "@/lib/utils";
 import { SupportedCodeLanguage } from "@/types/shared";
 import { memo } from "react";
+
+PrismLight.registerLanguage("tsx", tsx);
+PrismLight.registerLanguage("typescript", typescript);
+PrismLight.registerLanguage("bash", bash);
 
 export interface CodeSnippetProps {
   language: SupportedCodeLanguage;
@@ -52,7 +62,7 @@ const CodeSnippet = ({
             }}
             wrapLongLines
           >
-            {code}
+            {code.trim()}
           </SyntaxHighlighter>
         </div>
         {!disableCopy && (

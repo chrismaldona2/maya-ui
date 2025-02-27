@@ -19,4 +19,8 @@ export const sidebarLinks = [
     title: "Decorators",
     links: [{ href: "/components/waving-hand", label: "Waving hand" }],
   },
+  {
+    title: "Overlays",
+    links: [{ href: "/components/modal", label: "Modal" }],
+  },
 ];

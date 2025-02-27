@@ -1,10 +1,14 @@
+// detects clicks outside a specified element
+"use client";
 import { RefObject, useEffect } from "react";
 
 export const useClickOutside = (
-  ref: RefObject<HTMLElement | null>,
-  onClickOutside: () => void
+  onClickOutside?: () => void,
+  ref?: RefObject<HTMLElement | null>
 ) => {
   useEffect(() => {
+    if (!onClickOutside || !ref) return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         onClickOutside();

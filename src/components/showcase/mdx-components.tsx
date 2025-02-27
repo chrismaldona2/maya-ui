@@ -75,4 +75,8 @@ export const dynamicImports = {
         "@/components/showcase/rotating-theme-toggle/rotating-theme-toggle-motion"
       )
   ),
+  ModalDemo: dynamic(() => import("@/components/showcase/modal/modal-demo")),
+  ModalVariantsDemo: dynamic(
+    () => import("@/components/showcase/modal/modal-variants-demo")
+  ),
 };
