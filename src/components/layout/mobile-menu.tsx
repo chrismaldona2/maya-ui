@@ -9,7 +9,7 @@ import { sidebarLinks } from "@/config/navigation";
 
 const MobileMenu = ({ onClose }: { onClose: () => void }) => {
   const menuRef = useRef<HTMLDivElement>(null);
-  useClickOutside(menuRef, onClose);
+  useClickOutside(onClose, menuRef);
   useEscapeKeyPress(onClose);
 
   return (
