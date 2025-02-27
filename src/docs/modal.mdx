@@ -1,0 +1,70 @@
+---
+title: Modal
+description: A reusable modal component for creating accessible and animated dialog boxes.
+---
+
+import { motionSnippets, hooksSnippets, variantsCodeSnippet } from "@/components/showcase/modal/snippets"
+
+<section>
+
+  <Tabs>
+    <TabPanel label="Preview" >
+        <ComponentCard>
+            <ModalDemo />
+        </ComponentCard>
+    </TabPanel>
+    <TabPanel label="Code">
+        <CodeSnippet code={motionSnippets.code} language="tsx"/>
+    </TabPanel>
+    <TabPanel label="Usage">
+        <CodeSnippet code={motionSnippets.usage} language="tsx"/>
+    </TabPanel>
+  </Tabs>
+
+</section>
+
+<section>
+  <header>
+    ## Custom hooks
+  </header>
+
+  <Tabs>
+    {hooksSnippets.map((hook) => {
+      return <TabPanel key={hook.id} label={hook.name}><CodeSnippet code={hook.code} language="typescript"/></TabPanel>
+    })}
+  </Tabs>
+</section>
+
+
+<section>
+  <header>
+    ## More examples
+    Keep in mind that you can make more combinations and even add your own variants! 
+  </header>
+
+  <Tabs>
+    <TabPanel label="Variants">
+        <ComponentCard>
+            <ModalVariantsDemo />
+        </ComponentCard>
+    </TabPanel>
+    <TabPanel label="Code">
+        <CodeSnippet code={variantsCodeSnippet} language="tsx" disableCopy/>
+    </TabPanel>
+  </Tabs>
+
+</section>
+
+<section>
+  <header>
+    ## Dependencies
+    This component relies on the following libraries:
+  </header>
+
+  - **<a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a>**: For styling and simple animations.
+  - **<a href="https://github.com/dcastil/tailwind-merge" target="_blank">clsx</a>**: For conditional class handling.
+  - **<a href="https://github.com/lukeed/clsx" target="_blank">tailwind-merge</a>**: For merging Tailwind classes safely.
+  - **<a href="https://cva.style/" target="_blank">Class Variance Authority</a>**: For manage variants in a clean way.
+  - **<a href="https://motion.dev/" target="_blank">Motion</a>**: For enhanced animation capabilities.
+
+</section>

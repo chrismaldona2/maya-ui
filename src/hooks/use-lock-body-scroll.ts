@@ -1,3 +1,5 @@
+// prevents scrolling on the body element
+"use client";
 import { useEffect } from "react";
 
 export const useLockBodyScroll = (lock: boolean) => {

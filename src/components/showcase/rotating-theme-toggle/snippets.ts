@@ -165,14 +165,14 @@ export default {
         },
         keyframes: {
             "rotate-in": {
-            "0%": { transform: "rotate(90deg) scale(0)" },
-            "60%": { transform: "rotate(10deg) scale(1.15)" },
-            "100%": { transform: "rotate(0deg) scale(1)" },
+                "0%": { transform: "rotate(90deg) scale(0)" },
+                "60%": { transform: "rotate(10deg) scale(1.15)" },
+                "100%": { transform: "rotate(0deg) scale(1)" },
             },
             "rotate-out": {
-            "0%": { transform: "rotate(0deg) scale(1)" },
-            "25%": { transform: "rotate(-30deg) scale(1.15)" },
-            "100%": { transform: "rotate(-90deg) scale(0)" },
+                "0%": { transform: "rotate(0deg) scale(1)" },
+                "25%": { transform: "rotate(-30deg) scale(1.15)" },
+                "100%": { transform: "rotate(-90deg) scale(0)" },
             },
         },
     },

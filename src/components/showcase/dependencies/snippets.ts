@@ -5,7 +5,7 @@ type InstallationDoc = {
 
 export const installationSnippets: InstallationDoc = {
   npm: `#core
-npm install tailwind-merge clsx
+npm install tailwind-merge clsx class-variance-authority
 
 #animation
 npm install motion
@@ -14,7 +14,7 @@ npm install motion
 npm install three @types/three @react-three/fiber
 `,
   yarn: `#core
-yarn add tailwind-merge clsx
+yarn add tailwind-merge clsx class-variance-authority
 
 #animation
 yarn add motion
