@@ -2,6 +2,7 @@
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { useEscapeKeyPress } from "@/hooks/use-escape-key-press";
 import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { cn } from "@/lib/utils";
 import {
   ButtonHTMLAttributes,
@@ -13,7 +14,6 @@ import {
 import ReactDOM from "react-dom";
 import { AnimatePresence, motion, Variants } from "motion/react";
 import { cva } from "class-variance-authority";
-import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 const overlayVariants = cva(
   "fixed inset-0 backdrop-saturate-150 transition-opacity duration-300",

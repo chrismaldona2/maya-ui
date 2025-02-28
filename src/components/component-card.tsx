@@ -29,7 +29,7 @@ const ComponentCard = ({
           className="absolute right-4 top-4 rounded-md bg-neutral-300 px-2 py-1 text-xs font-semibold dark:bg-[#2a2929]"
           aria-label={`See '${title}' code`}
         >
-          <CodeIcon className="size-4 pointer-events-none [&_path]:fill-[#909090] dark:[&_path]:fill-neutral-600" />
+          <CodeIcon className="size-4 pointer-events-none text-[#909090] dark:text-neutral-600" />
         </Link>
       )}
       {children}

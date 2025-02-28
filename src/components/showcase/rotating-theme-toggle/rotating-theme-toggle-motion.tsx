@@ -73,6 +73,7 @@ const RotatingThemeToggle = ({
       aria-label={ariaLabel}
       title={ariaLabel}
       role={props.role ?? "switch"}
+      aria-checked={resolvedTheme === "light"}
     >
       <AnimatePresence mode="wait">
         {resolvedTheme === "dark" ? (

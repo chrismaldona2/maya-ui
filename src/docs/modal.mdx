@@ -7,8 +7,8 @@ import { motionSnippets, hooksSnippets, variantsCodeSnippet } from "@/components
 
 <section>
 
-  <Tabs>
-    <TabPanel label="Preview" >
+  <Tabs mountOnChange>
+    <TabPanel label="Preview">
         <ComponentCard>
             <ModalDemo />
         </ComponentCard>
@@ -28,7 +28,7 @@ import { motionSnippets, hooksSnippets, variantsCodeSnippet } from "@/components
     ## Custom hooks
   </header>
 
-  <Tabs>
+  <Tabs mountOnChange>
     {hooksSnippets.map((hook) => {
       return <TabPanel key={hook.id} label={hook.name}><CodeSnippet code={hook.code} language="typescript"/></TabPanel>
     })}

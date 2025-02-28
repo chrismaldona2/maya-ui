@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowIcon, GithubIcon } from "./icons";
 import { buttonVariants } from "./button";
 import Link from "next/link";
-import CenteredWrapper from "./centered-wrapper";
+import CenteredWrapper from "./layout/centered-wrapper";
 
 const Hero = () => {
   return (
@@ -25,7 +25,7 @@ const Hero = () => {
             })}
           >
             <span>Browse components</span>
-            <ArrowIcon className="size-3 [&_path]:fill-zinc-200 dark:[&_path]:fill-neutral-500 flex-shrink-0" />
+            <ArrowIcon className="size-3 text-zinc-200 dark:text-neutral-500 flex-shrink-0" />
           </Link>
           <a
             href="https://github.com/chrismaldona2/maya-ui"
@@ -34,7 +34,7 @@ const Hero = () => {
               variant: "outlined",
             })}
           >
-            <GithubIcon className="size-4 [&_path]:fill-neutral-950 dark:[&_path]:fill-neutral-200 flex-shrink-0" />
+            <GithubIcon className="size-4 text-neutral-950 dark:text-neutral-200 flex-shrink-0" />
             <span>Star on Github</span>
           </a>
         </div>

@@ -20,7 +20,7 @@ const DocNavigation = ({ currentPath }: { currentPath: string }) => {
       : null;
 
   return (
-    <div className="pt-8 flex gap-2 justify-between">
+    <div className="flex gap-2 justify-between">
       {prevLink ? (
         <NavigationLink href={prevLink.href} arrowDirection="left">
           {prevLink.label}
@@ -59,7 +59,7 @@ const NavigationLink = ({
       </span>
       <ArrowIcon
         className={cn(
-          "h-3 [&_path]:fill-neutral-400 dark:[&_path]:fill-neutral-500 flex-shrink-0",
+          "h-3 text-neutral-400 dark:text-neutral-500 flex-shrink-0",
           { "rotate-180": arrowDirection === "left" }
         )}
       />

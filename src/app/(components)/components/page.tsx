@@ -34,7 +34,7 @@ const ComponentsPage = () => {
         <Content components={{ ...dynamicImports, ...mdxComponents }} />
       </article>
 
-      <div className="mt-20">
+      <div className="mt-32">
         <DocNavigation currentPath="/components" />
       </div>
     </>
