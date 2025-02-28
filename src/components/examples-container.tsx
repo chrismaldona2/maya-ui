@@ -1,10 +1,10 @@
 import BentoGrid from "./bento-grid";
-import CenteredWrapper from "./centered-wrapper";
+import CenteredWrapper from "./layout/centered-wrapper";
 import ComponentCard from "./component-card";
 import { TabPanel, Tabs } from "./container-with-tabs";
 import ModalDemo from "./showcase/modal/modal-demo";
 import RotatingThemeToggle from "./showcase/rotating-theme-toggle/rotating-theme-toggle-tailwind";
-import WavingHand from "./showcase/waving-hand/waving-hand";
+import WavingHandDemo from "./showcase/waving-hand/waving-hand-demo";
 
 const ExamplesContainer = () => {
   return (
@@ -23,12 +23,7 @@ const ExamplesContainer = () => {
               title="Waving hand"
               codeLink="/components/waving-hand"
             >
-              <div className="flex items-center gap-2">
-                <span className="text-lg font-semibold text-primary/70 dark:text-primary cursor-default text-end">
-                  Hello world!
-                </span>
-                <WavingHand />
-              </div>
+              <WavingHandDemo />
             </ComponentCard>
             <ComponentCard
               title="Modal"

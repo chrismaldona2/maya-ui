@@ -63,6 +63,9 @@ export const dynamicImports = {
   WavingHand: dynamic(
     () => import("@/components/showcase/waving-hand/waving-hand")
   ),
+  WavingHandDemo: dynamic(
+    () => import("@/components/showcase/waving-hand/waving-hand-demo")
+  ),
   RotatingThemeToggleTailwind: dynamic(
     () =>
       import(

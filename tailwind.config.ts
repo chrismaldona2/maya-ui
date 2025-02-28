@@ -17,7 +17,6 @@ export default {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
-
         neutral: {
           150: "#ededed",
           250: "#dbdbdb",
@@ -31,6 +30,7 @@ export default {
         "hand-wave": "hand-wave 1000ms ease-in-out ",
         "rotate-in": "rotate-in 300ms ease-in-out backwards",
         "rotate-out": "rotate-out 350ms ease-in-out forwards",
+        popup: "popup 500ms ease-in-out forwards",
       },
       keyframes: {
         "hand-wave": {
@@ -49,6 +49,12 @@ export default {
           "0%": { transform: "rotate(0deg) scale(1)" },
           "25%": { transform: "rotate(-30deg) scale(1.15)" },
           "100%": { transform: "rotate(-90deg) scale(0)" },
+        },
+        popup: {
+          "0%": { transform: "scale(0)", opacity: "0" },
+          "65%": { transform: "scale(1.1)", opacity: "1" },
+          "75%": { transform: "scale(0.98)" },
+          "100%": { transform: "scale(1)" },
         },
       },
     },

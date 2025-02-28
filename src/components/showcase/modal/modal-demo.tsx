@@ -5,7 +5,7 @@ import Modal from "./modal";
 import Image from "next/image";
 
 const ModalDemo = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -30,7 +30,8 @@ const ModalDemo = () => {
               aria-label="Face with monocle emoji"
               width={80}
               height={80}
-              className="drop-shadow-lg"
+              className="drop-shadow-lg animate-popup"
+              unoptimized
             />
           }
         />

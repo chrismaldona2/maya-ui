@@ -8,7 +8,7 @@ interface CenteredWrapperProps {
 
 const CenteredWrapper = ({ className, children }: CenteredWrapperProps) => {
   return (
-    <div className={cn("max-w-screen-2xl px-6 w-full mx-auto ", className)}>
+    <div className={cn("max-w-[1440px] px-8 w-full mx-auto", className)}>
       {children}
     </div>
   );

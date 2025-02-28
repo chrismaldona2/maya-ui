@@ -32,7 +32,7 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
       >
         <div className="absolute top-4 right-3.5">
           <button onClick={onClose} className="p-2" aria-label="Close menu">
-            <CloseIcon className="[&_path]:fill-neutral-500 size-3" />
+            <CloseIcon className="text-neutral-500 size-3" />
           </button>
         </div>
         <nav className="py-6">

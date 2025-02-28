@@ -7,10 +7,10 @@ import ThemeToggle from "@/components/basic-theme-toggle";
 import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
 import MobileMenu from "@/components/layout/mobile-menu";
 import Logo from "@/components/logo";
-import CenteredWrapper from "@/components/centered-wrapper";
+import CenteredWrapper from "@/components/layout/centered-wrapper";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = useCallback(() => setIsMenuOpen((prev) => !prev), []);
   useLockBodyScroll(isMenuOpen);
 

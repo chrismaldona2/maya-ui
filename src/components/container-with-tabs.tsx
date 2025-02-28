@@ -7,14 +7,14 @@ interface TabContainerProps {
   children: ReactElement<PanelProps> | ReactElement<PanelProps>[];
   defaultActive?: number;
   innerContainerClassName?: string;
-  remountOnChange?: boolean;
+  mountOnChange?: boolean;
 }
 
 const Tabs = ({
   children,
   innerContainerClassName,
   defaultActive = 0,
-  remountOnChange = false,
+  mountOnChange = false,
 }: TabContainerProps) => {
   const [activeTab, setActiveTab] = useState(defaultActive);
   const tabsArray = Array.isArray(children) ? children : [children];
@@ -30,6 +30,8 @@ const Tabs = ({
             key={index}
             onClick={() => setActiveTab(index)}
             title={tab.props.label}
+            role="tab"
+            aria-selected={activeTab === index}
             className={cn(
               "text-neutral-550 dark:text-neutral-450 bg-neutral-300 dark:bg-neutral-925  px-6 py-2.5 text-sm  cursor-pointer select-none truncate",
               {
@@ -56,7 +58,7 @@ const Tabs = ({
         )}
       >
         <AnimateOnHeightChange>
-          {remountOnChange
+          {mountOnChange
             ? tabsArray.map((content, index) =>
                 index === activeTab
                   ? cloneElement(content, { active: true, key: index })

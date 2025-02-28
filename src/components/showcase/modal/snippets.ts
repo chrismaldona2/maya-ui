@@ -6,6 +6,7 @@ export const motionSnippets: MotionSnippets = {
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { useEscapeKeyPress } from "@/hooks/use-escape-key-press";
 import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { cn } from "@/lib/utils";
 import {
   ButtonHTMLAttributes,
@@ -17,7 +18,6 @@ import {
 import ReactDOM from "react-dom";
 import { AnimatePresence, motion, Variants } from "motion/react";
 import { cva } from "class-variance-authority";
-import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 const overlayVariants = cva(
   "fixed inset-0 backdrop-saturate-150 transition-opacity duration-300",
@@ -258,7 +258,7 @@ import { useState } from "react";
 import Modal from "./modal";
 
 const Demo = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -274,7 +274,7 @@ const Demo = () => {
         Open modal
       </Button>
       <Modal isOpen={isOpen} onClose={closeModal}>
-        <TermsForm onSubmit={handleSubmit} /> // → here you can put what you want
+        <TermsForm onSubmit={handleSubmit}/> // → here you can put what you want
       </Modal>
     </div>
   );
@@ -362,7 +362,7 @@ export const useClickOutside = (
     id: 2,
     name: "use-escape-key-press",
     code: `
-// detects when the Escape key is pressed
+// detects when the 'Escape' key is pressed
 "use client";
 import { useEffect, RefObject } from "react";
 

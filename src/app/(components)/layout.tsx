@@ -1,4 +1,4 @@
-import CenteredWrapper from "@/components/centered-wrapper";
+import CenteredWrapper from "@/components/layout/centered-wrapper";
 import { ReactNode } from "react";
 import DocsSidebar from "@/components/layout/docs-sidebar";
 

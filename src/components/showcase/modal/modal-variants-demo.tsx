@@ -10,12 +10,13 @@ const variantsDemo = {
     modalProps: {},
     formHeader: (
       <Image
-        src="/images/face-with-monocle.gif"
+        src="/images/face-in-clouds.gif"
         alt="Face with monocle emoji"
         aria-label="Face with monocle emoji"
         width={80}
         height={80}
-        className="drop-shadow-lg"
+        className="drop-shadow-lg animate-popup"
+        unoptimized
       />
     ),
   },
@@ -30,7 +31,8 @@ const variantsDemo = {
         aria-label="Partying face emoji"
         width={80}
         height={80}
-        className="drop-shadow-lg"
+        className="drop-shadow-lg animate-popup"
+        unoptimized
       />
     ),
   },
@@ -45,7 +47,8 @@ const variantsDemo = {
         aria-label="Dog emoji"
         width={80}
         height={80}
-        className="drop-shadow-lg"
+        className="drop-shadow-lg animate-popup"
+        unoptimized
       />
     ),
   },
@@ -61,7 +64,8 @@ const variantsDemo = {
         aria-label="Robot emoji"
         width={80}
         height={80}
-        className="drop-shadow-lg"
+        className="drop-shadow-lg animate-popup"
+        unoptimized
       />
     ),
   },
@@ -80,7 +84,8 @@ const variantsDemo = {
         aria-label="Skull emoji"
         width={80}
         height={80}
-        className="drop-shadow-lg"
+        className="drop-shadow-lg animate-popup"
+        unoptimized
       />
     ),
   },

@@ -14,9 +14,9 @@ const ThemeToggle = () => {
       title={`Switch to ${oppositeTheme} mode`}
     >
       {resolvedTheme === "dark" ? (
-        <MoonIcon className="[&_path]:fill-neutral-300 size-full" />
+        <MoonIcon className="text-neutral-300 size-full" />
       ) : (
-        <SunIcon className="[&_path]:fill-neutral-700 size-full" />
+        <SunIcon className="text-neutral-700 size-full" />
       )}
     </button>
   );

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SvgIcon } from "../../icons";
 
 const WavingHand = ({ className, ...props }: SvgIcon) => {
-  const [isWaving, setIsWaving] = useState<boolean>(false);
+  const [isWaving, setIsWaving] = useState(false);
 
   const triggerAnimation = () => {
     if (!isWaving) setIsWaving(true);

@@ -15,7 +15,7 @@ const RotatingThemeToggle = ({
   ...props
 }: HTMLAttributes<HTMLButtonElement>) => {
   const { mounted, resolvedTheme, handleSwitch } = useTheme();
-  const [isExiting, setIsExiting] = useState<boolean>(false);
+  const [isExiting, setIsExiting] = useState(false);
   if (!mounted) return null;
 
   const ariaLabel =
@@ -49,6 +49,7 @@ const RotatingThemeToggle = ({
       onAnimationEnd={handleAnimationEnd}
       aria-label={ariaLabel}
       role={props.role ?? "switch"}
+      aria-checked={resolvedTheme === "light"}
     >
       {resolvedTheme === "dark" ? (
         <MoonIcon className="size-full" />
