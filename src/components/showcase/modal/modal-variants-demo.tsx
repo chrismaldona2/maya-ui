@@ -3,13 +3,13 @@ import { Button } from "@/components/button";
 import { TermsForm } from "./modal-demo";
 import { useState } from "react";
 import Modal from "./modal";
-import Image from "next/image";
+import PopUpImage from "@/components/popup-image";
 
 const variantsDemo = {
   default: {
     modalProps: {},
     formHeader: (
-      <Image
+      <PopUpImage
         src="/images/face-in-clouds.gif"
         alt="Face with monocle emoji"
         aria-label="Face with monocle emoji"
@@ -25,7 +25,7 @@ const variantsDemo = {
       overlayEffect: "none",
     },
     formHeader: (
-      <Image
+      <PopUpImage
         src="/images/partying-face.gif"
         alt="Partying face emoji"
         aria-label="Partying face emoji"
@@ -41,7 +41,7 @@ const variantsDemo = {
       overlayOpacity: "none",
     },
     formHeader: (
-      <Image
+      <PopUpImage
         src="/images/dog.gif"
         alt="Dog emoji"
         aria-label="Dog emoji"
@@ -58,7 +58,7 @@ const variantsDemo = {
       overlayOpacity: "none",
     },
     formHeader: (
-      <Image
+      <PopUpImage
         src="/images/robot.gif"
         alt="Robot emoji"
         aria-label="Robot emoji"
@@ -78,7 +78,7 @@ const variantsDemo = {
         "hover:bg-blue-800 dark:hover:bg-blue-800 text-neutral-100 dark:text-neutral-100",
     },
     formHeader: (
-      <Image
+      <PopUpImage
         src="/images/skull.gif"
         alt="Skull emoji"
         aria-label="Skull emoji"

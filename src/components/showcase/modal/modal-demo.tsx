@@ -2,7 +2,7 @@
 import { Button } from "@/components/button";
 import React, { ReactNode, useState } from "react";
 import Modal from "./modal";
-import Image from "next/image";
+import PopUpImage from "@/components/popup-image";
 
 const ModalDemo = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +24,7 @@ const ModalDemo = () => {
         <TermsForm
           onSubmit={handleSubmit}
           header={
-            <Image
+            <PopUpImage
               src="/images/face-with-monocle.gif"
               alt="Animated face with monocle emoji"
               aria-label="Face with monocle emoji"
