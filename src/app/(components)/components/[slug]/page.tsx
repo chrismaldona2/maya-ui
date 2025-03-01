@@ -4,9 +4,9 @@ import {
   mdxComponents,
   dynamicImports,
 } from "@/components/showcase/mdx-components";
-import ScrollToTop from "@/components/layout/scroll-to-top";
 import DocBreadcrumb from "@/components/doc-breadcrumb";
 import DocNavigation from "@/components/layout/doc-navigation";
+import DocNotFound from "@/components/doc-not-found";
 
 export const generateStaticParams = async () =>
   allDocs.map((doc) => ({ slug: doc._raw.flattenedPath }));
@@ -19,12 +19,12 @@ const ComponentInfo = async ({
   const { slug } = await params;
   const currentPath = `/components/${slug}`;
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === slug);
-  if (!doc) return <></>;
+
+  if (!doc) return <DocNotFound />;
 
   const Content = getMDXComponent(doc.body.code);
   return (
     <>
-      <ScrollToTop />
       <DocBreadcrumb section="Components" page={doc.title} />
 
       <h1 className="font-bold text-3xl md:text-4xl text-neutral-700 dark:text-neutral-300 mb-4">

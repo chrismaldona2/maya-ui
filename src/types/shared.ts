@@ -12,3 +12,10 @@ export type MotionSnippets = {
   code: string;
   usage: string;
 };
+
+export interface CSSPositionOffsets {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}

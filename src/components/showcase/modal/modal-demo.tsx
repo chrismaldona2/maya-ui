@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/button";
+import Button from "@/components/button";
 import React, { ReactNode, useState } from "react";
 import Modal from "./modal";
 import PopUpImage from "@/components/popup-image";
@@ -20,7 +20,7 @@ const ModalDemo = () => {
       <Button onClick={openModal} className="bg-blue-600 dark:text-white">
         Open modal
       </Button>
-      <Modal isOpen={isOpen} onClose={closeModal}>
+      <Modal isOpen={isOpen} onClose={closeModal} overlayOpacity="light">
         <TermsForm
           onSubmit={handleSubmit}
           header={
@@ -62,7 +62,7 @@ export const TermsForm = ({ onSubmit, header }: Form) => {
 
       <Button
         onClick={onSubmit}
-        className="min-w-[30%] bg-blue-600 dark:text-white"
+        className="min-w-[30%] bg-blue-600 dark:text-white shadow-md shadow-black/25"
       >
         Accept
       </Button>

@@ -25,7 +25,7 @@ const overlayVariants = cva(
       },
       opacity: {
         default: "bg-black/40",
-        light: "bg-black/30",
+        light: "bg-black/20",
         dark: "bg-black/50",
         none: "",
       },

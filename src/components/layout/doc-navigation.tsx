@@ -51,6 +51,7 @@ const NavigationLink = ({
       className={cn(
         "flex items-center justify-center gap-2 border border-neutral-400 dark:border-neutral-700 py-2 px-4 rounded-md",
         "hover:scale-[102%] transition-transform duration-300",
+        "bg-slate-50 dark:bg-[#0e0e0e]",
         { "flex-row-reverse": arrowDirection === "left" }
       )}
     >
