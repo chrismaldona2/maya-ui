@@ -23,15 +23,12 @@ export interface ButtonProps
   children: ReactNode;
 }
 
-export const Button = ({
-  variant,
-  className,
-  children,
-  ...props
-}: ButtonProps) => {
+const Button = ({ variant, className, children, ...props }: ButtonProps) => {
   return (
     <button className={cn(buttonVariants({ variant, className }))} {...props}>
       {children}
     </button>
   );
 };
+
+export default Button;

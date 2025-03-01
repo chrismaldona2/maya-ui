@@ -47,7 +47,7 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
                     <Link
                       href={link.href}
                       onClick={onClose}
-                      className=" block font-medium text-sm text-neutral-500 py-2"
+                      className="block font-medium text-sm text-neutral-500 py-2"
                     >
                       {link.label}
                     </Link>

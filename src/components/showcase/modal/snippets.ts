@@ -253,7 +253,7 @@ export const CloseIcon = (props: React.HTMLAttributes<SVGElement>) => {
   usage: `
 "use client";
 import Image from "next/image";
-import { Button } from "@/components/button";
+import Button from "@/components/button";
 import { useState } from "react";
 import Modal from "./modal";
 

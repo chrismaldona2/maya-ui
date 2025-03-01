@@ -31,7 +31,9 @@ export default {
         "rotate-in": "rotate-in 300ms ease-in-out backwards",
         "rotate-out": "rotate-out 350ms ease-in-out forwards",
         popup: "popup 500ms ease-in-out forwards",
+        float: "float 6s ease-in-out infinite",
       },
+
       keyframes: {
         "hand-wave": {
           "0%": { transform: "rotate(0deg)" },
@@ -55,6 +57,13 @@ export default {
           "65%": { transform: "scale(1.1)", opacity: "1" },
           "75%": { transform: "scale(0.98)" },
           "100%": { transform: "scale(1)" },
+        },
+        float: {
+          "0%": { transform: "translate(0, 0) rotate(0deg)" },
+          "25%": { transform: "translate(-8px, 10px) rotate(-5deg)" },
+          "50%": { transform: "translate(5px, -14px) rotate(5deg)" },
+          "75%": { transform: "translate(-8px, -10px) rotate(-5deg)" },
+          "100%": { transform: "translate(0, 0) rotate(0deg)" },
         },
       },
     },

@@ -1,26 +1,19 @@
 "use client";
+import { MoonIcon, SunIcon } from "@/components/icons";
 import useTheme from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
 import { HTMLAttributes, MouseEvent, useState } from "react";
-import { MoonIcon, SunIcon } from "./icons";
 
-const shadow = {
-  dark: "drop-shadow-[0px_0px_1.35rem_rgba(143,_159,_201,_1)]",
-  light: "drop-shadow-[0px_0px_.8rem_rgba(255,_200,_0,_1)]",
-};
-
-const RotatingThemeToggle = ({
+const ThemeToggle = ({
   className,
   onClick,
   ...props
 }: HTMLAttributes<HTMLButtonElement>) => {
-  const { mounted, resolvedTheme, handleSwitch } = useTheme();
+  const { mounted, resolvedTheme, oppositeTheme, handleSwitch } = useTheme();
   const [isExiting, setIsExiting] = useState(false);
   if (!mounted) return null;
 
-  const ariaLabel =
-    props["aria-label"] ??
-    (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+  const ariaLabel = props["aria-label"] ?? `Switch to ${oppositeTheme} mode`;
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (!isExiting) {
@@ -40,24 +33,24 @@ const RotatingThemeToggle = ({
     <button
       {...props}
       className={cn(
-        "size-7 appearance-none cursor-pointer rounded-sm overflow-clip ",
-        resolvedTheme === "dark" ? shadow.dark : shadow.light,
+        "size-6 appearance-none cursor-pointer rounded-sm overflow-clip p-1",
         isExiting ? "animate-rotate-out" : "animate-rotate-in",
         className
       )}
       onClick={handleClick}
       onAnimationEnd={handleAnimationEnd}
       aria-label={ariaLabel}
+      title={ariaLabel}
       role={props.role ?? "switch"}
       aria-checked={resolvedTheme === "light"}
     >
       {resolvedTheme === "dark" ? (
-        <MoonIcon className="size-full" />
+        <MoonIcon className="text-neutral-300 size-full" />
       ) : (
-        <SunIcon className="size-full" />
+        <SunIcon className="text-neutral-500 size-full" />
       )}
     </button>
   );
 };
 
-export default RotatingThemeToggle;
+export default ThemeToggle;

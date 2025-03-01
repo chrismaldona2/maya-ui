@@ -3,11 +3,24 @@ import { ArrowIcon, GithubIcon } from "./icons";
 import { buttonVariants } from "./button";
 import Link from "next/link";
 import CenteredWrapper from "./layout/centered-wrapper";
+import BlurredCircle from "./blurred-circle";
 
 const Hero = () => {
   return (
-    <CenteredWrapper>
-      <div className="py-4 flex flex-col items-center gap-5 text-center">
+    <CenteredWrapper className="relative">
+      <BlurredCircle
+        className="bg-purple-600/25 dark:bg-purple-600/15
+      size-[250px] md:size-[350px] blur-[100px]
+      -top-[85%] -left-[10%] md:-top-[90%]"
+      />
+
+      <BlurredCircle
+        className="bg-pink-600/25 md:bg-pink-600/15 dark:bg-pink-600/15 
+      h-[300px] w-[250px] md:h-[500px] md:w-[375px] blur-[125px]
+      top-[125%] -right-[10%] "
+      />
+
+      <div className="py-8 flex flex-col items-center gap-5 text-center">
         <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-neutral-800 to-neutral-950 dark:from-neutral-50 dark:to-neutral-300 text-transparent bg-clip-text">
           Maya UI
         </h1>

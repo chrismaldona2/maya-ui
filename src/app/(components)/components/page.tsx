@@ -1,5 +1,4 @@
 import DocBreadcrumb from "@/components/doc-breadcrumb";
-import ScrollToTop from "@/components/layout/scroll-to-top";
 import { allDocs } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer2/hooks";
 import {
@@ -7,17 +6,17 @@ import {
   dynamicImports,
 } from "@/components/showcase/mdx-components";
 import DocNavigation from "@/components/layout/doc-navigation";
+import DocNotFound from "@/components/doc-not-found";
 
 const ComponentsPage = () => {
   const doc = allDocs.find((doc) => doc._raw.flattenedPath === "introduction");
 
-  if (!doc) return <></>;
+  if (!doc) return <DocNotFound />;
 
   const Content = getMDXComponent(doc.body.code);
 
   return (
     <>
-      <ScrollToTop />
       <DocBreadcrumb section="Components" page={doc.title} />
 
       <h1 className="font-bold text-3xl md:text-4xl text-neutral-700 dark:text-neutral-300 mb-4">

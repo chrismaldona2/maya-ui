@@ -43,7 +43,7 @@ const CodeSnippet = ({
     count: lineCount,
     estimateSize: () => 24,
     getScrollElement: () => scrollRef.current,
-    overscan: 4,
+    overscan: 6,
   });
   const virtualItems = virtualizer.getVirtualItems();
 
