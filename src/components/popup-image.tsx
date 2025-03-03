@@ -10,7 +10,7 @@ const PopUpImage = (props: ImageProps) => {
 
   return (
     <div className={cn("inline-block", loaded ? "animate-popup" : "opacity-0")}>
-      <Image {...props} alt={props.alt} onLoadingComplete={onLoadCallback} />
+      <Image {...props} alt={props.alt} onLoad={onLoadCallback} />
     </div>
   );
 };

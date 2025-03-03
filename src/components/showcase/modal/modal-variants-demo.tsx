@@ -22,7 +22,7 @@ const variantsDemo = {
   },
   noBlur: {
     modalProps: {
-      overlayEffect: "none",
+      blur: "none",
     },
     formHeader: (
       <PopUpImage
@@ -54,7 +54,7 @@ const variantsDemo = {
   },
   noOverlay: {
     modalProps: {
-      overlayEffect: "none",
+      blur: "none",
       overlayOpacity: "none",
     },
     formHeader: (

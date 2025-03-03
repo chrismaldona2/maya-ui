@@ -7,12 +7,15 @@ interface BlurredCircleProps {
 }
 
 const BlurredCircle = ({ className, style }: BlurredCircleProps) => {
-  const classes = cn(
-    "-z-20 absolute animate-float rounded-full blur-[75px]",
-    className
+  return (
+    <div
+      className={cn(
+        "-z-20 absolute animate-rotate origin-[70%_50%] rounded-full blur-[75px]",
+        className
+      )}
+      style={style}
+    />
   );
-
-  return <div className={classes} style={style} />;
 };
 
 export default BlurredCircle;

@@ -1,6 +1,13 @@
 "use client";
-import { motion, Variants, AnimatePresence } from "motion/react";
-import useTheme from "@/hooks/use-theme";
+import {
+  m,
+  LazyMotion,
+  domAnimation,
+  Variants,
+  AnimatePresence,
+} from "motion/react";
+import { useTheme } from "@/hooks/use-theme";
+import { useIsMounted } from "@/hooks/use-is-mounted";
 import { cn } from "@/lib/utils";
 import { MoonIcon, SunIcon } from "./icons";
 import { HTMLAttributes, MouseEvent } from "react";
@@ -36,28 +43,31 @@ const shadow = {
   light: "drop-shadow-[0px_0px_.8rem_rgba(255,_200,_0,_1)]",
 };
 
-interface ThemeToggle extends HTMLAttributes<HTMLButtonElement> {
+interface ThemeToggleProps extends HTMLAttributes<HTMLButtonElement> {
   iconsClassName?: string;
 }
 
-const RotatingThemeToggle = ({
+const ThemeToggle = ({
   className,
   onClick,
   iconsClassName,
   ...props
-}: ThemeToggle) => {
-  const { mounted, resolvedTheme, handleSwitch } = useTheme();
-  if (!mounted) return;
+}: ThemeToggleProps) => {
+  const { resolvedTheme, handleSwitch } = useTheme();
   // ↑ the theme managment is up to you
 
-  const ariaLabel =
-    props["aria-label"] ??
-    (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+  // ↓ only required if you're using server components
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     handleSwitch();
     onClick?.(event);
   };
+
+  const ariaLabel =
+    props["aria-label"] ??
+    (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
 
   const iconClassName = cn("size-full rounded-sm", iconsClassName);
 
@@ -75,31 +85,33 @@ const RotatingThemeToggle = ({
       role={props.role ?? "switch"}
       aria-checked={resolvedTheme === "light"}
     >
-      <AnimatePresence mode="wait">
-        {resolvedTheme === "dark" ? (
-          <motion.div
-            key="moon"
-            variants={animations}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <MoonIcon className={iconClassName} />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="sun"
-            variants={animations}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <SunIcon className={iconClassName} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <LazyMotion features={domAnimation} strict>
+        <AnimatePresence mode="wait">
+          {resolvedTheme === "dark" ? (
+            <m.div
+              key="moon"
+              variants={animations}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <MoonIcon className={iconClassName} />
+            </m.div>
+          ) : (
+            <m.div
+              key="sun"
+              variants={animations}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <SunIcon className={iconClassName} />
+            </m.div>
+          )}
+        </AnimatePresence>
+      </LazyMotion>
     </button>
   );
 };
 
-export default RotatingThemeToggle;
+export default ThemeToggle;

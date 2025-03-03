@@ -11,7 +11,6 @@ const ModalDemo = () => {
   const closeModal = () => setIsOpen(false);
 
   const handleSubmit = () => {
-    console.log("form submitted");
     closeModal();
   };
 

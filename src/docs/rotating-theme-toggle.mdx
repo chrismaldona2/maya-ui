@@ -3,7 +3,8 @@ title: Rotating theme toggle
 description: A theme switcher that toggles with a smooth animation.
 ---
 
-import { tailwindSnippets, motionSnippets } from "@/components/showcase/rotating-theme-toggle/snippets"
+import { tailwindSnippets, motionSnippets, hooksSnippets } from "@/components/showcase/rotating-theme-toggle/snippets"
+import { useIsMountedHook } from "@/components/showcase/shared-snippets/snippets"
 
 <section>
   <header> 
@@ -56,6 +57,18 @@ import { tailwindSnippets, motionSnippets } from "@/components/showcase/rotating
 </section>
 
 
+<section>
+  <header>
+    ## Custom hooks
+
+    Required if you're using server components:
+  </header>
+
+  <Tabs mountOnChange>
+      <TabPanel label={useIsMountedHook.name}><CodeSnippet code={useIsMountedHook.code} language="typescript"/></TabPanel>
+  </Tabs>
+</section>
+
 
 <section>
   <header>
@@ -63,10 +76,10 @@ import { tailwindSnippets, motionSnippets } from "@/components/showcase/rotating
   </header>
   
   Shared dependencies:
-  - **<a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a>**: For styling and simple animations.
-  - **<a href="https://github.com/dcastil/tailwind-merge" target="_blank">clsx</a>**: For conditional class handling.
-  - **<a href="https://github.com/lukeed/clsx" target="_blank">tailwind-merge</a>**: For merging Tailwind classes safely.
+  - **<a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a>**.
+  - **<a href="https://github.com/dcastil/tailwind-merge" target="_blank">clsx</a>**
+  - **<a href="https://github.com/lukeed/clsx" target="_blank">tailwind-merge</a>**
 
   For the Motion example:
-  - **<a href="https://motion.dev/" target="_blank">Motion</a>**: For enhanced animation capabilities.
+  - **<a href="https://motion.dev/" target="_blank">Motion</a>**
 </section>

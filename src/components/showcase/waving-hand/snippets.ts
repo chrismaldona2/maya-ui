@@ -18,7 +18,7 @@ const WavingHand = ({ className, ...props }: React.HTMLAttributes<SVGElement>) =
       {...props}
       className={cn(
         "flex-shrink-0 cursor-pointer origin-[80%_80%] size-6 outline-none",
-        "focus-visible:ring-2 ring-neutral-600 dark:ring-neutral-100",
+        "focus-visible:ring-2 ring-primary rounded-sm",
         isWaving && "animate-hand-wave",
         className
       )}

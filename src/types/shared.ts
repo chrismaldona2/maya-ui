@@ -8,6 +8,12 @@ export type TailwindSnippets = {
   tailwindConfig: string;
 };
 
+export type HookSnippet = {
+  id: number;
+  name: string;
+  code: string;
+};
+
 export type MotionSnippets = {
   code: string;
   usage: string;
