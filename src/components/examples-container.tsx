@@ -5,6 +5,7 @@ import { TabPanel, Tabs } from "./container-with-tabs";
 import ModalDemo from "./showcase/modal/modal-demo";
 import RotatingThemeToggle from "./showcase/rotating-theme-toggle/rotating-theme-toggle-tailwind";
 import WavingHandDemo from "./showcase/waving-hand/waving-hand-demo";
+import { TooltipDemo } from "./showcase/tooltip/tooltip";
 
 const ExamplesContainer = () => {
   return (
@@ -27,10 +28,16 @@ const ExamplesContainer = () => {
             </ComponentCard>
             <ComponentCard
               title="Modal"
-              className="col-span-full lg:col-span-1"
+              className="col-span-full md:col-span-2 lg:col-span-1"
               codeLink="/components/modal"
             >
               <ModalDemo />
+            </ComponentCard>
+            <ComponentCard
+              title="Tooltip"
+              className="col-span-full md:col-span-1 lg:col-span-full"
+            >
+              <TooltipDemo />
             </ComponentCard>
           </BentoGrid>
         </TabPanel>
