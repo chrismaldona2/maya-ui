@@ -9,12 +9,13 @@ import {
   oneDark,
   oneLight,
 } from "react-syntax-highlighter/dist/esm/styles/prism";
-import useTheme from "@/hooks/use-theme";
+import { useTheme } from "@/hooks/use-theme";
 import ComponentCard from "./component-card";
 import CopyButton from "./copy-button";
 import { cn } from "@/lib/utils";
 import { SupportedCodeLanguage } from "@/types/shared";
 import VirtualizedCodeRenderer from "./virtualized-code-renderer";
+import { useIsMounted } from "@/hooks/use-is-mounted";
 SyntaxHighlighter.registerLanguage("tsx", tsx);
 SyntaxHighlighter.registerLanguage("typescript", typescript);
 SyntaxHighlighter.registerLanguage("bash", bash);
@@ -34,7 +35,8 @@ const CodeSnippet = ({
   disableCopy = false,
   maxHeight = 700,
 }: CodeSnippetProps) => {
-  const { resolvedTheme, mounted } = useTheme();
+  const { resolvedTheme } = useTheme();
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const trimmedCode = code.trim();
   const lineCount = trimmedCode.split("\n").length;
@@ -47,7 +49,8 @@ const CodeSnippet = ({
   });
   const virtualItems = virtualizer.getVirtualItems();
 
-  if (!mounted) return null;
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
 
   const style = resolvedTheme === "dark" ? oneDark : oneLight;
   const isDarkTheme = resolvedTheme === "dark";
@@ -74,7 +77,7 @@ const CodeSnippet = ({
           }}
           codeTagProps={{
             style: { background: "transparent" },
-            className: "text-sm md:text-base",
+            className: "text-sm xl:text-base",
           }}
           wrapLongLines
           renderer={({ rows, stylesheet, useInlineStyles }) => (

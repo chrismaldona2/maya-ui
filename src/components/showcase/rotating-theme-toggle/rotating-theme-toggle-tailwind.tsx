@@ -1,5 +1,6 @@
 "use client";
-import useTheme from "@/hooks/use-theme";
+import { useTheme } from "@/hooks/use-theme";
+import { useIsMounted } from "@/hooks/use-is-mounted";
 import { cn } from "@/lib/utils";
 import { HTMLAttributes, MouseEvent, useState } from "react";
 import { MoonIcon, SunIcon } from "./icons";
@@ -9,18 +10,24 @@ const shadow = {
   light: "drop-shadow-[0px_0px_.8rem_rgba(255,_200,_0,_1)]",
 };
 
-const RotatingThemeToggle = ({
+interface ThemeToggleProps extends HTMLAttributes<HTMLButtonElement> {
+  iconsClassName?: string;
+}
+
+const ThemeToggle = ({
   className,
   onClick,
+  iconsClassName,
   ...props
-}: HTMLAttributes<HTMLButtonElement>) => {
-  const { mounted, resolvedTheme, handleSwitch } = useTheme();
-  const [isExiting, setIsExiting] = useState(false);
-  if (!mounted) return null;
+}: ThemeToggleProps) => {
+  const { resolvedTheme, handleSwitch } = useTheme();
+  // ↑ the theme managment is up to you
 
-  const ariaLabel =
-    props["aria-label"] ??
-    (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+  const [isExiting, setIsExiting] = useState(false);
+
+  // ↓ only required if you're using server components
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (!isExiting) {
@@ -35,6 +42,12 @@ const RotatingThemeToggle = ({
       setIsExiting(false);
     }
   };
+
+  const ariaLabel =
+    props["aria-label"] ??
+    (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+
+  const iconClassName = cn("size-full", iconsClassName);
 
   return (
     <button
@@ -52,12 +65,12 @@ const RotatingThemeToggle = ({
       aria-checked={resolvedTheme === "light"}
     >
       {resolvedTheme === "dark" ? (
-        <MoonIcon className="size-full" />
+        <MoonIcon className={iconClassName} />
       ) : (
-        <SunIcon className="size-full" />
+        <SunIcon className={iconClassName} />
       )}
     </button>
   );
 };
 
-export default RotatingThemeToggle;
+export default ThemeToggle;

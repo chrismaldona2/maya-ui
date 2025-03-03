@@ -1,6 +1,7 @@
 "use client";
 import { MoonIcon, SunIcon } from "@/components/icons";
-import useTheme from "@/hooks/use-theme";
+import { useIsMounted } from "@/hooks/use-is-mounted";
+import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
 import { HTMLAttributes, MouseEvent, useState } from "react";
 
@@ -9,11 +10,13 @@ const ThemeToggle = ({
   onClick,
   ...props
 }: HTMLAttributes<HTMLButtonElement>) => {
-  const { mounted, resolvedTheme, oppositeTheme, handleSwitch } = useTheme();
+  const { resolvedTheme, oppositeTheme, handleSwitch } = useTheme();
   const [isExiting, setIsExiting] = useState(false);
-  if (!mounted) return null;
 
   const ariaLabel = props["aria-label"] ?? `Switch to ${oppositeTheme} mode`;
+
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (!isExiting) {

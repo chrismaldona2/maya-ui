@@ -33,7 +33,7 @@ const Tabs = ({
             role="tab"
             aria-selected={activeTab === index}
             className={cn(
-              "text-neutral-550 dark:text-neutral-450 bg-neutral-300 dark:bg-neutral-925  px-6 py-2.5 text-sm  cursor-pointer select-none truncate",
+              "text-neutral-550 dark:text-neutral-450 bg-neutral-300 dark:bg-neutral-925  px-6 py-2.5 text-xs lg:text-sm cursor-pointer select-none truncate",
               {
                 "font-medium text-neutral-800  dark:text-zinc-400 bg-neutral-200 dark:bg-neutral-900":
                   activeTab === index,

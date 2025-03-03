@@ -1,9 +1,10 @@
-import { MotionSnippets, TailwindSnippets } from "@/types/shared";
+import { HookSnippet, MotionSnippets, TailwindSnippets } from "@/types/shared";
 
 export const tailwindSnippets: TailwindSnippets = {
   code: `
 "use client";
-import useTheme from "@/hooks/use-theme";
+import { useTheme } from "@/hooks/use-theme";
+import { useIsMounted } from "@/hooks/use-is-mounted";
 import { cn } from "@/lib/utils";
 import { HTMLAttributes, MouseEvent, useState } from "react";
 
@@ -12,19 +13,27 @@ const shadow = {
   light: "drop-shadow-[0px_0px_.8rem_rgba(255,_200,_0,_1)]",
 };
 
-const RotatingThemeToggle = ({
+interface ThemeToggleProps extends HTMLAttributes<HTMLButtonElement> {
+  iconsClassName?: string;
+}
+
+const ThemeToggle = ({
   className,
   onClick,
+  iconsClassName,
   ...props
-}: HTMLAttributes<HTMLButtonElement>) => {
-  const { mounted, resolvedTheme, handleSwitch } = useTheme();
+}: ThemeToggleProps) => {
+  const { resolvedTheme, handleSwitch } = useTheme();
+  // ↑ the theme managment is up to you
+
   const [isExiting, setIsExiting] = useState(false);
-  if (!mounted) return null;
 
-  const ariaLabel =
-    props["aria-label"] ??
-    (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
 
+  // ↓ only required if you're using server components
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
+
+  
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (!isExiting) {
       setIsExiting(true);
@@ -39,11 +48,17 @@ const RotatingThemeToggle = ({
     }
   };
 
+  const ariaLabel =
+    props["aria-label"] ??
+    (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+
+  const iconClassName = cn("size-full", iconsClassName);
+
   return (
     <button
       {...props}
       className={cn(
-        "size-7 appearance-none cursor-pointer rounded-sm overflow-clip",
+        "size-7 appearance-none cursor-pointer rounded-sm overflow-clip ",
         resolvedTheme === "dark" ? shadow.dark : shadow.light,
         isExiting ? "animate-rotate-out" : "animate-rotate-in",
         className
@@ -55,16 +70,17 @@ const RotatingThemeToggle = ({
       aria-checked={resolvedTheme === "light"}
     >
       {resolvedTheme === "dark" ? (
-        <MoonIcon className="size-full" />
+        <MoonIcon className={iconClassName} />
       ) : (
-        <SunIcon className="size-full" />
+        <SunIcon className={iconClassName} />
       )}
     </button>
   );
 };
 
-export default RotatingThemeToggle;
-  
+export default ThemeToggle;
+
+// for this example ↓
 const SunIcon = (props: React.HTMLAttributes<SVGElement>) => {
   return (
     <svg
@@ -139,9 +155,8 @@ const MoonIcon = (props: React.HTMLAttributes<SVGElement>) => {
   );
 };
 
-  `,
+`,
   usage: `
-  
 import { ReactNode } from "react";
 import ThemeToggle  from "./theme-toggle";
 
@@ -189,10 +204,16 @@ export default {
 export const motionSnippets: MotionSnippets = {
   code: `
 "use client";
-import { motion, Variants, AnimatePresence } from "motion/react";
-import useTheme from "@/hooks/use-theme";
+import {
+  m,
+  LazyMotion,
+  domAnimation,
+  Variants,
+  AnimatePresence,
+} from "motion/react";
+import { useTheme } from "@/hooks/use-theme";
+import { useIsMounted } from "@/hooks/use-is-mounted";
 import { cn } from "@/lib/utils";
-import { MoonIcon, SunIcon } from "./icons";
 import { HTMLAttributes, MouseEvent } from "react";
 
 export const animations: Variants = {
@@ -226,28 +247,33 @@ const shadow = {
   light: "drop-shadow-[0px_0px_.8rem_rgba(255,_200,_0,_1)]",
 };
 
-interface ThemeToggle extends HTMLAttributes<HTMLButtonElement> {
+interface ThemeToggleProps extends HTMLAttributes<HTMLButtonElement> {
   iconsClassName?: string;
 }
 
-const RotatingThemeToggle = ({
+const ThemeToggle = ({
   className,
   onClick,
   iconsClassName,
   ...props
-}: ThemeToggle) => {
-  const { mounted, resolvedTheme, handleSwitch } = useTheme();
-  if (!mounted) return;
+}: ThemeToggleProps) => {
+  const { resolvedTheme, handleSwitch } = useTheme();
   // ↑ the theme managment is up to you
 
-  const ariaLabel =
-    props["aria-label"] ??
-    (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+
+  // ↓ only required if you're using server components
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
+
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     handleSwitch();
     onClick?.(event);
   };
+
+  const ariaLabel =
+    props["aria-label"] ??
+    (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
 
   const iconClassName = cn("size-full rounded-sm", iconsClassName);
 
@@ -265,35 +291,38 @@ const RotatingThemeToggle = ({
       role={props.role ?? "switch"}
       aria-checked={resolvedTheme === "light"}
     >
-      <AnimatePresence mode="wait">
-        {resolvedTheme === "dark" ? (
-          <motion.div
-            key="moon"
-            variants={animations}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <MoonIcon className={iconClassName} />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="sun"
-            variants={animations}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <SunIcon className={iconClassName} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <LazyMotion features={domAnimation} strict>
+        <AnimatePresence mode="wait">
+          {resolvedTheme === "dark" ? (
+            <m.div
+              key="moon"
+              variants={animations}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <MoonIcon className={iconClassName} />
+            </m.div>
+          ) : (
+            <m.div
+              key="sun"
+              variants={animations}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <SunIcon className={iconClassName} />
+            </m.div>
+          )}
+        </AnimatePresence>
+      </LazyMotion>
     </button>
   );
 };
 
-export default RotatingThemeToggle;
+export default ThemeToggle;
 
+// for this example ↓
 const SunIcon = (props: React.HTMLAttributes<SVGElement>) => {
   return (
     <svg
@@ -367,8 +396,6 @@ const MoonIcon = (props: React.HTMLAttributes<SVGElement>) => {
     </svg>
   );
 };
-
-  
   `,
   usage: `
 // the same as tailwind version
@@ -387,3 +414,29 @@ const Layout = ({children}: {children: ReactNode}) => {
 export default Layout;
 `,
 };
+
+export const hooksSnippets: HookSnippet[] = [
+  {
+    id: 1,
+    name: "use-is-mounted",
+    code: `
+// checks if the component is currently mounted
+// helps to prevent hydration mismatches on server components
+"use client";
+import { useEffect, useState } from "react";
+
+export const useIsMounted = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    return () => {
+      setIsMounted(false);
+    };
+  }, []);
+
+  return isMounted;
+};
+`,
+  },
+];

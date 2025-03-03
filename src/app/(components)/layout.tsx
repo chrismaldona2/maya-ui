@@ -17,10 +17,10 @@ const Components = ({ children }: { children: ReactNode }) => {
       </div>
 
       <BlurredCircle
-        className="fixed bg-[#c678dd]/20 sm:bg-[#c678dd]/40 dark:bg-[#c678dd]/5 sm:dark:bg-[#c678dd]/10
-      size-[375px] -top-[275px] -right-[125px] blur-[100px]"
+        className="fixed bg-[#c678dd]/20 sm:bg-[#c678dd]/30 xl:bg-[#c678dd]/50 dark:bg-[#c678dd]/5 sm:dark:bg-[#c678dd]/10
+      size-[350px] -top-[225px] -right-[115px] blur-[100px] origin-[60%_50%]"
       />
-      <BlurredCircle className="fixed bg-[#61afef]/45 dark:bg-[#61afef]/10 size-[300px] -bottom-[200px] -left-[125px] blur-[100px]" />
+      <BlurredCircle className="fixed bg-[#61afef]/45 dark:bg-[#61afef]/10 size-[275px] -bottom-[200px] -left-[175px] blur-[100px]" />
     </CenteredWrapper>
   );
 };

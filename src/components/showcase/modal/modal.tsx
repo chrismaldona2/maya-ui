@@ -3,35 +3,40 @@ import { useClickOutside } from "@/hooks/use-click-outside";
 import { useEscapeKeyPress } from "@/hooks/use-escape-key-press";
 import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
+import { useIsMounted } from "@/hooks/use-is-mounted";
 import { cn } from "@/lib/utils";
-import {
-  ButtonHTMLAttributes,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ButtonHTMLAttributes, ReactNode, useRef } from "react";
 import ReactDOM from "react-dom";
-import { AnimatePresence, motion, Variants } from "motion/react";
+import {
+  AnimatePresence,
+  LazyMotion,
+  domAnimation,
+  m,
+  Variants,
+} from "motion/react";
 import { cva } from "class-variance-authority";
 
 const overlayVariants = cva(
   "fixed inset-0 backdrop-saturate-150 transition-opacity duration-300",
   {
     variants: {
-      effect: {
-        blur: "backdrop-blur",
+      blur: {
+        default: "backdrop-blur",
+        light: "backdrop-blur-sm",
+        medium: "backdrop-blur-md",
+        strong: "backdrop-blur-lg",
         none: "",
       },
       opacity: {
         default: "bg-black/40",
         light: "bg-black/20",
-        dark: "bg-black/50",
+        medium: "bg-black/50",
+        dark: "bg-black/70",
         none: "",
       },
     },
     defaultVariants: {
-      effect: "blur",
+      blur: "default",
       opacity: "default",
     },
   }
@@ -42,9 +47,9 @@ const contentVariants = cva(
   {
     variants: {
       size: {
-        sm: "max-w-[400px] p-6",
-        md: "max-w-[600px] p-6",
-        lg: "max-w-[800px] p-8",
+        sm: "max-w-[25rem] p-6",
+        md: "max-w-[37.5rem] p-6",
+        lg: "max-w-[50rem] p-8",
         full: "max-w-none p-8",
       },
       theme: {
@@ -94,11 +99,11 @@ const contentAnimation: Variants = {
 };
 
 interface ModalProps {
-  isOpen?: boolean;
+  isOpen: boolean;
   onClose: () => void;
   size?: "sm" | "md" | "lg" | "full";
-  overlayEffect?: "blur" | "none";
-  overlayOpacity?: "default" | "light" | "dark" | "none";
+  blur?: "default" | "light" | "medium" | "strong" | "none";
+  overlayOpacity?: "default" | "light" | "medium" | "dark" | "none";
   contentTheme?: "light" | "dark" | "auto";
   children: ReactNode;
   closeButton?: ReactNode;
@@ -115,10 +120,10 @@ interface ModalProps {
 }
 
 const Modal = ({
-  isOpen = false,
+  isOpen,
   onClose,
   size,
-  overlayEffect,
+  blur,
   overlayOpacity,
   contentTheme,
   children,
@@ -134,12 +139,7 @@ const Modal = ({
   ariaLabelledby,
   ariaDescribedby,
 }: ModalProps) => {
-  const [isMounted, setIsMounted] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   // ↓ if you want these hooks I let their code below
   useClickOutside(closeOnOverlayClick ? onClose : undefined, modalRef);
@@ -147,6 +147,8 @@ const Modal = ({
   useLockBodyScroll(isOpen);
   useFocusTrap(isOpen, modalRef);
 
+  // ↓ only required if you're using server components
+  const isMounted = useIsMounted();
   if (!isMounted) return null;
 
   return ReactDOM.createPortal(
@@ -156,52 +158,54 @@ const Modal = ({
           className="fixed inset-0 flex items-center justify-center"
           style={{ zIndex }}
         >
-          <motion.div
-            className={cn(
-              overlayVariants({
-                effect: overlayEffect,
-                opacity: overlayOpacity,
-              }),
-              overlayClassName
-            )}
-            variants={overlayAnimation}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-          />
-          <motion.div
-            className={cn(
-              contentVariants({
-                size,
-                theme: contentTheme,
-              }),
-              className
-            )}
-            ref={modalRef}
-            variants={contentAnimation}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            style={{ willChange: "transform, opacity" }}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={ariaLabelledby}
-            aria-describedby={ariaDescribedby}
-          >
-            {showCloseButton &&
-              (closeButton ?? (
-                <CloseButton
-                  onClick={onClose}
-                  aria-label="Close modal"
-                  title="Close modal"
-                  className={cn(
-                    "absolute top-0 right-0 m-2.5",
-                    closeButtonClassName
-                  )}
-                />
-              ))}
-            {children}
-          </motion.div>
+          <LazyMotion features={domAnimation}>
+            <m.div
+              className={cn(
+                overlayVariants({
+                  blur: blur,
+                  opacity: overlayOpacity,
+                }),
+                overlayClassName
+              )}
+              variants={overlayAnimation}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            />
+            <m.div
+              className={cn(
+                contentVariants({
+                  size,
+                  theme: contentTheme,
+                }),
+                className
+              )}
+              ref={modalRef}
+              variants={contentAnimation}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              style={{ willChange: "transform, opacity" }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={ariaLabelledby}
+              aria-describedby={ariaDescribedby}
+            >
+              {showCloseButton &&
+                (closeButton ?? (
+                  <CloseButton
+                    onClick={onClose}
+                    aria-label="Close modal"
+                    title="Close modal"
+                    className={cn(
+                      "absolute top-0 right-0 m-2.5",
+                      closeButtonClassName
+                    )}
+                  />
+                ))}
+              {children}
+            </m.div>
+          </LazyMotion>
         </div>
       )}
     </AnimatePresence>,
