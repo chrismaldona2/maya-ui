@@ -25,14 +25,14 @@ const overlayVariants = cva(
         light: "backdrop-blur-sm",
         medium: "backdrop-blur-md",
         strong: "backdrop-blur-lg",
-        none: "",
+        none: "backdrop-blur-none",
       },
       opacity: {
         default: "bg-black/40",
         light: "bg-black/20",
         medium: "bg-black/50",
         dark: "bg-black/70",
-        none: "",
+        none: "bg-transparent",
       },
     },
     defaultVariants: {
@@ -42,28 +42,42 @@ const overlayVariants = cva(
   }
 );
 
-const contentVariants = cva(
-  "relative w-[92%] max-h-[95vh] rounded-xl overflow-auto shadow-lg dark:shadow-neutral-700/10",
-  {
-    variants: {
-      size: {
-        sm: "max-w-[25rem] p-6",
-        md: "max-w-[37.5rem] p-6",
-        lg: "max-w-[50rem] p-8",
-        full: "max-w-none p-8",
-      },
-      theme: {
-        light: "bg-neutral-100 text-neutral-900",
-        dark: "bg-neutral-900 text-neutral-100",
-        auto: "bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100",
-      },
+const contentVariants = cva("relative w-[92%] max-h-[95vh] overflow-auto", {
+  variants: {
+    size: {
+      sm: "max-w-[25rem] p-6",
+      md: "max-w-[37.5rem] p-6",
+      lg: "max-w-[50rem] p-8",
+      full: "max-w-none p-8",
     },
-    defaultVariants: {
-      size: "md",
-      theme: "auto",
+    radius: {
+      none: "rounded-none",
+      sm: "rounded-sm",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      xl: "rounded-xl",
     },
-  }
-);
+    shadow: {
+      none: "shadow-none",
+      sm: "shadow-sm",
+      base: "shadow",
+      md: "shadow-md",
+      lg: "shadow-lg",
+      xl: "shadow-xl",
+    },
+    theme: {
+      light: "bg-neutral-100 text-neutral-900",
+      dark: "bg-neutral-900 text-neutral-100",
+      auto: "bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+    radius: "xl",
+    shadow: "lg",
+    theme: "auto",
+  },
+});
 
 const overlayAnimation: Variants = {
   hidden: {
@@ -102,6 +116,8 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   size?: "sm" | "md" | "lg" | "full";
+  radius?: "none" | "sm" | "md" | "lg" | "xl";
+  shadow?: "none" | "sm" | "base" | "md" | "lg" | "xl";
   blur?: "default" | "light" | "medium" | "strong" | "none";
   overlayOpacity?: "default" | "light" | "medium" | "dark" | "none";
   contentTheme?: "light" | "dark" | "auto";
@@ -123,6 +139,8 @@ const Modal = ({
   isOpen,
   onClose,
   size,
+  radius,
+  shadow,
   blur,
   overlayOpacity,
   contentTheme,
@@ -132,12 +150,12 @@ const Modal = ({
   className,
   overlayClassName,
   closeButtonClassName,
-  container,
-  zIndex = 99999,
   closeOnOverlayClick = true,
   closeOnEscapeKeyPress = true,
   ariaLabelledby,
   ariaDescribedby,
+  container,
+  zIndex = 99999,
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -176,6 +194,8 @@ const Modal = ({
               className={cn(
                 contentVariants({
                   size,
+                  radius,
+                  shadow,
                   theme: contentTheme,
                 }),
                 className

@@ -1,48 +1,68 @@
 "use client";
-import { motion } from "motion/react";
-import React, { ReactNode, useLayoutEffect, useRef, useState } from "react";
+import { ReactNode, useLayoutEffect, useRef, useState } from "react";
+import { LazyMotion, m, domAnimation } from "motion/react";
 
 const AnimateOnHeightChange = ({ children }: { children: ReactNode }) => {
   const [height, setHeight] = useState<number | "auto">("auto");
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const motionDivRef = useRef<HTMLDivElement | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const animationCountRef = useRef(0);
 
   const measureHeight = () => {
-    if (containerRef.current) {
-      return containerRef.current.offsetHeight;
+    return contentRef.current ? contentRef.current.offsetHeight : 0;
+  };
+
+  const setOverflow = (value: "hidden" | "visible") => {
+    if (motionDivRef.current) {
+      motionDivRef.current.style.overflow = value;
     }
-    return 0;
   };
 
   useLayoutEffect(() => {
-    // sync measurement before paint
     const initialHeight = measureHeight();
     setHeight(initialHeight);
 
     resizeObserverRef.current = new ResizeObserver((entries) => {
       const newHeight = entries[0].target.clientHeight;
-      setHeight(newHeight);
+      if (newHeight !== height) {
+        setOverflow("hidden");
+        setHeight(newHeight);
+      }
     });
 
-    if (containerRef.current) {
-      resizeObserverRef.current.observe(containerRef.current);
+    if (contentRef.current) {
+      resizeObserverRef.current.observe(contentRef.current);
     }
-
     return () => {
       resizeObserverRef.current?.disconnect();
     };
-  }, []);
+  }, [height]);
+
+  const handleAnimationStart = () => {
+    animationCountRef.current += 1;
+  };
+
+  const handleAnimationComplete = () => {
+    animationCountRef.current -= 1;
+    if (animationCountRef.current === 1) {
+      setOverflow("visible");
+    }
+  };
 
   return (
-    <motion.div
-      initial={{ height: "auto" }}
-      style={{ height }}
-      animate={{ height }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="overflow-hidden"
-    >
-      <div ref={containerRef}>{children}</div>
-    </motion.div>
+    <LazyMotion features={domAnimation}>
+      <m.div
+        ref={motionDivRef}
+        initial={{ height: "auto" }}
+        animate={{ height }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        onAnimationStart={handleAnimationStart}
+        onAnimationComplete={handleAnimationComplete}
+      >
+        <div ref={contentRef}>{children}</div>
+      </m.div>
+    </LazyMotion>
   );
 };
 
