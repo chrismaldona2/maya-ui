@@ -274,7 +274,6 @@ export const TooltipDemo = () => {
       placement="top"
       className="max-w-[300px] bg-violet-700 text-neutral-50"
       showArrow
-      isOpen
       disableUseSelect
     >
       <Button>Hover me</Button>
