@@ -4,22 +4,7 @@ import { cn } from "@/lib/utils";
 import { CSSProperties, ReactNode } from "react";
 import { LazyMotion, domAnimation, m, Variants } from "motion/react";
 import { cva } from "class-variance-authority";
-import { useDelayedToggle } from "@/hooks/use-delayed-toggle";
-
-const animation: Variants = {
-  hidden: {
-    visibility: "hidden",
-    opacity: 0,
-    scale: 0.8,
-    transition: { type: "spring", duration: 0.5 },
-  },
-  visible: {
-    visibility: "visible",
-    opacity: 1,
-    scale: 1,
-    transition: { type: "spring", duration: 0.5 },
-  },
-};
+import { useTooltip } from "@/hooks/use-tooltip";
 
 type Placement =
   | "top"
@@ -146,7 +131,7 @@ const placementConfig: PlacementConfig = {
 };
 
 const tooltipVariants = cva(
-  "absolute cursor-default select-none min-w-full w-max",
+  "absolute cursor-default min-w-full w-max bg-primary py-2 px-3.5 text-primary-foreground z-30",
   {
     variants: {
       radius: {
@@ -171,9 +156,13 @@ interface TooltipProps {
   placement?: Placement;
   radius?: "none" | "sm" | "md" | "lg" | "xl" | "full";
   openDelay?: number;
-  closeDelay?: number;
+  exitDelay?: number;
   showArrow?: boolean;
   arrowClassName?: string;
+  animationVariants?: Variants;
+  disabled?: boolean;
+  isOpen?: boolean;
+  disableUseSelect?: boolean;
 }
 
 const Tooltip = ({
@@ -183,18 +172,25 @@ const Tooltip = ({
   placement = "bottom",
   radius,
   openDelay = 200,
-  closeDelay = 750,
+  exitDelay = 750,
   showArrow,
   arrowClassName,
+  animationVariants = defaultAnimation,
+  disabled,
+  isOpen,
+  disableUseSelect,
 }: TooltipProps) => {
-  const { isVisible, show, hide, toggle } = useDelayedToggle(
+  const { isVisible, show, hide, toggle } = useTooltip(
     openDelay,
-    closeDelay
+    exitDelay,
+    isOpen
   );
+
+  if (disabled) return <>{children}</>;
 
   return (
     <div
-      className="relative"
+      className="relative inline-block"
       onMouseEnter={show}
       onMouseLeave={hide}
       onFocus={show}
@@ -205,16 +201,17 @@ const Tooltip = ({
 
       <LazyMotion features={domAnimation}>
         <m.div
-          variants={animation}
+          variants={animationVariants}
           initial="hidden"
-          animate={isVisible ? "visible" : ""}
+          animate={isVisible ? "visible" : "hidden"}
           className={cn(
             tooltipVariants({ radius }),
-            "bg-violet-700 py-2 px-3.5 text-neutral-50 z-30",
+            { "select-none": disableUseSelect },
             className
           )}
           style={placementConfig[placement].style}
           role="tooltip"
+          aria-hidden={!isVisible}
         >
           {showArrow && (
             <TooltipArrow
@@ -237,7 +234,7 @@ interface TooltipArrowProps {
 }
 
 const tooltipArrowVariants = cva(
-  "absolute size-2 rounded-[0%_100%_100%_0%_/_100%_0%_100%_0%]",
+  "absolute size-2 rounded-[0%_100%_100%_0%_/_100%_0%_100%_0%] bg-inherit",
   {
     variants: {
       placement: {
@@ -267,15 +264,7 @@ const tooltipArrowVariants = cva(
 );
 
 const TooltipArrow = ({ placement, className }: TooltipArrowProps) => {
-  return (
-    <div
-      className={cn(
-        tooltipArrowVariants({ placement }),
-        "bg-inherit",
-        className
-      )}
-    />
-  );
+  return <div className={cn(tooltipArrowVariants({ placement }), className)} />;
 };
 
 export const TooltipDemo = () => {
@@ -283,10 +272,27 @@ export const TooltipDemo = () => {
     <Tooltip
       content="I'm a tooltip! 😎"
       placement="top"
-      className="max-w-[300px]"
+      className="max-w-[300px] bg-violet-700 text-neutral-50"
       showArrow
+      isOpen
+      disableUseSelect
     >
       <Button>Hover me</Button>
     </Tooltip>
   );
+};
+
+const defaultAnimation: Variants = {
+  hidden: {
+    visibility: "hidden",
+    opacity: 0,
+    scale: 0.8,
+    transition: { type: "spring", duration: 0.5 },
+  },
+  visible: {
+    visibility: "visible",
+    opacity: 1,
+    scale: 1,
+    transition: { type: "spring", duration: 0.5 },
+  },
 };

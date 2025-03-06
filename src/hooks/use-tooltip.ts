@@ -1,8 +1,12 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 
-export const useDelayedToggle = (openDelay: number, exitDelay: number) => {
-  const [isVisible, setIsVisible] = useState(false);
+export const useTooltip = (
+  openDelay: number,
+  exitDelay: number,
+  defaultVisibleState?: boolean
+) => {
+  const [isVisible, setIsVisible] = useState(false || defaultVisibleState);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const clearExistingTimeout = () => {
