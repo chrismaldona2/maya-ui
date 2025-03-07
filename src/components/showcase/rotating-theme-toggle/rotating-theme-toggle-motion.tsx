@@ -69,7 +69,7 @@ const ThemeToggle = ({
     props["aria-label"] ??
     (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
 
-  const iconClassName = cn("size-full rounded-sm", iconsClassName);
+  const iconClassName = cn("size-full rounded-xs", iconsClassName);
 
   return (
     <button

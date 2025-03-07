@@ -25,8 +25,8 @@ const overlayVariants = cva(
   {
     variants: {
       blur: {
-        default: "backdrop-blur",
-        light: "backdrop-blur-sm",
+        default: "backdrop-blur-sm",
+        light: "backdrop-blur-xs",
         medium: "backdrop-blur-md",
         strong: "backdrop-blur-lg",
         none: "backdrop-blur-none",
@@ -56,15 +56,15 @@ const contentVariants = cva("relative w-[92%] max-h-[95vh] overflow-auto", {
     },
     radius: {
       none: "rounded-none",
-      sm: "rounded-sm",
+      sm: "rounded-xs",
       md: "rounded-md",
       lg: "rounded-lg",
       xl: "rounded-xl",
     },
     shadow: {
       none: "shadow-none",
-      sm: "shadow-sm",
-      base: "shadow",
+      sm: "shadow-xs",
+      base: "shadow-sm",
       md: "shadow-md",
       lg: "shadow-lg",
       xl: "shadow-xl",
@@ -83,49 +83,16 @@ const contentVariants = cva("relative w-[92%] max-h-[95vh] overflow-auto", {
   },
 });
 
-const overlayAnimation: Variants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: { opacity: 1, transition: { duration: 0.35 } },
-};
-
-const contentAnimation: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-    scale: 0.8,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 20,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: 20,
-    transition: {
-      duration: 0.3,
-      ease: "easeInOut",
-    },
-  },
-};
-
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  children: ReactNode;
   size?: "sm" | "md" | "lg" | "full";
   radius?: "none" | "sm" | "md" | "lg" | "xl";
   shadow?: "none" | "sm" | "base" | "md" | "lg" | "xl";
   blur?: "default" | "light" | "medium" | "strong" | "none";
   overlayOpacity?: "default" | "light" | "medium" | "dark" | "none";
   contentTheme?: "light" | "dark" | "auto";
-  children: ReactNode;
   closeButton?: ReactNode;
   showCloseButton?: boolean;
   className?: string;
@@ -137,29 +104,33 @@ interface ModalProps {
   closeOnEscapeKeyPress?: boolean;
   ariaLabelledby?: string;
   ariaDescribedby?: string;
+  animationVariants?: Variants;
+  overlayAnimationVariants?: Variants;
 }
 
 const Modal = ({
   isOpen,
   onClose,
+  children,
   size,
   radius,
   shadow,
   blur,
   overlayOpacity,
   contentTheme,
-  children,
   closeButton,
   showCloseButton = true,
   className,
   overlayClassName,
   closeButtonClassName,
+  container,
+  zIndex = 99999,
   closeOnOverlayClick = true,
   closeOnEscapeKeyPress = true,
   ariaLabelledby,
   ariaDescribedby,
-  container,
-  zIndex = 99999,
+  animationVariants = modalDefaultAnimation,
+  overlayAnimationVariants = overlayDefaultAnimation,
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -189,7 +160,7 @@ const Modal = ({
                 }),
                 overlayClassName
               )}
-              variants={overlayAnimation}
+              variants={overlayAnimationVariants}
               initial="hidden"
               animate="visible"
               exit="hidden"
@@ -205,7 +176,7 @@ const Modal = ({
                 className
               )}
               ref={modalRef}
-              variants={contentAnimation}
+              variants={animationVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -239,13 +210,46 @@ const Modal = ({
 
 export default Modal;
 
+const overlayDefaultAnimation: Variants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: { opacity: 1, transition: { duration: 0.35 } },
+};
+
+const modalDefaultAnimation: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+    scale: 0.8,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 20,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 20,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut",
+    },
+  },
+};
+
 const CloseButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
       {...props}
       type="button"
       className={cn(
-        "p-1.5 size-6 transition duration-300",
+        "p-1.5 size-6 transition duration-300 cursor-pointer",
         "active:scale-95 hover:bg-neutral-300 dark:hover:bg-neutral-700 rounded-md",
         props.className
       )}
@@ -504,8 +508,8 @@ export const variantsCodeSnippet = `
 // custom
 <Modal isOpen={isOpen} onClose={closeModal}
   contentTheme="dark"
-  className="bg-gradient-to-br from-blue-950 to-blue-900"
-  overlayClassName="bg-gradient-to-tr from-blue-950/80 to-blue-900/30"
+  className="bg-linear-to-br from-blue-950 to-blue-900"
+  overlayClassName="bg-linear-to-tr from-blue-950/80 to-blue-900/30"
   closeButtonClassName="hover:bg-blue-800 dark:hover:bg-blue-800 text-neutral-100 dark:text-neutral-100"
 >
   <Content/>

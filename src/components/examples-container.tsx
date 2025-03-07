@@ -5,7 +5,7 @@ import { TabPanel, Tabs } from "./container-with-tabs";
 import { ModalDemo } from "./showcase/modal/modal-demo";
 import RotatingThemeToggle from "./showcase/rotating-theme-toggle/rotating-theme-toggle-tailwind";
 import WavingHandDemo from "./showcase/waving-hand/waving-hand-demo";
-import { TooltipDemo } from "./showcase/tooltip/tooltip";
+import TooltipDemo from "./showcase/tooltip/tooltip-demo";
 
 const ExamplesContainer = () => {
   return (

@@ -136,8 +136,8 @@ const variantsDemo = {
   custom: {
     modalProps: {
       contentTheme: "dark",
-      className: "bg-gradient-to-br from-blue-950 to-blue-900",
-      overlayClassName: "bg-gradient-to-tr from-blue-950/80 to-blue-900/30",
+      className: "bg-linear-to-br from-blue-950 to-blue-900",
+      overlayClassName: "bg-linear-to-tr from-blue-950/80 to-blue-900/30",
       closeButtonClassName:
         "hover:bg-blue-800 dark:hover:bg-blue-800 text-neutral-100 dark:text-neutral-100",
     },

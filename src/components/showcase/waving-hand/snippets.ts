@@ -17,8 +17,8 @@ const WavingHand = ({ className, ...props }: React.HTMLAttributes<SVGElement>) =
     <WavingHandEmoji
       {...props}
       className={cn(
-        "flex-shrink-0 cursor-pointer origin-[80%_80%] size-6 outline-none",
-        "focus-visible:ring-2 ring-primary rounded-sm",
+        "shrink-0 cursor-pointer origin-[80%_80%] size-6 outline-hidden",
+        "focus-visible:ring-2 ring-primary rounded-xs",
         isWaving && "animate-hand-wave",
         className
       )}
@@ -122,7 +122,7 @@ const Gretting = () => {
 };
 
 export default Gretting;`,
-  tailwindConfig: `
+  v3Config: `
   
 import type { Config } from "tailwindcss";
 
@@ -147,4 +147,30 @@ export default {
 } satisfies Config;
 
 `,
+  v4Config: `
+// only for Tailwind CSS v4.0
+
+@theme {
+  --animate-hand-wave: hand-wave 1000ms ease-in-out;
+
+  @keyframes hand-wave {
+    0% {
+      transform: rotate(0deg);
+    }
+    15% {
+      transform: rotate(-16deg);
+    }
+    40% {
+      transform: rotate(0deg);
+    }
+    65% {
+      transform: rotate(-16deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+  `,
 };

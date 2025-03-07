@@ -20,7 +20,7 @@ const Header = () => {
         {isMenuOpen && <MobileMenu onClose={toggleMenu} />}
       </AnimatePresence>
 
-      <div className="bg-gradient-to-r from-[#ffffff] to-[#e8e5eb] dark:from-[#0a0a0a] dark:to-[#1b1b1c] text-neutral-800 dark:text-slate-100 py-[0.6rem] w-full text-center text-sm shadow-sm shadow-neutral-800/10 z-[60]">
+      <div className="bg-linear-to-r from-[#ffffff] to-[#e8e5eb] dark:from-[#0a0a0a] dark:to-[#1b1b1c] text-neutral-800 dark:text-slate-100 py-[0.6rem] w-full text-center text-sm shadow-xs shadow-neutral-800/10 z-60">
         ✨ Bring your website to life with Maya UI
       </div>
 

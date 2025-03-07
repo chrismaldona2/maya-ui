@@ -13,13 +13,13 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
   useEscapeKeyPress(onClose);
 
   return (
-    <motion.div className="fixed flex items-start inset-0 z-[9999]">
+    <motion.div className="fixed flex items-start inset-0 z-9999">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.75 }}
-        className="absolute -z-10 inset-0 bg-black/10 backdrop-blur-sm"
+        className="absolute -z-10 inset-0 bg-black/10 backdrop-blur-xs"
       ></motion.div>
 
       <motion.div

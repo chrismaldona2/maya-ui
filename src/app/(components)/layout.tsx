@@ -5,7 +5,7 @@ import BlurredCircle from "@/components/blurred-circle";
 
 const Components = ({ children }: { children: ReactNode }) => {
   return (
-    <CenteredWrapper className="flex-grow flex">
+    <CenteredWrapper className="grow flex">
       <div className="w-full grid grid-cols-1 md:grid-cols-[200px_minmax(0,1fr)] lg:md:grid-cols-[280px_minmax(0,1fr)_10%]">
         <div className="hidden h-fit max-h-[calc(100vh-7.875rem)] shrink-0 md:sticky md:top-14 md:block">
           <DocsSidebar />

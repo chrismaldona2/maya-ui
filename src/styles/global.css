@@ -1,6 +1,105 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-neutral-150: #ededed;
+  --color-neutral-250: #dbdbdb;
+  --color-neutral-450: #808080;
+  --color-neutral-550: #5c5c5c;
+  --color-neutral-850: #1f1f1f;
+  --color-neutral-925: #131313;
+
+  --animate-hand-wave: hand-wave 1000ms ease-in-out;
+  --animate-rotate-in: rotate-in 300ms ease-in-out backwards;
+  --animate-rotate-out: rotate-out 350ms ease-in-out forwards;
+  --animate-popup: popup 500ms ease-in-out forwards;
+  --animate-rotate: full-rotation 40s linear infinite;
+
+  @keyframes hand-wave {
+    0% {
+      transform: rotate(0deg);
+    }
+    15% {
+      transform: rotate(-16deg);
+    }
+    40% {
+      transform: rotate(0deg);
+    }
+    65% {
+      transform: rotate(-16deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes rotate-in {
+    0% {
+      transform: rotate(90deg) scale(0);
+    }
+    60% {
+      transform: rotate(10deg) scale(1.15);
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes rotate-out {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    25% {
+      transform: rotate(-30deg) scale(1.15);
+    }
+    100% {
+      transform: rotate(-90deg) scale(0);
+    }
+  }
+
+  @keyframes popup {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    65% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    75% {
+      transform: scale(0.98);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes full-rotation {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 @layer base {
   :root {
@@ -16,45 +115,39 @@
     --primary-foreground: 0 0 12%;
     --secondary-foreground: 0 0 85%;
   }
-}
 
-@layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-gradient-to-br from-white to-slate-50 dark:from-neutral-950 dark:to-[#0e0e0e];
+    @apply bg-linear-to-br from-white to-slate-50 dark:from-neutral-950 dark:to-[#0e0e0e];
   }
+}
 
+@layer base {
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
-    @apply bg-neutral-200 dark:bg-neutral-900;
+    @apply bg-neutral-200;
   }
-
-  ::-webkit-scrollbar-corner {
-    @apply bg-neutral-200 dark:bg-neutral-900;
-  }
-
   ::-webkit-scrollbar-thumb {
-    @apply bg-zinc-400 dark:bg-neutral-800;
+    @apply bg-zinc-400;
+  }
+  ::-webkit-scrollbar-corner {
+    @apply bg-neutral-200;
   }
 
-  html.lenis,
-  html.lenis body {
-    height: auto;
-  }
+  .dark {
+    ::-webkit-scrollbar {
+      @apply bg-neutral-900;
+    }
+    ::-webkit-scrollbar-thumb {
+      @apply bg-neutral-800;
+    }
 
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-
-  .lenis.lenis-stopped {
-    overflow: clip;
-  }
-
-  .lenis.lenis-smooth iframe {
-    pointer-events: none;
+    ::-webkit-scrollbar-corner {
+      @apply bg-neutral-900;
+    }
   }
 }

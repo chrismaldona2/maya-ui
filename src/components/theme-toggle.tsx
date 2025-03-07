@@ -36,7 +36,7 @@ const ThemeToggle = ({
     <button
       {...props}
       className={cn(
-        "size-6 appearance-none cursor-pointer rounded-sm overflow-clip p-1",
+        "size-6 appearance-none cursor-pointer rounded-xs overflow-clip p-1",
         isExiting ? "animate-rotate-out" : "animate-rotate-in",
         className
       )}

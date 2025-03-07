@@ -2,6 +2,7 @@ import { AnchorHTMLAttributes, PropsWithChildren } from "react";
 import { Tabs, TabPanel } from "../container-with-tabs";
 import CodeSnippet from "../code-snippet";
 import ComponentCard from "../component-card";
+import { StarComment } from "../icons";
 import dynamic from "next/dynamic";
 
 export const mdxComponents = {
@@ -9,9 +10,10 @@ export const mdxComponents = {
   TabPanel,
   CodeSnippet,
   ComponentCard,
+  StarComment,
   UIVerseLink: () => (
     <a
-      className="font-semibold bg-gradient-to-br from-[#8689f3] to-[#945abe] to-70% bg-clip-text text-transparent"
+      className="font-semibold bg-linear-to-br from-[#8689f3] to-[#945abe] to-70% bg-clip-text text-transparent"
       href="https://uiverse.io/"
       target="_blank"
     >
@@ -19,7 +21,7 @@ export const mdxComponents = {
     </a>
   ),
   Note: ({ children }: PropsWithChildren) => (
-    <aside className="my-5 p-4 rounded-md bg-neutral-200 text-neutral-700 dark:bg-neutral-850 dark:text-neutral-400">
+    <aside className="flex gap-4 items-center my-5 p-4 rounded-md bg-neutral-200 text-neutral-700 dark:bg-neutral-850 dark:text-neutral-400">
       {children}
     </aside>
   ),

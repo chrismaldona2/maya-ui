@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 
 export const buttonVariants = cva(
-  "max-w-full shadow-sm whitespace-nowrap overflow-clip flex justify-center items-center gap-2.5 py-2 px-4 rounded-md select-none hover:scale-[102%] active:scale-100 transition-transform duration-300",
+  "max-w-full shadow-xs whitespace-nowrap overflow-clip flex justify-center items-center gap-2.5 py-2 px-4 rounded-md select-none hover:scale-[102%] active:scale-100 transition-transform duration-300 cursor-pointer",
   {
     variants: {
       variant: {

@@ -60,7 +60,7 @@ const NavigationLink = ({
       </span>
       <ArrowIcon
         className={cn(
-          "h-3 text-neutral-400 dark:text-neutral-500 flex-shrink-0",
+          "h-3 text-neutral-400 dark:text-neutral-500 shrink-0",
           { "rotate-180": arrowDirection === "left" }
         )}
       />

@@ -20,7 +20,7 @@ const Tabs = ({
   const tabsArray = Array.isArray(children) ? children : [children];
 
   return (
-    <section className="drop-shadow-sm">
+    <section className="drop-shadow-xs">
       <div
         role="tablist"
         className="flex justify-start max-w-[95%] [&>*:first-child]:rounded-tl-xl [&>*:last-child]:rounded-tr-xl"
@@ -51,7 +51,7 @@ const Tabs = ({
 
       <div
         className={cn(
-          "py-5 px-[1.15rem] bg-gradient-to-b from-neutral-100 to-zinc-100 dark:from-[#111111] dark:to-[#0d0d0d] rounded-xl",
+          "py-5 px-[1.15rem] bg-linear-to-b from-neutral-100 to-zinc-100 dark:from-[#111111] dark:to-[#0d0d0d] rounded-xl",
           "shadow-[inset_-2px_-4px_8px_rgba(200,200,200,0.1)] dark:shadow-[inset_-2px_-4px_8px_rgba(44,44,44,0.1)]",
           "rounded-tl-none",
           innerContainerClassName

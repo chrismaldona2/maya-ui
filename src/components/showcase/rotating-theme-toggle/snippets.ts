@@ -58,7 +58,7 @@ const ThemeToggle = ({
     <button
       {...props}
       className={cn(
-        "size-7 appearance-none cursor-pointer rounded-sm overflow-clip ",
+        "size-7 appearance-none cursor-pointer rounded-xs overflow-clip ",
         resolvedTheme === "dark" ? shadow.dark : shadow.light,
         isExiting ? "animate-rotate-out" : "animate-rotate-in",
         className
@@ -171,7 +171,7 @@ const Layout = ({children}: {children: ReactNode}) => {
 
 export default Layout;
 `,
-  tailwindConfig: `
+  v3Config: `
 import type { Config } from "tailwindcss";
 
 export default {
@@ -198,6 +198,38 @@ export default {
   },
 } satisfies Config;
 
+ `,
+  v4Config: `
+// only for Tailwind CSS v4.0
+ 
+@theme {
+  --animate-rotate-in: rotate-in 300ms ease-in-out backwards;
+  --animate-rotate-out: rotate-out 350ms ease-in-out forwards;
+
+  @keyframes rotate-in {
+    0% {
+      transform: rotate(90deg) scale(0);
+    }
+    60% {
+      transform: rotate(10deg) scale(1.15);
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes rotate-out {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    25% {
+      transform: rotate(-30deg) scale(1.15);
+    }
+    100% {
+      transform: rotate(-90deg) scale(0);
+    }
+  }
+}
  `,
 };
 
@@ -275,7 +307,7 @@ const ThemeToggle = ({
     props["aria-label"] ??
     (resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
 
-  const iconClassName = cn("size-full rounded-sm", iconsClassName);
+  const iconClassName = cn("size-full rounded-xs", iconsClassName);
 
   return (
     <button

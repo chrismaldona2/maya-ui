@@ -27,7 +27,10 @@ import { useIsMountedHook } from "@/components/showcase/shared-snippets/snippets
 
   <Tabs>
     <TabPanel label="tailwind.config">
-        <CodeSnippet code={tailwindSnippets.tailwindConfig} language="tsx"/>
+        <CodeSnippet code={tailwindSnippets.v3Config} language="tsx"/>
+    </TabPanel>
+    <TabPanel label="style.css">
+        <CodeSnippet code={tailwindSnippets.v4Config} language="css"/>
     </TabPanel>
   </Tabs>
 </section>
@@ -53,7 +56,7 @@ import { useIsMountedHook } from "@/components/showcase/shared-snippets/snippets
 
   This version doesn't require any additional configuration as all animation logic is contained within the component.
 
-  <Note>Each implementation has its strengths. Choose the Tailwind-only version if you want to avoid additional dependencies, or the Motion library version as it offers a more declarative approach and provides greater flexibility for customization.</Note>
+  <Note><StarComment className="shrink-0 size-5"/>Each implementation has its strengths. Choose Tailwind-only to avoid extra dependencies, or Motion for a more declarative approach and customization.</Note>
 </section>
 
 
@@ -61,7 +64,7 @@ import { useIsMountedHook } from "@/components/showcase/shared-snippets/snippets
   <header>
     ## Custom hooks
 
-    Required if you're using server components:
+    Only required if you're using server components:
   </header>
 
   <Tabs mountOnChange>
