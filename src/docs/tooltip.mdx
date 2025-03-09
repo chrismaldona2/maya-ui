@@ -1,0 +1,52 @@
+---
+title: Tooltip
+description: A versatile tooltip component with customizable placement and animated transitions.
+---
+
+import { motionSnippets, hookSnippet } from "@/components/showcase/tooltip/snippets"
+
+<section>
+
+  <Tabs mountOnChange>
+    <TabPanel label="Preview">
+        <ComponentCard>
+            <TooltipDemo />
+        </ComponentCard>
+    </TabPanel>
+    <TabPanel label="Code">
+        <CodeSnippet code={motionSnippets.code} language="tsx"/>
+    </TabPanel>
+    <TabPanel label="Usage">
+        <CodeSnippet code={motionSnippets.usage} language="tsx"/>
+    </TabPanel>
+  </Tabs>
+
+</section>
+
+<section>
+  <header>
+    ## Custom hooks
+  </header>
+
+  <Tabs mountOnChange>
+    <TabPanel label={hookSnippet.name}>
+      <CodeSnippet code={hookSnippet.code} language="typescript"/>
+    </TabPanel>
+  </Tabs>
+
+</section>
+
+
+<section>
+  <header>
+    ## Dependencies
+    This component relies on the following libraries:
+  </header>
+
+  - **<a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a>**
+  - **<a href="https://github.com/dcastil/tailwind-merge" target="_blank">clsx</a>**
+  - **<a href="https://github.com/lukeed/clsx" target="_blank">tailwind-merge</a>**
+  - **<a href="https://cva.style/" target="_blank">Class Variance Authority</a>**
+  - **<a href="https://motion.dev/" target="_blank">Motion</a>**
+
+</section>

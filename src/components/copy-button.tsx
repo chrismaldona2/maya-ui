@@ -35,7 +35,7 @@ const CopyButton = ({ text, className, ...props }: CopyButtonProps) => {
       aria-label={props["aria-label"] ?? "Copy to clipboard"}
       title={props.title ?? "Copy to clipboard"}
       className={cn(
-        "p-2.5 cursor-pointer rounded-lg bg-neutral-200/90 hover:bg-neutral-100/90 dark:bg-neutral-900/90 dark:hover:bg-neutral-850/90 active:scale-[85%] transition-[transform] duration-300 hover:[transition-property:transform,background-color]",
+        "p-2.5 cursor-pointer rounded-lg bg-neutral-200/90 hover:bg-neutral-100/90 dark:bg-neutral-900/90 dark:hover:bg-neutral-850/90 active:scale-[85%] transition-transform hover:transition",
         className
       )}
       onClick={handleClick}

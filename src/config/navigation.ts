@@ -21,6 +21,9 @@ export const sidebarLinks = [
   },
   {
     title: "Overlays",
-    links: [{ href: "/components/modal", label: "Modal" }],
+    links: [
+      { href: "/components/modal", label: "Modal" },
+      { href: "/components/tooltip", label: "Tooltip" },
+    ],
   },
 ];

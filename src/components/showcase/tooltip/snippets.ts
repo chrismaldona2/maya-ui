@@ -1,3 +1,7 @@
+import { HookSnippet, MotionSnippets } from "@/types/shared";
+
+export const motionSnippets: MotionSnippets = {
+  code: `
 "use client";
 import { cn } from "@/lib/utils";
 import {
@@ -230,7 +234,7 @@ const getPlacementConfig = (
     case "top":
       return {
         style: {
-          bottom: `calc(100% + ${offset}px)`,
+          bottom: \`calc(100% + \${offset}px)\`,
           left: "50%",
           translateX: "-50%",
           transformOrigin: "bottom",
@@ -241,7 +245,7 @@ const getPlacementConfig = (
     case "right":
       return {
         style: {
-          left: `calc(100% + ${offset}px)`,
+          left: \`calc(100% + \${offset}px)\`,
           top: "50%",
           translateY: "-50%",
           transformOrigin: "left",
@@ -252,7 +256,7 @@ const getPlacementConfig = (
     case "bottom":
       return {
         style: {
-          top: `calc(100% + ${offset}px)`,
+          top: \`calc(100% + \${offset}px)\`,
           left: "50%",
           translateX: "-50%",
           transformOrigin: "top",
@@ -262,7 +266,7 @@ const getPlacementConfig = (
     case "left":
       return {
         style: {
-          right: `calc(100% + ${offset}px)`,
+          right: \`calc(100% + \${offset}px)\`,
           top: "50%",
           translateY: "-50%",
           transformOrigin: "right",
@@ -272,7 +276,7 @@ const getPlacementConfig = (
     case "top-start":
       return {
         style: {
-          bottom: `calc(100% + ${offset}px)`,
+          bottom: \`calc(100% + \${offset}px)\`,
           left: "0",
           transformOrigin: "bottom left",
         },
@@ -281,7 +285,7 @@ const getPlacementConfig = (
     case "top-end":
       return {
         style: {
-          bottom: `calc(100% + ${offset}px)`,
+          bottom: \`calc(100% + \${offset}px)\`,
           right: "0",
           transformOrigin: "bottom right",
         },
@@ -290,7 +294,7 @@ const getPlacementConfig = (
     case "right-start":
       return {
         style: {
-          left: `calc(100% + ${offset}px)`,
+          left: \`calc(100% + \${offset}px)\`,
           top: "0",
           transformOrigin: "top left",
         },
@@ -299,7 +303,7 @@ const getPlacementConfig = (
     case "right-end":
       return {
         style: {
-          left: `calc(100% + ${offset}px)`,
+          left: \`calc(100% + \${offset}px)\`,
           bottom: "0",
           transformOrigin: "bottom left",
         },
@@ -308,7 +312,7 @@ const getPlacementConfig = (
     case "bottom-start":
       return {
         style: {
-          top: `calc(100% + ${offset}px)`,
+          top: \`calc(100% + \${offset}px)\`,
           left: "0",
           transformOrigin: "top left",
         },
@@ -317,7 +321,7 @@ const getPlacementConfig = (
     case "bottom-end":
       return {
         style: {
-          top: `calc(100% + ${offset}px)`,
+          top: \`calc(100% + \${offset}px)\`,
           right: "0",
           transformOrigin: "top right",
         },
@@ -326,7 +330,7 @@ const getPlacementConfig = (
     case "left-start":
       return {
         style: {
-          right: `calc(100% + ${offset}px)`,
+          right: \`calc(100% + \${offset}px)\`,
           top: "0",
           transformOrigin: "top right",
         },
@@ -335,11 +339,91 @@ const getPlacementConfig = (
     case "left-end":
       return {
         style: {
-          right: `calc(100% + ${offset}px)`,
+          right: \`calc(100% + \${offset}px)\`,
           bottom: "0",
           transformOrigin: "bottom right",
         },
         arrowPlacement: "right-end",
       };
   }
+};
+  
+`,
+  usage: `
+import Button from "@/components/button";
+import Tooltip from "@/components/tooltip";
+
+const Demo = () => {
+  return (
+    <Tooltip
+      offset={12}
+      content="I'm a tooltip! 😎"
+      placement="top"
+      className="max-w-[300px] bg-violet-700 text-neutral-50 "
+      disableUserSelect
+      showArrow
+      arrowClassName="size-2"
+    >
+      <Button>Hover me</Button>
+    </Tooltip>
+  );
+};
+
+export default Demo;
+`,
+};
+
+export const hookSnippet: HookSnippet = {
+  id: 1,
+  name: "use-tooltip",
+  code: `
+// manage tooltip visibility and delays
+"use client";
+import { useState, useRef, useEffect } from "react";
+
+export const useTooltip = (
+  openDelay: number,
+  exitDelay: number,
+  isOpen?: boolean
+) => {
+  const [isVisible, setIsVisible] = useState(isOpen ?? false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (isOpen !== undefined && isOpen !== isVisible) {
+      setIsVisible(isOpen);
+    }
+  }, [isOpen, isVisible]);
+
+  const clearExistingTimeout = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  };
+
+  const show = () => {
+    if (isOpen !== undefined) return;
+    clearExistingTimeout();
+    timeoutRef.current = setTimeout(() => setIsVisible(true), openDelay);
+  };
+
+  const hide = () => {
+    if (isOpen !== undefined) return;
+    clearExistingTimeout();
+    timeoutRef.current = setTimeout(() => setIsVisible(false), exitDelay);
+  };
+
+  const toggle = () => {
+    if (isOpen !== undefined) return;
+    setIsVisible((prev) => !prev);
+  };
+
+  useEffect(() => {
+    return () => clearExistingTimeout();
+  }, []);
+
+  return { isVisible, show, hide, toggle };
+};
+  `,
 };

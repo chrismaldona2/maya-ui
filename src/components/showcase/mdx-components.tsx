@@ -90,4 +90,9 @@ export const dynamicImports = {
       (demo) => demo.ModalVariantsDemo
     )
   ),
+  TooltipDemo: dynamic(() =>
+    import("@/components/showcase/tooltip/tooltip-demo").then(
+      (demo) => demo.TooltipDemo
+    )
+  ),
 };
