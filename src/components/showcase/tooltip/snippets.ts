@@ -189,27 +189,25 @@ interface TooltipArrowProps {
   color?: string;
 }
 
-const tooltipArrowVariants = cva(
-  "absolute w-3 h-3 rotate-45 -z-10 rounded-xs",
-  {
-    variants: {
-      placement: {
-        top: "bottom-full left-1/2 -translate-x-1/2 translate-y-1/2",
-        bottom: "top-full left-1/2 -translate-x-1/2 -translate-y-1/2",
-        right: "left-full top-1/2 -translate-y-1/2 -translate-x-1/2",
-        left: "right-full top-1/2 -translate-y-1/2 translate-x-1/2",
-        "top-start": "bottom-full left-3 translate-y-1/2",
-        "top-end": "bottom-full right-3 translate-y-1/2",
-        "bottom-start": "top-full left-3 -translate-y-1/2",
-        "bottom-end": "top-full right-3 -translate-y-1/2",
-        "right-start": "left-full top-3 -translate-x-1/2",
-        "right-end": "left-full bottom-3 -translate-x-1/2",
-        "left-start": "right-full top-3 translate-x-1/2",
-        "left-end": "right-full bottom-3 translate-x-1/2",
-      },
+const tooltipArrowVariants = cva("absolute size-2.5 rotate-45 -z-10", {
+  variants: {
+    placement: {
+      "top": "bottom-full left-1/2 -translate-x-1/2 translate-y-1/2",
+      "bottom": "top-full left-1/2 -translate-x-1/2 -translate-y-1/2",
+      "right": "left-full top-1/2 -translate-y-1/2 -translate-x-1/2",
+      "left": "right-full top-1/2 -translate-y-1/2 translate-x-1/2",
+      "top-start": "bottom-full left-3 translate-y-1/2",
+      "top-end": "bottom-full right-3 translate-y-1/2",
+      "bottom-start": "top-full left-3 -translate-y-1/2",
+      "bottom-end": "top-full right-3 -translate-y-1/2",
+      "right-start": "left-full top-3 -translate-x-1/2",
+      "right-end": "left-full bottom-3 -translate-x-1/2",
+      "left-start": "right-full top-3 translate-x-1/2",
+      "left-end": "right-full bottom-3 translate-x-1/2",
     },
-  }
-);
+  },
+});
+
 
 const TooltipArrow = ({ placement, color, className }: TooltipArrowProps) => {
   return (
@@ -359,7 +357,7 @@ const Demo = () => {
       offset={12}
       content="I'm a tooltip! 😎"
       placement="top"
-      className="max-w-[300px] bg-violet-700 text-neutral-50 "
+      className="max-w-[300px] bg-violet-700 text-neutral-50"
       disableUserSelect
       showArrow
       arrowClassName="size-2"

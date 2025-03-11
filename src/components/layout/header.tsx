@@ -45,7 +45,7 @@ const Header = () => {
             <div className="ml-auto flex gap-4">
               <ThemeToggle />
               <button
-                className="sm:hidden"
+                className="sm:hidden cursor-pointer"
                 onClick={toggleMenu}
                 aria-label="Open menu"
               >

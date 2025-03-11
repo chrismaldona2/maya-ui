@@ -1,5 +1,5 @@
 "use client";
-import { memo, useRef } from "react";
+import { useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
@@ -108,4 +108,4 @@ const CodeSnippet = ({
   );
 };
 
-export default memo(CodeSnippet);
+export default CodeSnippet;

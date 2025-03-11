@@ -108,7 +108,7 @@ const WavingHandEmoji = (props: React.HTMLAttributes<SVGElement>) => {
 `,
   usage: `
 "use client"
-import WavingHand from ".waving-hand";
+import WavingHand from "@/components/waving-hand";
 
 const Gretting = () => {
   const handleClick = () => console.log("how are you?");

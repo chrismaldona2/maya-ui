@@ -28,7 +28,12 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("bg-background antialiased", geist.className)}>
+      <body
+        className={cn(
+          "bg-background antialiased overflow-x-hidden",
+          geist.className
+        )}
+      >
         <Providers>
           <PageLayout>
             <Header />

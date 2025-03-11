@@ -24,7 +24,7 @@ const Hero = () => {
         <h1 className="text-6xl md:text-7xl font-bold bg-linear-to-br from-neutral-800 to-neutral-950 dark:from-neutral-50 dark:to-neutral-300 text-transparent bg-clip-text">
           Maya UI
         </h1>
-        <div className="text-neutral-500 mb-4 text-base md:text-lg">
+        <div className="text-neutral-450 mb-4 text-base md:text-lg">
           <p>A free open-source collection of animated React components.</p>
           <p>Built with TypeScript, Tailwind CSS and Motion.</p>
         </div>

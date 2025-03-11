@@ -1,9 +1,9 @@
 ---
 title: Dependencies
-description: Some of the components rely on external dependencies to provide enhanced functionality, animations, or styling.
+description: Some of the components rely on external dependencies to provide enhanced functionality, animations, or styling. Each component will specify its required dependencies where applicable.
 ---
 
-import { installationSnippets } from "@/components/showcase/dependencies/snippets"
+import { installationSnippets, cnUtility } from "@/components/showcase/dependencies/snippets"
 
 <section>
     <header>
@@ -26,13 +26,14 @@ import { installationSnippets } from "@/components/showcase/dependencies/snippet
 
     - [**Motion**](https://motion.dev/) - Production-ready animations with spring physics and gesture support.
     - [**React Three Fiber**](https://r3f.docs.pmnd.rs/) - React-powered Three.js wrapper for building interactive 3D content.
+
 </section>
 
 
 <section>
     <header>
-    ## Basic installation
-    To use these dependencies in your project, install them using npm or yarn:
+        ## Basic installation        
+        To use these dependencies in your project, install them using npm or yarn:
     </header>
 
     <Tabs>
@@ -45,7 +46,21 @@ import { installationSnippets } from "@/components/showcase/dependencies/snippet
     </Tabs>
 
 
-    <Note>Tailwind CSS installation may require multiple steps. For detailed instructions, visit their [installation guide](https://tailwindcss.com/docs/installation/). </Note>
+    <Note><p>Tailwind CSS installation may require multiple steps. For detailed instructions, visit their [installation guide](https://tailwindcss.com/docs/installation/).</p></Note>
 
-    Each component will specify which libraries are required.
+</section>
+
+
+<section>
+    <header>
+        ## Class Name utility
+        The **"`cn`"** helper function is used throughout our components to safely merge Tailwind classes, simplyfing conditional styling:
+    </header>
+
+    <Tabs>
+        <TabPanel label="utils.ts">
+            <CodeSnippet code={cnUtility} language="tsx"/>
+        </TabPanel>
+    </Tabs>
+
 </section>

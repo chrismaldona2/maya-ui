@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/button";
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import Modal from "./modal";
 import PopUpImage from "@/components/popup-image";
 

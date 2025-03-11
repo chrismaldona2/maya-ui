@@ -280,10 +280,9 @@ export const CloseIcon = (props: React.HTMLAttributes<SVGElement>) => {
 `,
   usage: `
 "use client";
-import Image from "next/image";
 import Button from "@/components/button";
+import Modal from "@/components/modal";
 import { useState } from "react";
-import Modal from "./modal";
 
 const Demo = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -310,6 +309,8 @@ const Demo = () => {
 
 
 // ↓ example content
+
+import Image from "next/image";
 
 interface Form {
   onSubmit: () => void;

@@ -1,6 +1,6 @@
 import { AnchorHTMLAttributes, PropsWithChildren } from "react";
 import { Tabs, TabPanel } from "../container-with-tabs";
-import CodeSnippet from "../code-snippet";
+import CodeSnippet from "../lazy-code-snippet";
 import ComponentCard from "../component-card";
 import { StarComment } from "../icons";
 import dynamic from "next/dynamic";
@@ -93,6 +93,11 @@ export const dynamicImports = {
   TooltipDemo: dynamic(() =>
     import("@/components/showcase/tooltip/tooltip-demo").then(
       (demo) => demo.TooltipDemo
+    )
+  ),
+  TooltipPositionsDemo: dynamic(() =>
+    import("@/components/showcase/tooltip/tooltip-demo").then(
+      (demo) => demo.TooltipPositionsDemo
     )
   ),
 };

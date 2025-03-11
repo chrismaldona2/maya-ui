@@ -23,3 +23,10 @@ yarn add motion
 yarn add three @types/three @react-three/fiber
 `,
 };
+
+export const cnUtility: string = `
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export const cn = (...classes: ClassValue[]) => twMerge(clsx(...classes));
+`;

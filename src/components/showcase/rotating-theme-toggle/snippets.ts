@@ -157,10 +157,9 @@ const MoonIcon = (props: React.HTMLAttributes<SVGElement>) => {
 
 `,
   usage: `
-import { ReactNode } from "react";
-import ThemeToggle  from "./theme-toggle";
+import ThemeToggle from "@/components/theme-toggle";
 
-const Layout = ({children}: {children: ReactNode}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <ThemeToggle className="absolute top-0 left-0 m-5 size-8" />
@@ -431,10 +430,9 @@ const MoonIcon = (props: React.HTMLAttributes<SVGElement>) => {
   `,
   usage: `
 // the same as tailwind version
-import { ReactNode } from "react";
-import ThemeToggle  from "./theme-toggle";
+import ThemeToggle from "@/components/theme-toggle";
 
-const Layout = ({children}: {children: ReactNode}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <ThemeToggle className="absolute top-0 left-0 m-5 size-8" />

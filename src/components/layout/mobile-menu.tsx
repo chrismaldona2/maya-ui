@@ -2,10 +2,11 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { CloseIcon } from "@/components/icons";
-import { useRef } from "react";
+import { ButtonHTMLAttributes, useRef } from "react";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { useEscapeKeyPress } from "@/hooks/use-escape-key-press";
 import { sidebarLinks } from "@/config/navigation";
+import { cn } from "@/lib/utils";
 
 const MobileMenu = ({ onClose }: { onClose: () => void }) => {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -31,9 +32,7 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
         ref={menuRef}
       >
         <div className="absolute top-4 right-3.5">
-          <button onClick={onClose} className="p-2" aria-label="Close menu">
-            <CloseIcon className="text-neutral-500 size-3" />
-          </button>
+          <CloseButton onClick={onClose} aria-label="Close menu" />
         </div>
         <nav className="py-6">
           {sidebarLinks.map((section) => (
@@ -63,3 +62,19 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
 };
 
 export default MobileMenu;
+
+const CloseButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return (
+    <button
+      {...props}
+      type="button"
+      className={cn(
+        "p-1.5 size-6 transition duration-300 cursor-pointer",
+        "active:scale-95 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-md",
+        props.className
+      )}
+    >
+      <CloseIcon className="text-neutral-500 size-3" />
+    </button>
+  );
+};
