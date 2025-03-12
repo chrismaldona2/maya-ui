@@ -25,7 +25,7 @@ const Header = () => {
         ✨ Bring your website to life with Maya UI
       </div>
 
-      <header className="w-full z-50 bg-white/75 dark:bg-neutral-950/85 backdrop-blur-md flex flex-col mx-auto items-center sticky top-0 border-b border-neutral-300 dark:border-neutral-900">
+      <header className="w-full z-50  px-6 sm:px-8 bg-white/75 dark:bg-neutral-950/85 backdrop-blur-md flex flex-col mx-auto items-center sticky top-0 border-b border-neutral-300 dark:border-neutral-900">
         <CenteredWrapper>
           <div className="py-4 w-full flex items-center justify-between gap-4">
             <div className="flex gap-4 items-center">

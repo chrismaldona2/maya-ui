@@ -6,6 +6,7 @@ import {
   useCallback,
   useId,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import {
@@ -17,6 +18,7 @@ import {
 } from "motion/react";
 import { cva } from "class-variance-authority";
 import { useTooltip } from "@/hooks/use-tooltip";
+import { useClickOutside } from "@/hooks/use-click-outside";
 
 const defaultAnimation: Variants = {
   hidden: {
@@ -102,12 +104,14 @@ const Tooltip = ({
   offset = 8,
 }: TooltipProps) => {
   const tooltipId = useId(); // → for accessibility purposes
-
   const { isVisible, show, hide, toggle } = useTooltip(
     openDelay,
     exitDelay,
     isOpen
   );
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  useClickOutside(hide, containerRef);
 
   // ↓ calculates the CSS positioning and arrow placement based on the specified placement and offset
   const placementConfig = useMemo(
@@ -128,6 +132,7 @@ const Tooltip = ({
 
   return (
     <div
+      ref={containerRef}
       className="relative inline-block"
       aria-labelledby={isVisible ? tooltipId : undefined}
       onMouseEnter={show}
@@ -188,10 +193,10 @@ interface TooltipArrowProps {
 const tooltipArrowVariants = cva("absolute size-2.5 rotate-45 -z-10", {
   variants: {
     placement: {
-      "top": "bottom-full left-1/2 -translate-x-1/2 translate-y-1/2",
-      "bottom": "top-full left-1/2 -translate-x-1/2 -translate-y-1/2",
-      "right": "left-full top-1/2 -translate-y-1/2 -translate-x-1/2",
-      "left": "right-full top-1/2 -translate-y-1/2 translate-x-1/2",
+      top: "bottom-full left-1/2 -translate-x-1/2 translate-y-1/2",
+      bottom: "top-full left-1/2 -translate-x-1/2 -translate-y-1/2",
+      right: "left-full top-1/2 -translate-y-1/2 -translate-x-1/2",
+      left: "right-full top-1/2 -translate-y-1/2 translate-x-1/2",
       "top-start": "bottom-full left-3 translate-y-1/2",
       "top-end": "bottom-full right-3 translate-y-1/2",
       "bottom-start": "top-full left-3 -translate-y-1/2",

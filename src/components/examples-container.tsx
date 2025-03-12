@@ -9,7 +9,7 @@ import { TooltipDemo } from "./showcase/tooltip/tooltip-demo";
 
 const ExamplesContainer = () => {
   return (
-    <CenteredWrapper>
+    <CenteredWrapper className="px-6 ">
       <Tabs innerContainerClassName="px-[1.7rem] py-[1.85rem]">
         <TabPanel label="Examples">
           <BentoGrid>

@@ -10,6 +10,7 @@ import {
   useCallback,
   useId,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import {
@@ -106,12 +107,14 @@ const Tooltip = ({
   offset = 8,
 }: TooltipProps) => {
   const tooltipId = useId(); // → for accessibility purposes
-
   const { isVisible, show, hide, toggle } = useTooltip(
     openDelay,
     exitDelay,
     isOpen
   );
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  useClickOutside(hide, containerRef);
 
   // ↓ calculates the CSS positioning and arrow placement based on the specified placement and offset
   const placementConfig = useMemo(
@@ -132,6 +135,7 @@ const Tooltip = ({
 
   return (
     <div
+      ref={containerRef}
       className="relative inline-block"
       aria-labelledby={isVisible ? tooltipId : undefined}
       onMouseEnter={show}
@@ -371,10 +375,11 @@ export default Demo;
 `,
 };
 
-export const hookSnippet: HookSnippet = {
-  id: 1,
-  name: "use-tooltip",
-  code: `
+export const hooksSnippets: HookSnippet[] = [
+  {
+    id: 1,
+    name: "use-tooltip",
+    code: `
 // manage tooltip visibility and delays
 "use client";
 import { useState, useRef, useEffect } from "react";
@@ -424,4 +429,34 @@ export const useTooltip = (
   return { isVisible, show, hide, toggle };
 };
   `,
+  },
+  {
+    id: 2,
+    name: "use-click-outside",
+    code: `
+// detects clicks outside a specified element
+"use client";
+import { RefObject, useEffect } from "react";
+
+export const useClickOutside = (
+  onClickOutside?: () => void,
+  ref?: RefObject<HTMLElement | null>
+) => {
+  useEffect(() => {
+    if (!onClickOutside || !ref) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        onClickOutside();
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [ref, onClickOutside]);
 };
+    `,
+  },
+];

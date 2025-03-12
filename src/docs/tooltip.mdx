@@ -3,7 +3,7 @@ title: Tooltip
 description: A versatile tooltip component with customizable placement and animated transitions.
 ---
 
-import { motionSnippets, hookSnippet } from "@/components/showcase/tooltip/snippets"
+import { motionSnippets, hooksSnippets } from "@/components/showcase/tooltip/snippets"
 
 <section>
 
@@ -29,9 +29,9 @@ import { motionSnippets, hookSnippet } from "@/components/showcase/tooltip/snipp
   </header>
 
   <Tabs mountOnChange>
-    <TabPanel label={hookSnippet.name}>
-      <CodeSnippet code={hookSnippet.code} language="typescript"/>
-    </TabPanel>
+    {hooksSnippets.map((hook) => {
+      return <TabPanel key={hook.id} label={hook.name}><CodeSnippet code={hook.code} language="typescript"/></TabPanel>
+    })}
   </Tabs>
 
 </section>
