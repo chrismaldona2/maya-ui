@@ -5,7 +5,7 @@ import { CloseIcon } from "@/components/icons";
 import { ButtonHTMLAttributes, useRef } from "react";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { useEscapeKeyPress } from "@/hooks/use-escape-key-press";
-import { sidebarLinks } from "@/config/navigation";
+import { docsLinks } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 
 const MobileMenu = ({ onClose }: { onClose: () => void }) => {
@@ -35,7 +35,7 @@ const MobileMenu = ({ onClose }: { onClose: () => void }) => {
           <CloseButton onClick={onClose} aria-label="Close menu" />
         </div>
         <nav className="py-6">
-          {sidebarLinks.map((section) => (
+          {docsLinks.map((section) => (
             <div key={section.title} className="mb-7">
               <h3 className="font-semibold text-neutral-600 dark:text-neutral-300">
                 {section.title}

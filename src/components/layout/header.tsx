@@ -8,6 +8,7 @@ import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
 import MobileMenu from "@/components/layout/mobile-menu";
 import Logo from "@/components/logo";
 import CenteredWrapper from "@/components/layout/centered-wrapper";
+import SearchBar from "../searchbar";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,24 +27,26 @@ const Header = () => {
 
       <header className="w-full z-50 bg-white/75 dark:bg-neutral-950/85 backdrop-blur-md flex flex-col mx-auto items-center sticky top-0 border-b border-neutral-300 dark:border-neutral-900">
         <CenteredWrapper>
-          <div className="py-4 w-full flex items-center gap-8">
-            <Logo redirectToMainPage />
+          <div className="py-4 w-full flex items-center justify-between gap-4">
+            <div className="flex gap-4 items-center">
+              <Logo redirectToMainPage />
+              <nav className="hidden sm:flex gap-5 text-sm ml-6">
+                <ul>
+                  <li>
+                    <Link
+                      href="/components"
+                      className="p-1 font-medium text-neutral-400 hover:text-neutral-800 dark:text-gray-400 dark:hover:text-neutral-200 transition-colors duration-300"
+                    >
+                      Components
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            </div>
 
-            <nav>
-              <ul className="hidden sm:flex gap-5 text-sm">
-                <li>
-                  <Link
-                    href="/components"
-                    className="p-1 font-medium text-neutral-400 hover:text-neutral-800 dark:text-gray-400 dark:hover:text-neutral-200 transition-colors duration-300"
-                  >
-                    Components
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-
-            <div className="ml-auto flex gap-4">
-              <ThemeToggle />
+            <div className="flex gap-4.5 items-center grow-1 sm:grow-0">
+              <SearchBar />
+              <ThemeToggle className="shrink-0" />
               <button
                 className="sm:hidden cursor-pointer"
                 onClick={toggleMenu}

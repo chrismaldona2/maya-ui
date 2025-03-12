@@ -250,7 +250,7 @@ const CloseButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
       type="button"
       className={cn(
         "p-1.5 size-6 transition duration-300 cursor-pointer",
-        "active:scale-95 hover:bg-neutral-300 dark:hover:bg-neutral-700 rounded-md",
+        "active:scale-95 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md",
         props.className
       )}
     >

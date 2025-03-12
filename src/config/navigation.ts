@@ -1,4 +1,4 @@
-export const sidebarLinks = [
+export const docsLinks = [
   {
     title: "Getting started",
     links: [

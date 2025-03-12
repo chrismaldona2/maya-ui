@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { sidebarLinks } from "@/config/navigation";
+import { docsLinks } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowIcon } from "../icons";
 import { ReactNode } from "react";
 
-const flattenedLinks = sidebarLinks.reduce<
-  Array<{ href: string; label: string }>
->((acc, section) => [...acc, ...section.links], []);
+const flattenedLinks = docsLinks.reduce<Array<{ href: string; label: string }>>(
+  (acc, section) => [...acc, ...section.links],
+  []
+);
 
 const DocNavigation = ({ currentPath }: { currentPath: string }) => {
   const currentIndex = flattenedLinks.findIndex(
@@ -59,10 +60,9 @@ const NavigationLink = ({
         {children}
       </span>
       <ArrowIcon
-        className={cn(
-          "h-3 text-neutral-400 dark:text-neutral-500 shrink-0",
-          { "rotate-180": arrowDirection === "left" }
-        )}
+        className={cn("h-3 text-neutral-400 dark:text-neutral-500 shrink-0", {
+          "rotate-180": arrowDirection === "left",
+        })}
       />
     </Link>
   );
