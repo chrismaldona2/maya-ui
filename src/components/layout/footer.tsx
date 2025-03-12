@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="font-medium text-neutral-400 dark:text-neutral-700 text-sm ml-auto w-fit">
         Developed by{" "}
         <a
-          href="https://personal-website-v1-chrismaldona2s-projects.vercel.app/"
+          href="https://www.chris-maldonado.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline"
