@@ -104,14 +104,14 @@ const Tooltip = ({
   offset = 8,
 }: TooltipProps) => {
   const tooltipId = useId(); // → for accessibility purposes
-  const { isVisible, show, hide, toggle } = useTooltip(
+  const { isVisible, show, hide, toggle, hideInstantly } = useTooltip(
     openDelay,
     exitDelay,
     isOpen
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
-  useClickOutside(hide, containerRef);
+  useClickOutside(isOpen ? undefined : hideInstantly, containerRef);
 
   // ↓ calculates the CSS positioning and arrow placement based on the specified placement and offset
   const placementConfig = useMemo(

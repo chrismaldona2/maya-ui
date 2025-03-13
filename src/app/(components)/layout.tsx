@@ -7,9 +7,7 @@ const Components = ({ children }: { children: ReactNode }) => {
   return (
     <CenteredWrapper className="grow flex">
       <div className="w-full grid grid-cols-1 md:grid-cols-[200px_minmax(0,1fr)] lg:md:grid-cols-[280px_minmax(0,1fr)_10%]">
-        <div className="hidden h-fit max-h-[calc(100vh-7.875rem)] shrink-0 md:sticky md:top-14 md:block">
-          <DocsSidebar />
-        </div>
+        <StickyDocsSidebar />
         <main className="h-full py-12 md:py-8 px-6 md:px-14 md:border-l border-neutral-200 dark:border-neutral-900 overflow-x-hidden">
           {children}
         </main>
@@ -26,3 +24,11 @@ const Components = ({ children }: { children: ReactNode }) => {
 };
 
 export default Components;
+
+const StickyDocsSidebar = () => {
+  return (
+    <div className="hidden h-fit max-h-[calc(100vh-7.875rem)] shrink-0 md:sticky md:top-14 md:block">
+      <DocsSidebar />
+    </div>
+  );
+};

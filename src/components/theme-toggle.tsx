@@ -36,7 +36,7 @@ const ThemeToggle = ({
     <button
       {...props}
       className={cn(
-        "size-6 appearance-none cursor-pointer rounded-xs overflow-clip p-1",
+        "size-6 appearance-none cursor-pointer rounded-xs overflow-clip p-1 text-neutral-500 dark:text-neutral-300",
         isExiting ? "animate-rotate-out" : "animate-rotate-in",
         className
       )}
@@ -48,9 +48,9 @@ const ThemeToggle = ({
       aria-checked={resolvedTheme === "light"}
     >
       {resolvedTheme === "dark" ? (
-        <MoonIcon className="text-neutral-300 size-full" />
+        <MoonIcon className="size-full" />
       ) : (
-        <SunIcon className="text-neutral-500 size-full" />
+        <SunIcon className="size-full" />
       )}
     </button>
   );

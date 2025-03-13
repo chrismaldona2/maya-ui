@@ -10,12 +10,6 @@ export const useTooltip = (
   const [isVisible, setIsVisible] = useState(isOpen ?? false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (isOpen !== undefined && isOpen !== isVisible) {
-      setIsVisible(isOpen);
-    }
-  }, [isOpen, isVisible]);
-
   const clearExistingTimeout = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -24,25 +18,28 @@ export const useTooltip = (
   };
 
   const show = () => {
-    if (isOpen !== undefined) return;
     clearExistingTimeout();
     timeoutRef.current = setTimeout(() => setIsVisible(true), openDelay);
   };
 
   const hide = () => {
-    if (isOpen !== undefined) return;
     clearExistingTimeout();
     timeoutRef.current = setTimeout(() => setIsVisible(false), exitDelay);
   };
 
   const toggle = () => {
-    if (isOpen !== undefined) return;
+    clearExistingTimeout();
     setIsVisible((prev) => !prev);
+  };
+
+  const hideInstantly = () => {
+    clearExistingTimeout();
+    setIsVisible(false);
   };
 
   useEffect(() => {
     return () => clearExistingTimeout();
   }, []);
 
-  return { isVisible, show, hide, toggle };
+  return { isVisible, show, hide, toggle, hideInstantly };
 };

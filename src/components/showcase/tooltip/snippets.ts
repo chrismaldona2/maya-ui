@@ -22,6 +22,7 @@ import {
 } from "motion/react";
 import { cva } from "class-variance-authority";
 import { useTooltip } from "@/hooks/use-tooltip";
+import { useClickOutside } from "@/hooks/use-click-outside";
 
 const defaultAnimation: Variants = {
   hidden: {
@@ -107,14 +108,14 @@ const Tooltip = ({
   offset = 8,
 }: TooltipProps) => {
   const tooltipId = useId(); // → for accessibility purposes
-  const { isVisible, show, hide, toggle } = useTooltip(
+  const { isVisible, show, hide, toggle, hideInstantly } = useTooltip(
     openDelay,
     exitDelay,
     isOpen
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
-  useClickOutside(hide, containerRef);
+  useClickOutside(isOpen ? undefined : hideInstantly, containerRef);
 
   // ↓ calculates the CSS positioning and arrow placement based on the specified placement and offset
   const placementConfig = useMemo(
@@ -149,7 +150,7 @@ const Tooltip = ({
         {isVisible ? (
           <LazyMotion features={domAnimation}>
             <m.div
-              className="absolute inline-block isolate"
+              className="absolute inline-block isolate z-20"
               variants={animationVariants}
               id={tooltipId}
               role="tooltip"
@@ -211,7 +212,6 @@ const tooltipArrowVariants = cva("absolute size-2.5 rotate-45 -z-10", {
     },
   },
 });
-
 
 const TooltipArrow = ({ placement, color, className }: TooltipArrowProps) => {
   return (
@@ -349,8 +349,9 @@ const getPlacementConfig = (
       };
   }
 };
+
   
-`,
+  `,
   usage: `
 import Button from "@/components/button";
 import Tooltip from "@/components/tooltip";
@@ -392,12 +393,6 @@ export const useTooltip = (
   const [isVisible, setIsVisible] = useState(isOpen ?? false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (isOpen !== undefined && isOpen !== isVisible) {
-      setIsVisible(isOpen);
-    }
-  }, [isOpen, isVisible]);
-
   const clearExistingTimeout = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -406,28 +401,32 @@ export const useTooltip = (
   };
 
   const show = () => {
-    if (isOpen !== undefined) return;
     clearExistingTimeout();
     timeoutRef.current = setTimeout(() => setIsVisible(true), openDelay);
   };
 
   const hide = () => {
-    if (isOpen !== undefined) return;
     clearExistingTimeout();
     timeoutRef.current = setTimeout(() => setIsVisible(false), exitDelay);
   };
 
   const toggle = () => {
-    if (isOpen !== undefined) return;
+    clearExistingTimeout();
     setIsVisible((prev) => !prev);
+  };
+
+  const hideInstantly = () => {
+    clearExistingTimeout();
+    setIsVisible(false);
   };
 
   useEffect(() => {
     return () => clearExistingTimeout();
   }, []);
 
-  return { isVisible, show, hide, toggle };
+  return { isVisible, show, hide, toggle, hideInstantly };
 };
+
   `,
   },
   {

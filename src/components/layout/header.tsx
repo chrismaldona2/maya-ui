@@ -25,28 +25,16 @@ const Header = () => {
         ✨ Bring your website to life with Maya UI
       </div>
 
-      <header className="w-full z-50  px-6 sm:px-8 bg-white/75 dark:bg-neutral-950/85 backdrop-blur-md flex flex-col mx-auto items-center sticky top-0 border-b border-neutral-300 dark:border-neutral-900">
-        <CenteredWrapper>
+      <header className="w-full z-50 bg-white/75 dark:bg-neutral-950/85 backdrop-blur-md flex flex-col mx-auto items-center sticky top-0 border-b border-neutral-300 dark:border-neutral-900">
+        <CenteredWrapper className="px-4 ">
           <div className="py-4 w-full flex items-center justify-between gap-4">
             <div className="flex gap-4 items-center">
               <Logo redirectToMainPage />
-              <nav className="hidden sm:flex gap-5 text-sm ml-6">
-                <ul>
-                  <li>
-                    <Link
-                      href="/components"
-                      className="p-1 font-medium text-neutral-400 hover:text-neutral-800 dark:text-gray-400 dark:hover:text-neutral-200 transition-colors duration-300"
-                    >
-                      Components
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
+              <HeaderLinks />
             </div>
-
             <div className="flex gap-4.5 items-center grow-1 sm:grow-0">
               <SearchBar />
-              <ThemeToggle className="shrink-0" />
+              <ThemeToggle className="shrink-0 text-neutral-450 dark:text-neutral-300" />
               <button
                 className="sm:hidden cursor-pointer"
                 onClick={toggleMenu}
@@ -63,3 +51,20 @@ const Header = () => {
 };
 
 export default Header;
+
+const HeaderLinks = () => {
+  return (
+    <nav className="hidden sm:flex gap-5 text-sm ml-6">
+      <ul>
+        <li>
+          <Link
+            href="/components"
+            className="p-1 font-medium text-neutral-450 hover:text-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-200 transition-colors duration-300"
+          >
+            Components
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
