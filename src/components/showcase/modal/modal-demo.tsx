@@ -153,6 +153,17 @@ const variantsDemo = {
       />
     ),
   },
+  cookies: {
+    modalProps: {
+      size: "sm",
+      placement: "bottom-start",
+      className: "m-4 border border-black/10",
+      preventScroll: false,
+      overlay: false,
+      closeOnOutsideClick: false,
+    },
+    formHeader: <></>,
+  },
 };
 
 export const ModalVariantsDemo = () => {
@@ -169,7 +180,7 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.default);
           open();
         }}
-        className="flex-1"
+        className="flex-1 bg-orange-300 text-white"
       >
         Default
       </Button>
@@ -179,7 +190,7 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.noBlur);
           open();
         }}
-        className="flex-1"
+        className="flex-1 bg-orange-400 text-white"
       >
         No blur
       </Button>
@@ -189,7 +200,7 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.blurOnly);
           open();
         }}
-        className="flex-1"
+        className="flex-1 bg-orange-500 text-white"
       >
         Blur only
       </Button>
@@ -199,7 +210,7 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.noOverlay);
           open();
         }}
-        className="flex-1"
+        className="flex-1 bg-orange-600 text-white"
       >
         No overlay
       </Button>
@@ -209,14 +220,70 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.custom);
           open();
         }}
-        className="flex-1"
+        className="flex-1 bg-orange-700 text-white"
       >
         Custom
       </Button>
 
+      <Button
+        onClick={() => {
+          setCurrentVariant(variantsDemo.cookies);
+          open();
+        }}
+        className="flex-1 bg-orange-800 text-white"
+      >
+        Custom 2
+      </Button>
+
       <Modal isOpen={isOpen} onClose={close} {...currentVariant.modalProps}>
-        <TermsForm onSubmit={close} header={currentVariant.formHeader} />
+        {currentVariant === variantsDemo.cookies ? (
+          <CookiesModal onSubmit={close} />
+        ) : (
+          <TermsForm onSubmit={close} header={currentVariant.formHeader} />
+        )}
       </Modal>
+    </div>
+  );
+};
+
+const CookiesModal = ({ onSubmit }: { onSubmit: () => void }) => {
+  return (
+    <div className="pt-7 pb-2 flex flex-col items-center gap-6">
+      <PopUpImage
+        src="/images/cookie.png"
+        alt="Cookie emoji"
+        aria-label="Cookie emoji"
+        width={80}
+        height={80}
+        className="drop-shadow-lg animate-popup"
+      />
+      <div>
+        <h2 className="font-semibold text-2xl text-center mb-2">
+          We use cookies
+        </h2>
+        <p className="text-center mx-3">
+          This website uses cookies to help you have a superior and more
+          admissible browsing experience.{" "}
+          <span className="underline text-[#dba355] cursor-pointer">
+            Read more
+          </span>
+        </p>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          onClick={onSubmit}
+          className=" bg-[#dba355] text-white flex-1 font-semibold"
+        >
+          Accept
+        </Button>
+        <Button
+          onClick={onSubmit}
+          className="text-[#dba355] border border-[#dba355] bg-white flex-1 font-semibold"
+        >
+          Decline
+        </Button>
+      </div>
     </div>
   );
 };

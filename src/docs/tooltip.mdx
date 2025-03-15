@@ -3,7 +3,7 @@ title: Tooltip
 description: A versatile tooltip component with customizable placement and animated transitions.
 ---
 
-import { motionSnippets, hooksSnippets } from "@/components/showcase/tooltip/snippets"
+import { motionSnippets, hooksSnippets, placementVariantsCodeSnippet } from "@/components/showcase/tooltip/snippets"
 
 <section>
 
@@ -48,6 +48,9 @@ import { motionSnippets, hooksSnippets } from "@/components/showcase/tooltip/sni
         <ComponentCard showOverflow>
             <TooltipPositionsDemo />
         </ComponentCard>
+    </TabPanel>
+    <TabPanel label="Code">
+        <CodeSnippet code={placementVariantsCodeSnippet} language="tsx"/>
     </TabPanel>
   </Tabs>
 

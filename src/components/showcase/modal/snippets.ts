@@ -3,13 +3,19 @@ import { MotionSnippets, HookSnippet } from "@/types/shared";
 export const motionSnippets: MotionSnippets = {
   code: `
 "use client";
+import { cn } from "@/lib/utils";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { useEscapeKeyPress } from "@/hooks/use-escape-key-press";
 import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { useIsMounted } from "@/hooks/use-is-mounted";
-import { cn } from "@/lib/utils";
-import { ButtonHTMLAttributes, ReactNode, useRef } from "react";
+import {
+  ButtonHTMLAttributes,
+  CSSProperties,
+  ReactNode,
+  useMemo,
+  useRef,
+} from "react";
 import ReactDOM from "react-dom";
 import {
   AnimatePresence,
@@ -19,6 +25,17 @@ import {
   Variants,
 } from "motion/react";
 import { cva } from "class-variance-authority";
+
+type Placement =
+  | "center"
+  | "top"
+  | "right"
+  | "bottom"
+  | "left"
+  | "top-start"
+  | "top-end"
+  | "bottom-start"
+  | "bottom-end";
 
 const overlayVariants = cva(
   "fixed inset-0 backdrop-saturate-150 transition-opacity duration-300",
@@ -46,7 +63,7 @@ const overlayVariants = cva(
   }
 );
 
-const contentVariants = cva("relative w-[92%] max-h-[95vh] overflow-auto", {
+const contentVariants = cva("w-[95%] max-h-[95%] overflow-auto", {
   variants: {
     size: {
       sm: "max-w-[25rem] p-6",
@@ -87,6 +104,7 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  placement?: Placement;
   size?: "sm" | "md" | "lg" | "full";
   radius?: "none" | "sm" | "md" | "lg" | "xl";
   shadow?: "none" | "sm" | "base" | "md" | "lg" | "xl";
@@ -96,11 +114,13 @@ interface ModalProps {
   closeButton?: ReactNode;
   showCloseButton?: boolean;
   className?: string;
+  overlay?: boolean;
   overlayClassName?: string;
   closeButtonClassName?: string;
   container?: HTMLElement;
   zIndex?: number;
-  closeOnOverlayClick?: boolean;
+  preventScroll?: boolean;
+  closeOnOutsideClick?: boolean;
   closeOnEscapeKeyPress?: boolean;
   ariaLabelledby?: string;
   ariaDescribedby?: string;
@@ -112,6 +132,7 @@ const Modal = ({
   isOpen,
   onClose,
   children,
+  placement = "center",
   size,
   radius,
   shadow,
@@ -121,11 +142,13 @@ const Modal = ({
   closeButton,
   showCloseButton = true,
   className,
+  overlay = true,
   overlayClassName,
   closeButtonClassName,
   container,
   zIndex = 99999,
-  closeOnOverlayClick = true,
+  preventScroll = true,
+  closeOnOutsideClick = true,
   closeOnEscapeKeyPress = true,
   ariaLabelledby,
   ariaDescribedby,
@@ -135,10 +158,15 @@ const Modal = ({
   const modalRef = useRef<HTMLDivElement>(null);
 
   // ↓ if you want these hooks I let their code below
-  useClickOutside(closeOnOverlayClick ? onClose : undefined, modalRef);
+  useClickOutside(closeOnOutsideClick ? onClose : undefined, modalRef);
   useEscapeKeyPress(closeOnEscapeKeyPress ? onClose : undefined);
-  useLockBodyScroll(isOpen);
+  useLockBodyScroll(preventScroll ? isOpen : false);
   useFocusTrap(isOpen, modalRef);
+
+  const modalPlacementStyle = useMemo(
+    () => getPlacementStyle(placement),
+    [placement]
+  );
 
   // ↓ only required if you're using server components
   const isMounted = useIsMounted();
@@ -147,24 +175,24 @@ const Modal = ({
   return ReactDOM.createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div
-          className="fixed inset-0 flex items-center justify-center"
-          style={{ zIndex }}
-        >
+        <div className={overlay ? "fixed inset-0" : ""} style={{ zIndex }}>
           <LazyMotion features={domAnimation}>
-            <m.div
-              className={cn(
-                overlayVariants({
-                  blur: blur,
-                  opacity: overlayOpacity,
-                }),
-                overlayClassName
-              )}
-              variants={overlayAnimationVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-            />
+            {overlay && (
+              <m.div
+                className={cn(
+                  overlayVariants({
+                    blur: blur,
+                    opacity: overlayOpacity,
+                  }),
+                  overlayClassName
+                )}
+                variants={overlayAnimationVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              />
+            )}
+
             <m.div
               className={cn(
                 contentVariants({
@@ -173,6 +201,7 @@ const Modal = ({
                   shadow,
                   theme: contentTheme,
                 }),
+                overlay ? "absolute" : "fixed",
                 className
               )}
               ref={modalRef}
@@ -180,7 +209,10 @@ const Modal = ({
               initial="hidden"
               animate="visible"
               exit="exit"
-              style={{ willChange: "transform, opacity" }}
+              style={{
+                willChange: "transform, opacity",
+                ...modalPlacementStyle,
+              }}
               role="dialog"
               aria-modal="true"
               aria-labelledby={ariaLabelledby}
@@ -250,7 +282,7 @@ const CloseButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
       type="button"
       className={cn(
         "p-1.5 size-6 transition duration-300 cursor-pointer",
-        "active:scale-95 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md",
+        "active:scale-95 hover:bg-black/5 dark:hover:bg-white/5 rounded-md",
         props.className
       )}
     >
@@ -275,6 +307,66 @@ export const CloseIcon = (props: React.HTMLAttributes<SVGElement>) => {
       />
     </svg>
   );
+};
+
+type PlacementStyle = CSSProperties & {
+  translateX?: string;
+  translateY?: string;
+};
+
+const getPlacementStyle = (placement: Placement): PlacementStyle => {
+  switch (placement) {
+    case "center":
+      return {
+        top: "50%",
+        left: "50%",
+        translate: "-50% -50%",
+      };
+    case "top":
+      return {
+        top: 0,
+        left: "50%",
+        translateX: "-50%",
+      };
+    case "right":
+      return {
+        right: 0,
+        top: "50%",
+        translateY: "-50%",
+      };
+    case "bottom":
+      return {
+        bottom: 0,
+        left: "50%",
+        translateX: "-50%",
+      };
+    case "left":
+      return {
+        left: 0,
+        top: "50%",
+        translateY: "-50%",
+      };
+    case "top-start":
+      return {
+        top: 0,
+        left: 0,
+      };
+    case "top-end":
+      return {
+        top: 0,
+        right: 0,
+      };
+    case "bottom-start":
+      return {
+        bottom: 0,
+        left: 0,
+      };
+    case "bottom-end":
+      return {
+        bottom: 0,
+        right: 0,
+      };
+  }
 };
 
 `,
@@ -512,6 +604,19 @@ export const variantsCodeSnippet = `
   className="bg-linear-to-br from-blue-950 to-blue-900"
   overlayClassName="bg-linear-to-tr from-blue-950/80 to-blue-900/30"
   closeButtonClassName="hover:bg-blue-800 dark:hover:bg-blue-800 text-neutral-100 dark:text-neutral-100"
+>
+  <Content/>
+</Modal>
+
+
+// custom 2 
+<Modal isOpen={isOpen} onClose={closeModal}
+  size="sm"
+  className="m-4 border border-black/10"
+  placement="bottom-start"
+  overlay={false}
+  preventScroll={false}
+  closeOnOutsideClick={false}
 >
   <Content/>
 </Modal>
