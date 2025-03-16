@@ -4,7 +4,11 @@ import dynamic from "next/dynamic";
 import Loader from "./loader";
 
 const CodeSnippet = dynamic(() => import("./code-snippet"), {
-  loading: () => <Loader className="my-12" />,
+  loading: () => (
+    <div className="py-12 flex justify-center">
+      <Loader className="" />
+    </div>
+  ),
   ssr: false,
 });
 
