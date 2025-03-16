@@ -36,7 +36,7 @@ const SearchBar = () => {
       <Modal
         isOpen={isOpen}
         onClose={closeModal}
-        className="p-0 dark:bg-neutral-900"
+        className="p-0 dark:bg-neutral-900 overflow-visible"
         showCloseButton={false}
       >
         <AnimateOnHeightChange>
