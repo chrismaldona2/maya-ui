@@ -464,7 +464,6 @@ export const placementVariantsCodeSnippet = `
 import Button from "@/components/button";
 import Tooltip from "@/components/tooltip";
 
-
 const top = {
   tooltipClassName: "bg-[#7c58c5] text-neutral-50 text-center",
   buttonClassName: "bg-[#563a88] text-white font-medium",
@@ -599,6 +598,7 @@ const left = {
   buttonClassName: "bg-[#fd8631] text-white font-medium",
 };
 
+// left
 <Tooltip
   offset={12}
   content="I'm at the left 😵‍💫"
@@ -609,6 +609,8 @@ const left = {
 >
   <Button className={left.buttonClassName}>Left</Button>
 </Tooltip>
+
+// left-start
 <Tooltip
   offset={12}
   content="I'm at the left start 😵‍💫"
@@ -619,6 +621,8 @@ const left = {
 >
   <Button className={left.buttonClassName}>Left-start</Button>
 </Tooltip>
+
+// left-end
 <Tooltip
   offset={12}
   content="I'm at the left end 😵‍💫"
