@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Loader from "./loader";
 
 const CodeSnippet = dynamic(() => import("./code-snippet"), {
-  loading: () => <Loader />,
+  loading: () => <Loader className="my-12" />,
   ssr: false,
 });
 
