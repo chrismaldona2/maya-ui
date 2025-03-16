@@ -36,7 +36,7 @@ const SearchBar = () => {
       <Modal
         isOpen={isOpen}
         onClose={closeModal}
-        className="p-0 dark:bg-neutral-900"
+        className="p-0 dark:bg-neutral-900 overflow-clip"
         showCloseButton={false}
       >
         <AnimateOnHeightChange>
@@ -50,7 +50,7 @@ const SearchBar = () => {
             />
           </div>
 
-          <div className="max-h-[300px] overflow-auto flex flex-col gap-5 p-4">
+          <div className="max-h-[300px] h-full overflow-auto flex flex-col gap-5 p-4">
             {filteredLinks.length > 0 ? (
               filteredLinks.map((section) => (
                 <div key={section.title}>

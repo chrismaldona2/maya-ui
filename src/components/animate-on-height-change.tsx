@@ -9,7 +9,6 @@ const AnimateOnHeightChange = ({ children }: { children: ReactNode }) => {
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const animationCountRef = useRef(0);
 
-  console.log(height);
   const measureHeight = () => {
     return contentRef.current ? contentRef.current.offsetHeight : 0;
   };
@@ -21,8 +20,12 @@ const AnimateOnHeightChange = ({ children }: { children: ReactNode }) => {
   };
 
   useLayoutEffect(() => {
-    const initialHeight = measureHeight();
-    setHeight(initialHeight);
+    setHeight(0);
+
+    requestAnimationFrame(() => {
+      const initialHeight = measureHeight();
+      setHeight(initialHeight);
+    });
 
     resizeObserverRef.current = new ResizeObserver((entries) => {
       const newHeight = entries[0].target.clientHeight;
