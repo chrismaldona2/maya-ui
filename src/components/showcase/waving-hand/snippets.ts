@@ -22,7 +22,10 @@ const WavingHand = ({ className, ...props }: React.HTMLAttributes<SVGElement>) =
         isWaving && "animate-hand-wave",
         className
       )}
+      onAnimationEnd={() => setIsWaving(false)}
       tabIndex={0}
+      // ↓ I start to repeat myself here, feel free to abstract this logic  
+      // ↓ I left it like this for better readability
       onClick={(e) => {
         triggerAnimation();
         props.onClick?.(e);
@@ -41,7 +44,6 @@ const WavingHand = ({ className, ...props }: React.HTMLAttributes<SVGElement>) =
           props.onKeyDown?.(e);
         }
       }}
-      onAnimationEnd={() => setIsWaving(false)}
     />
   );
 };

@@ -3,12 +3,13 @@ import { ReactNode, useLayoutEffect, useRef, useState } from "react";
 import { LazyMotion, m, domAnimation } from "motion/react";
 
 const AnimateOnHeightChange = ({ children }: { children: ReactNode }) => {
-  const [height, setHeight] = useState<number | "auto">("auto");
+  const [height, setHeight] = useState<number>(0);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const motionDivRef = useRef<HTMLDivElement | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const animationCountRef = useRef(0);
 
+  console.log(height);
   const measureHeight = () => {
     return contentRef.current ? contentRef.current.offsetHeight : 0;
   };
@@ -37,7 +38,8 @@ const AnimateOnHeightChange = ({ children }: { children: ReactNode }) => {
     return () => {
       resizeObserverRef.current?.disconnect();
     };
-  }, [height]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleAnimationStart = () => {
     animationCountRef.current += 1;

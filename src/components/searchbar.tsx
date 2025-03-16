@@ -12,6 +12,7 @@ const SearchBar = () => {
   const closeModal = () => setIsOpen(false);
 
   const [searchQuery, setSearchQuery] = useState("");
+
   const filteredLinks = docsLinks
     .map((section) => ({
       ...section,
