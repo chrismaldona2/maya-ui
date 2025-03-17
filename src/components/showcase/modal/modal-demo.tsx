@@ -153,25 +153,18 @@ const variantsDemo = {
       />
     ),
   },
-  cookies: {
-    modalProps: {
-      size: "sm",
-      placement: "bottom-start",
-      className: "m-4 border border-black/10",
-      preventScroll: false,
-      overlay: false,
-      closeOnOutsideClick: false,
-    },
-    formHeader: <></>,
-  },
 };
 
 export const ModalVariantsDemo = () => {
   const [currentVariant, setCurrentVariant] = useState(variantsDemo.default);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCookiesModalOpen, setIsCookiesModalOpen] = useState(false);
 
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
+  const open = () => setIsModalOpen(true);
+  const close = () => setIsModalOpen(false);
+
+  const openCookiesModal = () => setIsCookiesModalOpen(true);
+  const closeCookiesModal = () => setIsCookiesModalOpen(false);
 
   return (
     <div className="flex gap-3 items-center justify-center flex-wrap px-2">
@@ -180,7 +173,7 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.default);
           open();
         }}
-        className="flex-1 bg-orange-300 text-white"
+        className="flex-1 bg-green-600 text-white"
       >
         Default
       </Button>
@@ -190,7 +183,7 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.noBlur);
           open();
         }}
-        className="flex-1 bg-orange-400 text-white"
+        className="flex-1 bg-lime-600 text-white"
       >
         No blur
       </Button>
@@ -200,7 +193,7 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.blurOnly);
           open();
         }}
-        className="flex-1 bg-orange-500 text-white"
+        className="flex-1 bg-yellow-600 text-white"
       >
         Blur only
       </Button>
@@ -210,7 +203,7 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.noOverlay);
           open();
         }}
-        className="flex-1 bg-orange-600 text-white"
+        className="flex-1 bg-amber-600 text-white"
       >
         No overlay
       </Button>
@@ -220,27 +213,37 @@ export const ModalVariantsDemo = () => {
           setCurrentVariant(variantsDemo.custom);
           open();
         }}
-        className="flex-1 bg-orange-700 text-white"
+        className="flex-1 bg-orange-600 text-white"
       >
         Custom
       </Button>
 
       <Button
-        onClick={() => {
-          setCurrentVariant(variantsDemo.cookies);
-          open();
-        }}
-        className="flex-1 bg-orange-800 text-white"
+        onClick={openCookiesModal}
+        className="flex-1 bg-red-600 text-white"
       >
         Custom 2
       </Button>
 
-      <Modal isOpen={isOpen} onClose={close} {...currentVariant.modalProps}>
-        {currentVariant === variantsDemo.cookies ? (
-          <CookiesModal onSubmit={close} />
-        ) : (
-          <TermsForm onSubmit={close} header={currentVariant.formHeader} />
-        )}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={close}
+        {...currentVariant.modalProps}
+      >
+        <TermsForm onSubmit={close} header={currentVariant.formHeader} />
+      </Modal>
+
+      <Modal
+        isOpen={isCookiesModalOpen}
+        onClose={closeCookiesModal}
+        size="sm"
+        className="m-4 border border-black/10"
+        placement="bottom-start"
+        overlay={false}
+        preventScroll={false}
+        closeOnOutsideClick={false}
+      >
+        <CookiesModal onSubmit={closeCookiesModal} />
       </Modal>
     </div>
   );
