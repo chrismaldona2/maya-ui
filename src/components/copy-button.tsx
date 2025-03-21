@@ -1,6 +1,12 @@
 "use client";
 import { useCopy } from "@/hooks/use-copy";
-import { AnimatePresence, motion, Variants } from "motion/react";
+import {
+  AnimatePresence,
+  domAnimation,
+  LazyMotion,
+  m,
+  Variants,
+} from "motion/react";
 import { CopyIcon, CheckIcon, CrossIcon } from "./icons";
 import { cn } from "@/lib/utils";
 import { ButtonHTMLAttributes, memo, MouseEvent } from "react";
@@ -21,8 +27,8 @@ const successAnimation: Variants = {
 const CopyButton = ({ text, className, ...props }: CopyButtonProps) => {
   const { copy, isCopied, error } = useCopy();
 
-  const MotionCheckIcon = motion.create(CheckIcon);
-  const MotionCrossIcon = motion.create(CrossIcon);
+  const MotionCheckIcon = m.create(CheckIcon);
+  const MotionCrossIcon = m.create(CrossIcon);
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     copy(text);
@@ -43,27 +49,29 @@ const CopyButton = ({ text, className, ...props }: CopyButtonProps) => {
       <div className="relative">
         <CopyIcon className="size-full text-neutral-400  dark:text-neutral-700" />
         <AnimatePresence mode="wait">
-          {isCopied && (
-            <MotionCheckIcon
-              variants={successAnimation}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              transition={{ duration: 0.2 }}
-              className="size-[42%] absolute right-[17%] bottom-[20%] text-green-500"
-            />
-          )}
+          <LazyMotion features={domAnimation}>
+            {isCopied && (
+              <MotionCheckIcon
+                variants={successAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                transition={{ duration: 0.2 }}
+                className="size-[42%] absolute right-[17%] bottom-[20%] text-green-500"
+              />
+            )}
 
-          {error && (
-            <MotionCrossIcon
-              variants={successAnimation}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              transition={{ duration: 0.2 }}
-              className="size-[42%] absolute right-[17%] bottom-[20%] text-red-700"
-            />
-          )}
+            {error && (
+              <MotionCrossIcon
+                variants={successAnimation}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                transition={{ duration: 0.2 }}
+                className="size-[42%] absolute right-[17%] bottom-[20%] text-red-700"
+              />
+            )}
+          </LazyMotion>
         </AnimatePresence>
       </div>
     </button>

@@ -434,10 +434,10 @@ import ThemeToggle from "@/components/theme-toggle";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <main>
       <ThemeToggle className="absolute top-0 left-0 m-5 size-8" />
       {children}
-    </div>
+    </main>
   );
 };
 

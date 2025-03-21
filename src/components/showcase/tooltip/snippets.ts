@@ -78,6 +78,7 @@ interface TooltipProps {
   className?: string;
   placement?: Placement;
   radius?: "none" | "sm" | "md" | "lg" | "xl" | "full";
+  offset?: number;
   openDelay?: number;
   exitDelay?: number;
   showArrow?: boolean;
@@ -87,7 +88,6 @@ interface TooltipProps {
   disabled?: boolean;
   isOpen?: boolean;
   disableUserSelect?: boolean;
-  offset?: number;
 }
 
 const Tooltip = ({
@@ -96,16 +96,16 @@ const Tooltip = ({
   className,
   placement = "bottom",
   radius,
+  offset = 8,
   openDelay = 200,
   exitDelay = 750,
-  showArrow,
+  showArrow = false,
   arrowColor,
   arrowClassName,
   animationVariants = defaultAnimation,
-  disabled,
-  isOpen,
-  disableUserSelect,
-  offset = 8,
+  disabled = false,
+  isOpen = false,
+  disableUserSelect = false,
 }: TooltipProps) => {
   const tooltipId = useId(); // → for accessibility purposes
   const { isVisible, show, hide, toggle, hideInstantly } = useTooltip(
